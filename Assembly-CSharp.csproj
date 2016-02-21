@@ -6,7 +6,7 @@
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
 	<RootNamespace></RootNamespace>
-	<ProjectGuid>{AAFAA5B3-00A2-5CCB-FEB3-EFCEA1B63D06}</ProjectGuid>
+	<ProjectGuid>{812DF29A-7431-ED11-FA2A-5AE24F002D9C}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<AssemblyName>Assembly-CSharp</AssemblyName>
@@ -50,19 +50,13 @@
      <Compile Include="Assets\World Map Assets [You Can Ignore This]\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
      <None Include="Assets\World Map Assets [You Can Ignore This]\Destroyed City\Destroyed_city_FREE_Info.txt" />
      <None Include="Assets\World Map Assets [You Can Ignore This]\Standard Assets\Skyboxes\_skybox info.txt" />
-     <None Include="Assets\World Map Assets [You Can Ignore This]\City Objects\Set Builder\Hong Kong\Textures and Shaders\Reflect-BumpSpec.shader" />
+     <None Include="Assets\World Map Assets [You Can Ignore This]\Bridges\Textures and Shaders\Reflect-BumpSpec.shader" />
      <None Include="Assets\World Map Assets [You Can Ignore This]\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>

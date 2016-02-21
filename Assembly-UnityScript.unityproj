@@ -6,7 +6,7 @@
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
 	<RootNamespace></RootNamespace>
-	<ProjectGuid>{9CCDD591-E740-D099-E90E-340DC774F50D}</ProjectGuid>
+	<ProjectGuid>{6918C7A4-0305-D6C0-D0B1-52DFE5BE475E}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<AssemblyName>Assembly-UnityScript</AssemblyName>
@@ -45,27 +45,21 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Water Effects\Scripts\ScrollUV.js" />
      <Compile Include="Assets\World Map Assets [You Can Ignore This]\Standard Assets\Character Controllers\Sources\Scripts\CharacterMotor.js" />
      <Compile Include="Assets\World Map Assets [You Can Ignore This]\Standard Assets\Character Controllers\Sources\Scripts\FPSInputController.js" />
      <Compile Include="Assets\World Map Assets [You Can Ignore This]\Standard Assets\Character Controllers\Sources\Scripts\PlatformInputController.js" />
      <Compile Include="Assets\World Map Assets [You Can Ignore This]\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonCamera.js" />
      <Compile Include="Assets\World Map Assets [You Can Ignore This]\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" />
+     <Compile Include="Assets\World Map Assets [You Can Ignore This]\Water Effects\Scripts\ScrollUV.js" />
      <None Include="Assets\World Map Assets [You Can Ignore This]\Destroyed City\Destroyed_city_FREE_Info.txt" />
      <None Include="Assets\World Map Assets [You Can Ignore This]\Standard Assets\Skyboxes\_skybox info.txt" />
-     <None Include="Assets\World Map Assets [You Can Ignore This]\City Objects\Set Builder\Hong Kong\Textures and Shaders\Reflect-BumpSpec.shader" />
+     <None Include="Assets\World Map Assets [You Can Ignore This]\Bridges\Textures and Shaders\Reflect-BumpSpec.shader" />
      <None Include="Assets\World Map Assets [You Can Ignore This]\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
