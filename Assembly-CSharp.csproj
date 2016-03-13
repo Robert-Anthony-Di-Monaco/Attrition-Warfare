@@ -45,15 +45,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\All Scripts\BTConditionNode.cs" />
-     <Compile Include="Assets\All Scripts\BTLeafAttribute.cs" />
-     <Compile Include="Assets\All Scripts\BTLeafNode.cs" />
-     <Compile Include="Assets\All Scripts\BTNode.cs" />
-     <Compile Include="Assets\All Scripts\BTNodeResult.cs" />
-     <Compile Include="Assets\All Scripts\BTNotNode.cs" />
-     <Compile Include="Assets\All Scripts\BTSelector.cs" />
-     <Compile Include="Assets\All Scripts\BTSequence.cs" />
-     <Compile Include="Assets\All Scripts\BehaviorTree.cs" />
+     <Compile Include="Assets\All Scripts\Behaviour Trees\BTConditionNode.cs" />
+     <Compile Include="Assets\All Scripts\Behaviour Trees\BTLeafAttribute.cs" />
+     <Compile Include="Assets\All Scripts\Behaviour Trees\BTLeafNode.cs" />
+     <Compile Include="Assets\All Scripts\Behaviour Trees\BTNode.cs" />
+     <Compile Include="Assets\All Scripts\Behaviour Trees\BTNodeResult.cs" />
+     <Compile Include="Assets\All Scripts\Behaviour Trees\BTNotNode.cs" />
+     <Compile Include="Assets\All Scripts\Behaviour Trees\BTSelector.cs" />
+     <Compile Include="Assets\All Scripts\Behaviour Trees\BTSequence.cs" />
+     <Compile Include="Assets\All Scripts\Behaviour Trees\BehaviorTree.cs" />
      <Compile Include="Assets\All Scripts\CameraController.cs" />
      <Compile Include="Assets\All Scripts\PlayerController.cs" />
      <Compile Include="Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
@@ -65,15 +65,19 @@
      <Compile Include="Assets\Environment\Water\Water\Scripts\Water.cs" />
      <Compile Include="Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
      <Compile Include="Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
-     <Compile Include="Assets\World Map Assets [You Can Ignore This]\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
-     <None Include="Assets\World Map Assets [You Can Ignore This]\Destroyed City\Destroyed_city_FREE_Info.txt" />
+     <Compile Include="Assets\Lava_Flowing_Shader\Scripts\ScrollingUVs_Layers.cs" />
+     <Compile Include="Assets\World Map Assets\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
+     <None Include="Assets\World Map Assets\Destroyed City\Destroyed_city_FREE_Info.txt" />
+     <None Include="Assets\Lava_Flowing_Shader\Shaders\Unlit_Lava_Simple.shader" />
+     <None Include="Assets\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
      <None Include="Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
-     <None Include="Assets\World Map Assets [You Can Ignore This]\Standard Assets\Skyboxes\_skybox info.txt" />
+     <None Include="Assets\World Map Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
+     <None Include="Assets\Lava_Flowing_Shader\ReadMe.txt" />
      <None Include="Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
      <None Include="Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
      <None Include="Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
-     <None Include="Assets\World Map Assets [You Can Ignore This]\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
+     <None Include="Assets\World Map Assets\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

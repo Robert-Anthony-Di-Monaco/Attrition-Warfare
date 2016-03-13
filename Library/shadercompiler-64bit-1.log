@@ -1,23 +1,29 @@
 Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-14252
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-13092
 Cmd: getPlatforms
 Cmd: compileSnippet
-  error: 2 plat 4 at (43): failed to open source file: 'WaterInclude.cginc'\nCompiling Vertex program with FOG_EXP2 WATER_VERTEX_DISPLACEMENT_ON WATER_REFLECTIVE WATER_EDGEBLEND_ON
-  api=4 type=0 insize=10255 outsize=0 kw=FOG_EXP2 WATER_VERTEX_DISPLACEMENT_ON WATER_REFLECTIVE WATER_EDGEBLEND_ON pd= ok=0
+  api=4 type=0 insize=70718 outsize=5929 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF FOG_EXP2 _TERRAIN_NORMAL_MAP pd= ok=1
 Cmd: compileSnippet
-  error: 2 plat 4 at (43): failed to open source file: 'WaterInclude.cginc'\nCompiling Fragment program with FOG_EXP2 WATER_VERTEX_DISPLACEMENT_ON WATER_REFLECTIVE WATER_EDGEBLEND_ON
-  api=4 type=1 insize=10255 outsize=0 kw=FOG_EXP2 WATER_VERTEX_DISPLACEMENT_ON WATER_REFLECTIVE WATER_EDGEBLEND_ON pd= ok=0
+  api=4 type=1 insize=70718 outsize=13843 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF FOG_EXP2 _TERRAIN_NORMAL_MAP pd= ok=1
 Cmd: compileSnippet
-  api=4 type=0 insize=7705 outsize=4784 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF pd= ok=1
+  api=4 type=0 insize=70718 outsize=5539 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF FOG_EXP2 _TERRAIN_NORMAL_MAP pd= ok=1
 Cmd: compileSnippet
-  api=4 type=1 insize=7705 outsize=3654 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF pd= ok=1
+  api=4 type=1 insize=70718 outsize=13534 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF DYNAMICLIGHTMAP_OFF FOG_EXP2 _TERRAIN_NORMAL_MAP pd= ok=1
 Cmd: compileSnippet
-  api=4 type=0 insize=5087 outsize=4020 kw=DIRECTIONAL pd= ok=1
+  error: 2 plat 4 at (43): failed to open source file: 'WaterInclude.cginc'\nCompiling Vertex program with WATER_SIMPLE WATER_VERTEX_DISPLACEMENT_OFF WATER_EDGEBLEND_ON
+  api=4 type=0 insize=10255 outsize=0 kw=WATER_SIMPLE WATER_VERTEX_DISPLACEMENT_OFF WATER_EDGEBLEND_ON pd= ok=0
 Cmd: compileSnippet
-  api=4 type=1 insize=5087 outsize=3086 kw=DIRECTIONAL pd= ok=1
+  error: 2 plat 4 at (43): failed to open source file: 'WaterInclude.cginc'\nCompiling Fragment program with WATER_SIMPLE WATER_VERTEX_DISPLACEMENT_OFF WATER_EDGEBLEND_ON
+  api=4 type=1 insize=10255 outsize=0 kw=WATER_SIMPLE WATER_VERTEX_DISPLACEMENT_OFF WATER_EDGEBLEND_ON pd= ok=0
+Cmd: preprocess
+  insize=1493 outsize=490 ok=1
 Cmd: compileSnippet
-  error: 2 plat 4 at (43): failed to open source file: 'WaterInclude.cginc'\nCompiling Vertex program with WATER_VERTEX_DISPLACEMENT_OFF WATER_SIMPLE WATER_EDGEBLEND_ON
-  api=4 type=0 insize=10255 outsize=0 kw=WATER_VERTEX_DISPLACEMENT_OFF WATER_SIMPLE WATER_EDGEBLEND_ON pd= ok=0
+  api=4 type=0 insize=1305 outsize=1323 kw= pd= ok=1
 Cmd: compileSnippet
-  error: 2 plat 4 at (43): failed to open source file: 'WaterInclude.cginc'\nCompiling Fragment program with WATER_VERTEX_DISPLACEMENT_OFF WATER_SIMPLE WATER_EDGEBLEND_ON
-  api=4 type=1 insize=10255 outsize=0 kw=WATER_VERTEX_DISPLACEMENT_OFF WATER_SIMPLE WATER_EDGEBLEND_ON pd= ok=0
+  api=4 type=1 insize=1305 outsize=1282 kw= pd= ok=1
+Cmd: preprocess
+  insize=1162 outsize=351 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=1113 outsize=1323 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1113 outsize=1030 kw= pd= ok=1
