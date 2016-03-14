@@ -5,11 +5,13 @@ public class ClickToMoveCharacter : MonoBehaviour {
 
 
     public NavMeshAgent agent;
-    public float beamShotCooldown, nextBeamShot;
+    public float beamShotCooldown, nextBeamShot, shotRange;
     public GameObject beamShot;
+    public bool enemyClose;
 
 	// Use this for initialization
 	void Start () {
+        shotRange = 50f;
         nextBeamShot = Time.time;
         beamShotCooldown = 0.5f;
         agent = this.GetComponent<NavMeshAgent>();
@@ -59,6 +61,9 @@ public class ClickToMoveCharacter : MonoBehaviour {
 
         Camera.main.transform.parent.position = this.transform.position;
     }
+
+    //I want to do some more work on this function is doesnt look natural when the player faces his target
+    //before shooting
     void ShootBeam()
     {
         if (Time.time > nextBeamShot)
@@ -77,4 +82,27 @@ public class ClickToMoveCharacter : MonoBehaviour {
             
         }
     }
+
+    //Casts a sphere with radius shotRange around the targets position and checks colliding objects
+    //if they are tagged as Enemy.  Returns the closest Enemy if there is one within range otherwise returns null
+    GameObject EnemyInRange()
+    {
+        GameObject closestEnemy = null;
+        float closestDistance = float.MaxValue;
+        Collider[] col = Physics.OverlapSphere(transform.position, shotRange);
+        foreach(Collider collision in col){
+            if(collision.gameObject.tag.Equals("Enemy")){
+
+                float distance = (collision.gameObject.transform.position - transform.position).magnitude;
+                if (distance < closestDistance)
+                {
+                    closestEnemy = collision.gameObject;
+                    closestDistance = distance;
+                }
+            }
+        }
+        return closestEnemy;
+    }
+
+
 }

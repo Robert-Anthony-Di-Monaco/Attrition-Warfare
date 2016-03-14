@@ -81,7 +81,6 @@
     <Compile Include="Assets\All Scripts\ClickToMoveCharacter.cs" />
     <Compile Include="Assets\All Scripts\PlayerController.cs" />
     <Compile Include="Assets\All Scripts\RTSMove.cs" />
-    <Compile Include="Assets\BasicBeamShot\SampleStage\GetUI.cs" />
     <Compile Include="Assets\BasicBeamShot\Script\AutoDestroy.cs" />
     <Compile Include="Assets\BasicBeamShot\Script\BM_WaveEffect.cs" />
     <Compile Include="Assets\BasicBeamShot\Script\BasicBullet.cs" />
