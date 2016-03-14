@@ -1,9 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\Inverse Tag\Assets\NPCscript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\All Scripts\NewBehaviourScript.cs">
     <Files>
-      <File FileName="..\Inverse Tag\Assets\PathfindingScript.cs" Line="12" Column="2" />
-      <File FileName="..\Inverse Tag\Assets\NPCscript.cs" Line="20" Column="1" />
+      <File FileName="Assets\All Scripts\NewBehaviourScript.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
