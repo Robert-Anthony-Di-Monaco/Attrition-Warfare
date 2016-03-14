@@ -5,11 +5,14 @@ public class ClickToMoveCharacter : MonoBehaviour {
 
 
     public NavMeshAgent agent;
+    public float beamShotCooldown, nextBeamShot;
+    public GameObject beamShot;
+
 	// Use this for initialization
 	void Start () {
-
+        nextBeamShot = Time.time;
+        beamShotCooldown = 0.5f;
         agent = this.GetComponent<NavMeshAgent>();
-
 	}
 	
 	// Update is called once per frame
@@ -32,6 +35,10 @@ public class ClickToMoveCharacter : MonoBehaviour {
         {
             SnapCameraToPlayer();
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ShootBeam();
+        }
 
 
     }
@@ -51,5 +58,23 @@ public class ClickToMoveCharacter : MonoBehaviour {
     {
 
         Camera.main.transform.parent.position = this.transform.position;
+    }
+    void ShootBeam()
+    {
+        if (Time.time > nextBeamShot)
+        {
+            //get the vector pointing towards the mouse position
+            RaycastHit vHit = new RaycastHit();
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out vHit);
+            Vector3 moveDir = vHit.point - transform.position;
+
+            //stop movement
+            agent.SetDestination(this.transform.position);
+            //rotate towards towards mouse position
+
+            transform.forward = Vector3.RotateTowards(transform.forward, moveDir, 90f , 0.0f);
+            Instantiate(beamShot, transform.position + (transform.forward * 1f), this.transform.rotation);
+            
+        }
     }
 }

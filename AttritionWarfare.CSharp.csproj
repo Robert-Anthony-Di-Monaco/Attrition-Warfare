@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -87,6 +81,32 @@
     <Compile Include="Assets\All Scripts\ClickToMoveCharacter.cs" />
     <Compile Include="Assets\All Scripts\PlayerController.cs" />
     <Compile Include="Assets\All Scripts\RTSMove.cs" />
+    <Compile Include="Assets\BasicBeamShot\SampleStage\GetUI.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\AutoDestroy.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\BM_WaveEffect.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\BasicBullet.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\BeamCollision.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\BeamLine.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\BeamParam.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\BeamWave.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\BillBoard.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\Create_MyLineMesh.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\Flash.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\GeroBeam.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\GeroBeamHit.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\GetColor_BeamLine.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\GetColor_Flash.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\GetColor_Particle.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\JumpScene.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\MouseTgt.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\MultiShooter.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\RandomRotate.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\ScaleWiggle.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\SceneMaster.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\ShooterRotate.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\ShotBase.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\ShotParticleEmitter.cs" />
+    <Compile Include="Assets\BasicBeamShot\Script\ShotParticle_Scale.cs" />
     <Compile Include="Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
     <Compile Include="Assets\Environment\Water\Water\Scripts\Displace.cs" />
     <Compile Include="Assets\Environment\Water\Water\Scripts\GerstnerDisplace.cs" />
@@ -97,9 +117,15 @@
     <Compile Include="Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
     <Compile Include="Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
     <Compile Include="Assets\TerrainAssets\Lava_Flowing_Shader\Scripts\ScrollingUVs_Layers.cs" />
-    <Compile Include="Assets\World Map Assets\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\BasicBeamShot\HowToUse_EN.txt" />
+    <None Include="Assets\BasicBeamShot\HowToUse_JP.txt" />
+    <None Include="Assets\BasicBeamShot\sh\AddColor_sh.shader" />
+    <None Include="Assets\BasicBeamShot\sh\Add_UVScroll_sh.shader" />
+    <None Include="Assets\BasicBeamShot\sh\BeamLine_sh.shader" />
+    <None Include="Assets\BasicBeamShot\sh\GeroBeam_sh.shader" />
+    <None Include="Assets\BasicBeamShot\sh\Sprite_Add_sh.shader" />
     <None Include="Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
     <None Include="Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
