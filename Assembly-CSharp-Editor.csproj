@@ -45,16 +45,29 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
-     <None Include="Assets\World Map Assets [You Can Ignore This]\Destroyed City\Destroyed_city_FREE_Info.txt" />
-     <None Include="Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
-     <None Include="Assets\World Map Assets [You Can Ignore This]\Standard Assets\Skyboxes\_skybox info.txt" />
-     <None Include="Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
-     <None Include="Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
-     <None Include="Assets\World Map Assets [You Can Ignore This]\Bridges\Textures and Shaders\Reflect-BumpSpec.shader" />
-     <None Include="Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
-     <None Include="Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
-     <None Include="Assets\World Map Assets [You Can Ignore This]\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
+     <Compile Include="Assets\World Assets {IGNORE}\Eruption\Editor\CJPyroclasticMaterialEditor.cs" />
+     <Compile Include="Assets\World Assets {IGNORE}\Eruption\Editor\ExplosionMatEditor.cs" />
+     <None Include="Assets\All Project Scripts\AI_Scripts\Flying AI\Behaviour-Flying.xml" />
+     <None Include="Assets\World Assets {IGNORE}\Textures Lava Stone\Lava_Flowing_Shader\Shaders\Unlit_Lava_Simple.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Eruption\Explosion.shader" />
+     <None Include="Assets\BasicBeamShot\sh\Add_UVScroll_sh.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Textures Lava Stone\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Environment Water\Water\Water4\Shaders\FXWater4Simple.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Standard Assets\Skyboxes\_skybox info.txt" />
+     <None Include="Assets\BasicBeamShot\HowToUse_JP.txt" />
+     <None Include="Assets\BasicBeamShot\sh\Sprite_Add_sh.shader" />
+     <None Include="Assets\BasicBeamShot\sh\GeroBeam_sh.shader" />
+     <None Include="Assets\BasicBeamShot\sh\BeamLine_sh.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Textures Lava Stone\Lava_Flowing_Shader\ReadMe.txt" />
+     <None Include="Assets\All Project Scripts\AI_Scripts\Climber AI\Behaviour-Climber.xml" />
+     <None Include="Assets\World Assets {IGNORE}\Environment Water\Water\Water\Shaders\FXWaterPro.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Eruption\README.txt" />
+     <None Include="Assets\BasicBeamShot\sh\AddColor_sh.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Environment Water\Water\Water4\Shaders\WaterInclude.cginc" />
+     <None Include="Assets\World Assets {IGNORE}\Environment Water\Water\Water4\Shaders\FXWater4Advanced.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
+     <None Include="Assets\BasicBeamShot\HowToUse_EN.txt" />
+     <None Include="Assets\All Project Scripts\AI_Scripts\Mutant AI\Behaviour-Mutant.xml" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -113,8 +126,6 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{812DF29A-7431-ED11-FA2A-5AE24F002D9C}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
-    <ProjectReference Include="Assembly-UnityScript.unityproj">
-      <Project>{6918C7A4-0305-D6C0-D0B1-52DFE5BE475E}</Project>      <Name>Assembly-UnityScript</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

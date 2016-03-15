@@ -45,30 +45,30 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\World Map Assets\Standard Assets\Character Controllers\Sources\Scripts\CharacterMotor.js" />
-     <Compile Include="Assets\World Map Assets\Standard Assets\Character Controllers\Sources\Scripts\FPSInputController.js" />
-     <Compile Include="Assets\World Map Assets\Standard Assets\Character Controllers\Sources\Scripts\PlatformInputController.js" />
-     <Compile Include="Assets\World Map Assets\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonCamera.js" />
-     <Compile Include="Assets\World Map Assets\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" />
+     <Compile Include="Assets\World Assets {IGNORE}\Standard Assets\Character Controllers\Sources\Scripts\CharacterMotor.js" />
+     <Compile Include="Assets\World Assets {IGNORE}\Standard Assets\Character Controllers\Sources\Scripts\FPSInputController.js" />
+     <Compile Include="Assets\World Assets {IGNORE}\Standard Assets\Character Controllers\Sources\Scripts\PlatformInputController.js" />
+     <Compile Include="Assets\World Assets {IGNORE}\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonCamera.js" />
+     <Compile Include="Assets\World Assets {IGNORE}\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" />
      <None Include="Assets\All Project Scripts\AI_Scripts\Flying AI\Behaviour-Flying.xml" />
-     <None Include="Assets\World Map Assets\Destroyed City\Destroyed_city_FREE_Info.txt" />
-     <None Include="Assets\World Map Assets\Textures Lava Stone\Lava_Flowing_Shader\Shaders\Unlit_Lava_Simple.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Textures Lava Stone\Lava_Flowing_Shader\Shaders\Unlit_Lava_Simple.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Eruption\Explosion.shader" />
      <None Include="Assets\BasicBeamShot\sh\Add_UVScroll_sh.shader" />
-     <None Include="Assets\World Map Assets\Textures Lava Stone\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
-     <None Include="Assets\World Map Assets\Environment Water\Water\Water4\Shaders\FXWater4Simple.shader" />
-     <None Include="Assets\World Map Assets\Standard Assets\Skyboxes\_skybox info.txt" />
+     <None Include="Assets\World Assets {IGNORE}\Textures Lava Stone\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Environment Water\Water\Water4\Shaders\FXWater4Simple.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\BasicBeamShot\HowToUse_JP.txt" />
      <None Include="Assets\BasicBeamShot\sh\Sprite_Add_sh.shader" />
      <None Include="Assets\BasicBeamShot\sh\GeroBeam_sh.shader" />
      <None Include="Assets\BasicBeamShot\sh\BeamLine_sh.shader" />
-     <None Include="Assets\World Map Assets\Environment Water\Water (Basic)\Shaders\FXWaterBasic.shader" />
-     <None Include="Assets\World Map Assets\Textures Lava Stone\Lava_Flowing_Shader\ReadMe.txt" />
+     <None Include="Assets\World Assets {IGNORE}\Textures Lava Stone\Lava_Flowing_Shader\ReadMe.txt" />
      <None Include="Assets\All Project Scripts\AI_Scripts\Climber AI\Behaviour-Climber.xml" />
-     <None Include="Assets\World Map Assets\Environment Water\Water\Water\Shaders\FXWaterPro.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Environment Water\Water\Water\Shaders\FXWaterPro.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Eruption\README.txt" />
      <None Include="Assets\BasicBeamShot\sh\AddColor_sh.shader" />
-     <None Include="Assets\World Map Assets\Environment Water\Water\Water4\Shaders\WaterInclude.cginc" />
-     <None Include="Assets\World Map Assets\Environment Water\Water\Water4\Shaders\FXWater4Advanced.shader" />
-     <None Include="Assets\World Map Assets\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Environment Water\Water\Water4\Shaders\WaterInclude.cginc" />
+     <None Include="Assets\World Assets {IGNORE}\Environment Water\Water\Water4\Shaders\FXWater4Advanced.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
      <None Include="Assets\BasicBeamShot\HowToUse_EN.txt" />
      <None Include="Assets\All Project Scripts\AI_Scripts\Mutant AI\Behaviour-Mutant.xml" />
  <Reference Include="UnityEngine.UI">

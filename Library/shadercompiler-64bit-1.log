@@ -1,3 +1,32 @@
 Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-2696
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-6504
 Cmd: getPlatforms
+Cmd: compileSnippet
+  api=4 type=0 insize=526 outsize=2224 kw=_SPECGLOSSMAP pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=526 outsize=1753 kw=_SPECGLOSSMAP pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=977 outsize=4418 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON _NORMALMAP _SPECGLOSSMAP pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=977 outsize=11804 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON _NORMALMAP _SPECGLOSSMAP pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=977 outsize=5296 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON _EMISSION _DETAIL_MULX2 _NORMALMAP _PARALLAXMAP _SPECGLOSSMAP pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=977 outsize=14225 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON _EMISSION _DETAIL_MULX2 _NORMALMAP _PARALLAXMAP _SPECGLOSSMAP pd= ok=1
+Cmd: preprocess
+  insize=4716 outsize=806 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=636 outsize=1119 kw= pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=636 outsize=453 kw= pd= ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (89): Output value 'vert' is not completely initialized\nCompiling Vertex program with QUALITY_HIGH OCTAVES_4 SCATTERING_ON
+  api=4 type=0 insize=3880 outsize=1656 kw=QUALITY_HIGH OCTAVES_4 SCATTERING_ON pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=3880 outsize=9423 kw=QUALITY_HIGH OCTAVES_4 SCATTERING_ON pd= ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=9861 outsize=2793 kw=WATER_VERTEX_DISPLACEMENT_OFF WATER_SIMPLE WATER_EDGEBLEND_ON pd= ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=9861 outsize=4873 kw=WATER_VERTEX_DISPLACEMENT_OFF WATER_SIMPLE WATER_EDGEBLEND_ON pd= ok=1
+Cmd: preprocess
+  insize=1472 outsize=1905 ok=1
