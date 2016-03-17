@@ -1,32 +1,19 @@
 Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-6504
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-7756
 Cmd: getPlatforms
 Cmd: compileSnippet
-  api=4 type=0 insize=526 outsize=2224 kw=_SPECGLOSSMAP pd= ok=1
+  api=4 type=0 insize=613 outsize=4044 kw= pd= ok=1
 Cmd: compileSnippet
-  api=4 type=1 insize=526 outsize=1753 kw=_SPECGLOSSMAP pd= ok=1
+  api=4 type=1 insize=613 outsize=989 kw= pd= ok=1
 Cmd: compileSnippet
-  api=4 type=0 insize=977 outsize=4418 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON _NORMALMAP _SPECGLOSSMAP pd= ok=1
+  api=4 type=0 insize=607 outsize=3646 kw= pd= ok=1
 Cmd: compileSnippet
-  api=4 type=1 insize=977 outsize=11804 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON _NORMALMAP _SPECGLOSSMAP pd= ok=1
+  api=4 type=1 insize=607 outsize=803 kw= pd= ok=1
 Cmd: compileSnippet
-  api=4 type=0 insize=977 outsize=5296 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON _EMISSION _DETAIL_MULX2 _NORMALMAP _PARALLAXMAP _SPECGLOSSMAP pd= ok=1
+  api=4 type=0 insize=619 outsize=4548 kw=FOG_EXP2 pd= ok=1
 Cmd: compileSnippet
-  api=4 type=1 insize=977 outsize=14225 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON _EMISSION _DETAIL_MULX2 _NORMALMAP _PARALLAXMAP _SPECGLOSSMAP pd= ok=1
-Cmd: preprocess
-  insize=4716 outsize=806 ok=1
+  api=4 type=1 insize=619 outsize=1063 kw=FOG_EXP2 pd= ok=1
 Cmd: compileSnippet
-  api=4 type=0 insize=636 outsize=1119 kw= pd= ok=1
+  api=4 type=0 insize=631 outsize=4581 kw=FOG_EXP2 pd= ok=1
 Cmd: compileSnippet
-  api=4 type=1 insize=636 outsize=453 kw= pd= ok=1
-Cmd: compileSnippet
-  error: 1 plat 4 at (89): Output value 'vert' is not completely initialized\nCompiling Vertex program with QUALITY_HIGH OCTAVES_4 SCATTERING_ON
-  api=4 type=0 insize=3880 outsize=1656 kw=QUALITY_HIGH OCTAVES_4 SCATTERING_ON pd= ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=3880 outsize=9423 kw=QUALITY_HIGH OCTAVES_4 SCATTERING_ON pd= ok=1
-Cmd: compileSnippet
-  api=4 type=0 insize=9861 outsize=2793 kw=WATER_VERTEX_DISPLACEMENT_OFF WATER_SIMPLE WATER_EDGEBLEND_ON pd= ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=9861 outsize=4873 kw=WATER_VERTEX_DISPLACEMENT_OFF WATER_SIMPLE WATER_EDGEBLEND_ON pd= ok=1
-Cmd: preprocess
-  insize=1472 outsize=1905 ok=1
+  api=4 type=1 insize=631 outsize=1249 kw=FOG_EXP2 pd= ok=1
