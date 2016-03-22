@@ -58,7 +58,7 @@
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Flying AI\AI_FlyingVehicle.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Mutant AI\AI_Mutant.cs" />
      <Compile Include="Assets\All Project Scripts\ClickToMoveCharacter.cs" />
-     <Compile Include="Assets\All Project Scripts\NavMeshTesting.cs" />
+     <Compile Include="Assets\All Project Scripts\PlayerController.cs" />
      <Compile Include="Assets\All Project Scripts\RTSMove.cs" />
      <Compile Include="Assets\All Project Scripts\WorldController.cs" />
      <Compile Include="Assets\BasicBeamShot\Script\AutoDestroy.cs" />
@@ -95,10 +95,8 @@
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\Water.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\WaterBase.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\WaterTile.cs" />
-     <Compile Include="Assets\World Assets {IGNORE}\Eruption\ExplosionMat.cs" />
      <None Include="Assets\All Project Scripts\AI_Scripts\Flying AI\Behaviour-Flying.xml" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Shaders\Unlit_Lava_Simple.shader" />
-     <None Include="Assets\World Assets {IGNORE}\Eruption\Explosion.shader" />
      <None Include="Assets\BasicBeamShot\sh\Add_UVScroll_sh.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\FXWater4Simple.shader" />
@@ -110,7 +108,6 @@
      <None Include="Assets\All Project Scripts\AI_Scripts\Climber AI\Behaviour-Climber.xml" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Shaders\FXWaterPro.shader" />
      <None Include="Assets\World Assets {IGNORE}\City Parts\Textures and Shaders\Reflect-BumpSpec.shader" />
-     <None Include="Assets\World Assets {IGNORE}\Eruption\README.txt" />
      <None Include="Assets\BasicBeamShot\sh\AddColor_sh.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\WaterInclude.cginc" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\FXWater4Advanced.shader" />
