@@ -107,24 +107,18 @@
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\ReadMe.txt" />
      <None Include="Assets\All Project Scripts\AI_Scripts\Climber AI\Behaviour-Climber.xml" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Shaders\FXWaterPro.shader" />
-     <None Include="Assets\World Assets {IGNORE}\City Parts\Textures and Shaders\Reflect-BumpSpec.shader" />
+     <None Include="Assets\World Assets {IGNORE}\Bridge\Textures and Shaders\Reflect-BumpSpec.shader" />
      <None Include="Assets\BasicBeamShot\sh\AddColor_sh.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\WaterInclude.cginc" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\FXWater4Advanced.shader" />
      <None Include="Assets\World Assets {IGNORE}\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
      <None Include="Assets\BasicBeamShot\HowToUse_EN.txt" />
      <None Include="Assets\All Project Scripts\AI_Scripts\Mutant AI\Behaviour-Mutant.xml" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
