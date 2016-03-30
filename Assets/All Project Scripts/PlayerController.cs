@@ -1,20 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/*
-	DO NOT PLACE ANY AI CODE IN THIS SCRIPT.
-		-ROB
-*/
-
 public class PlayerController : MonoBehaviour 
 {
 	public float speed = 5f; 
 	public Transform NavMeshTarget;
-	NavMeshAgent thisGameObject;
+	NavMeshAgent agent;
 
 	void Start () 
 	{
-		thisGameObject = GetComponent<NavMeshAgent>();
+		agent = GetComponent<NavMeshAgent>();
 	}
 
 	void Update () 
@@ -24,6 +19,6 @@ public class PlayerController : MonoBehaviour
 //		Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical) * speed * Time.deltaTime;
 //		transform.Translate(movement.x, 0, movement.z);
 
-		thisGameObject.SetDestination (NavMeshTarget.position);
+		agent.SetDestination (NavMeshTarget.position);
 	}
 }

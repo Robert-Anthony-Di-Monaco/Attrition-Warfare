@@ -45,6 +45,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Base\AI_Base.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Base\HealthBar.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Melee\AI_Melee.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Range\AI_Range.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Siege\AI_Siege.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTConditionNode.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTLeafAttribute.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTLeafNode.cs" />
@@ -54,9 +59,6 @@
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTSelector.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTSequence.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BehaviorTree.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Climber AI\AI_Climber.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Flying AI\AI_FlyingVehicle.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Mutant AI\AI_Mutant.cs" />
      <Compile Include="Assets\All Project Scripts\ClickToMoveCharacter.cs" />
      <Compile Include="Assets\All Project Scripts\PlayerController.cs" />
      <Compile Include="Assets\All Project Scripts\RTSMove.cs" />
@@ -95,7 +97,7 @@
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\Water.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\WaterBase.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\WaterTile.cs" />
-     <None Include="Assets\All Project Scripts\AI_Scripts\Flying AI\Behaviour-Flying.xml" />
+     <None Include="Assets\All Project Scripts\AI_Scripts\AI Siege\Behaviour-Siege.xml" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Shaders\Unlit_Lava_Simple.shader" />
      <None Include="Assets\BasicBeamShot\sh\Add_UVScroll_sh.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
@@ -105,7 +107,7 @@
      <None Include="Assets\BasicBeamShot\sh\GeroBeam_sh.shader" />
      <None Include="Assets\BasicBeamShot\sh\BeamLine_sh.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\ReadMe.txt" />
-     <None Include="Assets\All Project Scripts\AI_Scripts\Climber AI\Behaviour-Climber.xml" />
+     <None Include="Assets\All Project Scripts\AI_Scripts\AI Range\Behaviour-Range.xml" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Shaders\FXWaterPro.shader" />
      <None Include="Assets\World Assets {IGNORE}\Bridge\Textures and Shaders\Reflect-BumpSpec.shader" />
      <None Include="Assets\BasicBeamShot\sh\AddColor_sh.shader" />
@@ -113,18 +115,12 @@
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\FXWater4Advanced.shader" />
      <None Include="Assets\World Assets {IGNORE}\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
      <None Include="Assets\BasicBeamShot\HowToUse_EN.txt" />
-     <None Include="Assets\All Project Scripts\AI_Scripts\Mutant AI\Behaviour-Mutant.xml" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
+     <None Include="Assets\All Project Scripts\AI_Scripts\AI Melee\Behaviour-Melee.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>

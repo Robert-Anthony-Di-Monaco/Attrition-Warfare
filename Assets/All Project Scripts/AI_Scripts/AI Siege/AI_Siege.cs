@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 using Coroutine = System.Collections.IEnumerator;
 using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 
-public class AI_FlyingVehicle : MonoBehaviour 
+public class AI_Siege : AI_Base
 {
 	private BehaviorTree bt;
 	
@@ -24,7 +24,7 @@ public class AI_FlyingVehicle : MonoBehaviour
 	
 	private void InitBT()
 	{
-		bt = new BehaviorTree(Application.dataPath + "/Behaviour_Mutant.xml", this);
+		bt = new BehaviorTree(Application.dataPath + "/Behaviour_Siege.xml", this);
 	}
 }
 

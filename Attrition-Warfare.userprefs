@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\Desktop\Lab8\Assets\Scripts\NetworkManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\All Project Scripts\PlayerController.cs">
     <Files>
-      <File FileName="..\..\..\Desktop\Lab8\Assets\Scripts\NetworkManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\All Project Scripts\WorldController.cs" Line="5" Column="64" />
+      <File FileName="Assets\All Project Scripts\PlayerController.cs" Line="10" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

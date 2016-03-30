@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WorldController : MonoBehaviour {
+/*	
+	This script will control world events and hold world variables
+ */
 
-	// Use this for initialization
-	void Start () {
+public class WorldController : MonoBehaviour 
+{
+	void Start () 
+	{
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	void Update () 
+	{
 	
 	}
 }
