@@ -7,6 +7,10 @@ using System.Collections;
 
 public class WorldController : MonoBehaviour 
 {
+
+    public float playerHealth;
+    public float max_PlayerHealth;
+
 	void Start () 
 	{
 	
