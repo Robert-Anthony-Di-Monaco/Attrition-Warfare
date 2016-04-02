@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+// IGNORE THIS SCRIPT, IT WILL TAKE CARE OF DISPLAYING A UNIT'S HEALTH, if its position around the unit needs adjusting --- > tell ROBERT he will fix it 
+
+
 public class HealthBar : MonoBehaviour {
 	GUIStyle healthStyle;
 	GUIStyle backStyle;
-	AI_Base health;
+	Unit_Base health;
 	
 	void Awake()
 	{
-		health = GetComponent<AI_Base>();
+		health = GetComponent<Unit_Base>();
 	}
 	
 	void OnGUI()
@@ -21,7 +25,7 @@ public class HealthBar : MonoBehaviour {
 		// Draw health bar background
 		GUI.color = Color.grey;
 		GUI.backgroundColor = Color.grey;
-		GUI.Box(new Rect(pos.x-26, Screen.height - pos.y + 20, AI_Base.maxHealth/2, 7), ".", backStyle);
+		GUI.Box(new Rect(pos.x-26, Screen.height - pos.y + 20, Unit_Base.maxHealth/2, 7), ".", backStyle);
 		
 		// Draw health bar amount
 		GUI.color = Color.green;

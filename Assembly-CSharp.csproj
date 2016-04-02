@@ -45,24 +45,29 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Base\AI_Base.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Base\HealthBar.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Melee\AI_Melee.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Range\AI_Range.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Siege\AI_Siege.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTConditionNode.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTLeafAttribute.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTLeafNode.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTNode.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTNodeResult.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTNotNode.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTSelector.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTSequence.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BehaviorTree.cs" />
-     <Compile Include="Assets\All Project Scripts\ClickToMoveCharacter.cs" />
-     <Compile Include="Assets\All Project Scripts\PlayerController.cs" />
-     <Compile Include="Assets\All Project Scripts\RTSMove.cs" />
-     <Compile Include="Assets\All Project Scripts\WorldController.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Squad.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Unit_Base.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Melee\Unit_Melee.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Range\Unit_Range.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Siege\Unit_Siege.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Tower\Unit_Tower.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Turret\Unit_Turret.cs" />
+     <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTConditionNode.cs" />
+     <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTLeafAttribute.cs" />
+     <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTLeafNode.cs" />
+     <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTNode.cs" />
+     <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTNodeResult.cs" />
+     <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTNotNode.cs" />
+     <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTSelector.cs" />
+     <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTSequence.cs" />
+     <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BehaviorTree.cs" />
+     <Compile Include="Assets\All Project Scripts\HealthBar.cs" />
+     <Compile Include="Assets\All Project Scripts\Misc\ClickToMoveCharacter.cs" />
+     <Compile Include="Assets\All Project Scripts\Misc\RTSMove.cs" />
+     <Compile Include="Assets\All Project Scripts\Player Scripts\PlayerController.cs" />
+     <Compile Include="Assets\All Project Scripts\Player Scripts\Player_AI.cs" />
+     <Compile Include="Assets\All Project Scripts\World Scripts\EnemyController.cs" />
+     <Compile Include="Assets\All Project Scripts\World Scripts\WorldController.cs" />
      <Compile Include="Assets\BasicBeamShot\Script\AutoDestroy.cs" />
      <Compile Include="Assets\BasicBeamShot\Script\BM_WaveEffect.cs" />
      <Compile Include="Assets\BasicBeamShot\Script\BasicBullet.cs" />
@@ -97,8 +102,9 @@
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\Water.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\WaterBase.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\WaterTile.cs" />
-     <None Include="Assets\All Project Scripts\AI_Scripts\AI Siege\Behaviour-Siege.xml" />
+     <None Include="Assets\All Project Scripts\AI_Scripts\AI Siege\Siege-AI-Tree.xml" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Shaders\Unlit_Lava_Simple.shader" />
+     <None Include="Assets\All Project Scripts\Player Scripts\Player-AI-Tree.xml" />
      <None Include="Assets\BasicBeamShot\sh\Add_UVScroll_sh.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\FXWater4Simple.shader" />
@@ -107,26 +113,22 @@
      <None Include="Assets\BasicBeamShot\sh\GeroBeam_sh.shader" />
      <None Include="Assets\BasicBeamShot\sh\BeamLine_sh.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\ReadMe.txt" />
-     <None Include="Assets\All Project Scripts\AI_Scripts\AI Range\Behaviour-Range.xml" />
+     <None Include="Assets\All Project Scripts\AI_Scripts\AI Range\Range-AI-Tree.xml" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Shaders\FXWaterPro.shader" />
      <None Include="Assets\World Assets {IGNORE}\Bridge\Textures and Shaders\Reflect-BumpSpec.shader" />
+     <None Include="Assets\All Project Scripts\AI_Scripts\AI Tower\Tower-AI-Tree.xml" />
+     <None Include="Assets\All Project Scripts\AI_Scripts\AI Turret\Turret-AI-Tree.xml" />
      <None Include="Assets\BasicBeamShot\sh\AddColor_sh.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\WaterInclude.cginc" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\FXWater4Advanced.shader" />
      <None Include="Assets\World Assets {IGNORE}\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
      <None Include="Assets\BasicBeamShot\HowToUse_EN.txt" />
-     <None Include="Assets\All Project Scripts\AI_Scripts\AI Melee\Behaviour-Melee.xml" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
+     <None Include="Assets\All Project Scripts\AI_Scripts\AI Melee\Melee-AI-Tree.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
