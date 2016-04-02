@@ -8,8 +8,11 @@ public class RTSMove : MonoBehaviour {
     Rect topRect;
     Rect leftRect;
     Rect rightRect;
+
 	// Use this for initialization
 	void Start () {
+
+
         GUIsize = 20f;
         camSpeed = 2f;
         bottomRect = new Rect(0, 0, Screen.width, GUIsize);
@@ -38,6 +41,21 @@ public class RTSMove : MonoBehaviour {
         {
             transform.parent.Translate(-camSpeed, 0, 0, Space.World);
         }
-	
+        manageHeight();
 	}
+
+
+    //this method is called to raycast to the ground and hold the camera at a constant distance from the ground 
+    //in the center of the camera
+    void manageHeight()
+    {
+         RaycastHit hit;
+         Vector3  eyeInTheSkye = transform.parent.position;
+         eyeInTheSkye.y += 1000f;
+      
+         if(Physics.Raycast(eyeInTheSkye, Vector3.down, out hit))
+         {
+             transform.parent.position = Vector3.Lerp(transform.parent.position, new Vector3(transform.parent.position.x, hit.transform.position.y, transform.parent.position.z), 1f);
+         }
+    }
 }
