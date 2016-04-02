@@ -83,7 +83,7 @@ public class ClickToMoveCharacter : MonoBehaviour {
         }
     }
 
-    //Casts a sphere with radius shotRange around the targets position and checks colliding objects
+    //Casts a sphere with radius shotRange around the objects position and checks colliding objects
     //if they are tagged as Enemy.  Returns the closest Enemy if there is one within range otherwise returns null
     GameObject EnemyInRange()
     {
