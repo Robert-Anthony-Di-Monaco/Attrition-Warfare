@@ -21,6 +21,9 @@ public class Player_AI : MonoBehaviour
     public const int maxHealth = 100;
     public int health = maxHealth;
 
+    //LayerMask
+    public int enemyLayer = 1 << 8;
+
     public float aimThreshold = 10f;
 
     //basic attack variables
@@ -39,6 +42,7 @@ public class Player_AI : MonoBehaviour
     NavMeshAgent agent;
 	void Awake () 
 	{
+        attackRange = 10f;
         target = null;
         agent = GetComponent<NavMeshAgent>();
 		InitBT();
@@ -70,6 +74,10 @@ public class Player_AI : MonoBehaviour
     [BTLeaf("is-target-a-unit")]
     public bool isTargetAUnit()
     {
+        if (target == null)
+        {
+            return false;
+        }
         if (target.tag.Equals("MoveWaypoint"))
         {
             return false;
@@ -80,12 +88,11 @@ public class Player_AI : MonoBehaviour
         }
     }
 
-    //check if there in an enemy within our attakc range
+    //check if there in an enemy within our attack range
     [BTLeaf ("is-enemy-in-attack-range")]
     public bool isEnemyInRange()
     {
-       int layerMask = 0; //TODO: CHANGE TO INCLUDE EVERYTHING BUT THE ENEMY LAYER
-       return Physics.CheckSphere(this.transform.position, attackRange, layerMask);
+       return Physics.CheckSphere(this.transform.position, attackRange, enemyLayer);
     }
 
     //checks if the targeted enemy is within our attack range (different from above)
@@ -117,6 +124,10 @@ public class Player_AI : MonoBehaviour
     public bool isFacingNearestEnemy()
     {
         GameObject closestEnemy = this.getClosestEnemy();
+        if (closestEnemy == null)
+        {
+            return false;
+        }
         Vector3 enemyDir = closestEnemy.transform.position - this.transform.position;
         float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
 
