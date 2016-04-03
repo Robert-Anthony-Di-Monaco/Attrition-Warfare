@@ -34,6 +34,22 @@ public class Unit_Siege : Unit_Base
 	}
 
 
+	public void getNewAnchorPosition(int unitIndex){
+
+		int numSiege = squad.siegeUnits.Count;
+
+		//Siege units stand in a line behind the range units 
+		float zOffset = -4.5f * squad.distanceBetweenUnits;
+
+		//Lines up the units side by side
+		float xOffset = (unitIndex / numSiege) * (squad.distanceBetweenUnits * numSiege);
+		xOffset -= (squad.distanceBetweenUnits / 2) * numSiege;
+
+		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
+
+	}
+
+
 
 	// LEAFS and CONDITIONS definitions ---> SEE TEMPLATES BELOW FOR HOW TO DO THEM!!!!!!!!
 	[BTLeaf("has-target")]
@@ -49,7 +65,7 @@ public class Unit_Siege : Unit_Base
 	{
 		NavMeshSeek ();
 
-		if (Vector3.Distance (NavMeshTarget.position, transform.position) < attackRange)
+		if (Vector3.Distance (NavMeshTarget, transform.position) < attackRange)
 			yield return BTNodeResult.Success;
 		else
 			yield return BTNodeResult.NotFinished;

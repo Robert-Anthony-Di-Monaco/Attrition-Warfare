@@ -35,6 +35,22 @@ public class Unit_Range : Unit_Base
 	}
 
 
+	public void getNewAnchorPosition(int unitIndex){
+
+		int numRange = squad.rangeUnits.Count;
+
+		//Ranged units stand in a line behind the melee units 
+		float zOffset = -3f * squad.distanceBetweenUnits;
+
+		//Lines up the units side by side
+		float xOffset = (unitIndex / numRange) * (squad.distanceBetweenUnits * numRange);
+		xOffset -= (squad.distanceBetweenUnits / 2) * numRange;
+
+		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
+
+	}
+
+
 
 	// LEAFS and CONDITIONS definitions ---> SEE TEMPLATES BELOW FOR HOW TO DO THEM!!!!!!!!
 	[BTLeaf("has-target")]
@@ -50,7 +66,7 @@ public class Unit_Range : Unit_Base
 	{
 		NavMeshSeek ();
 
-		if (Vector3.Distance (NavMeshTarget.position, transform.position) < attackRange)
+		if (Vector3.Distance (NavMeshTarget, transform.position) < attackRange)
 			yield return BTNodeResult.Success;
 		else
 			yield return BTNodeResult.NotFinished;

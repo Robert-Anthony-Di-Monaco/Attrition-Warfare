@@ -23,21 +23,25 @@ public class Unit_Base : MonoBehaviour
 	public const int maxHealth = 100; 
 	public int health = maxHealth;
 
-	public int ID,   			   // Uniquely identify this unit
-			   squadID;   		   // Identify this Unit's squad
+	public int ID;	 			   // Uniquely identify this unit by its index in the WorldController's allUnits list
+	public Squad squad;   		   // Points to this Unit's squad
 	public int UpgradeLevel = 0;   // Determines this unit's abilities
 	public bool isEnemy;   		   // Friendly or enemy unit
 
-	public Transform NavMeshTarget;  // This unit's current target ---> to access its script use NavMeshTarget.gameObject.GetComponent<Unit_Base>();
+	//Changed to Vector3 from Transform
+	public Vector3 NavMeshTarget;  // This unit's current target ---> to access its script use NavMeshTarget.gameObject.GetComponent<Unit_Base>();
+
+	public Vector3 offsetFromAnchor = Vector3.zero;
 
 	// THESE WILL BE DONE BY ROBERT ----> ignore for now
 	Animator anim;  
 	NavMeshAgent agent;
 
-	void Awake()
+	 void Awake()
 	{
 		//anim = GetComponent<Animator>();
 		agent = GetComponent<NavMeshAgent>();
+
 
 
 		/* In derived class Initialize that Unit's variables here
@@ -49,12 +53,21 @@ public class Unit_Base : MonoBehaviour
 		 */
 	}
 
+	//Overridden by children classes
+	void Start(){
+		
+		WorldController wc = GameObject.Find("WorldController").GetComponent<WorldController>();
+		ID = wc.allUnits.Count;
+		wc.allUnits.Add (this);
+
+	}
+
 // **********************************************************  SHARED FUNCTIONS BY ALL UNITS  ***********************************************
 	// This and only this is used to move the NPC-unit
 	public void NavMeshSeek()
 	{
 		if(NavMeshTarget != null)
-			agent.SetDestination (NavMeshTarget.position); 
+			agent.SetDestination (NavMeshTarget); //changed from navmeshtarget.position
 	}
 	// Stop moving the NPC-unit
 	public void NavMeshStop()
@@ -75,6 +88,10 @@ public class Unit_Base : MonoBehaviour
 	public void Heal(int amount) 
 	{
 		health += amount;
+	}
+
+	public bool isSquadLeader(){
+		return (squad != null && squad.leader != null && squad.leader.ID == ID);
 	}
 }
 

@@ -26,6 +26,9 @@ public class WorldController : MonoBehaviour
 	// Holds all Enemy Stationary Units --> turrets and towers
 	public List<Transform> stationaryEnemyUnits = new List<Transform> ();
 
+	//All units in the game, used to generated unique IDs
+	public List<Unit_Base> allUnits = new List<Unit_Base>();
+
 	void Start () 
 	{
 	

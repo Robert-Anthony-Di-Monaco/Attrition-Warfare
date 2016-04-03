@@ -21,6 +21,7 @@ using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 
 public class Unit_Melee : Unit_Base
 {
+	
 	private BehaviorTree bt;
 	
 	void Awake () 
@@ -28,9 +29,29 @@ public class Unit_Melee : Unit_Base
 		InitBT();
 		bt.Start();
 	}
+
 	private void InitBT()
 	{
 		bt = new BehaviorTree(Application.dataPath + "/Melee-AI-Tree.xml", this);
+	}
+
+
+	public void getNewAnchorPosition(int unitIndex){
+
+		if (squad.leader.ID == this.ID)
+			offsetFromAnchor = Vector3.zero;
+
+		int numMelee = squad.meleeUnits.Count;
+		
+		//Melees stand in a line behind the leader 
+		float zOffset = -1.5f * squad.distanceBetweenUnits;
+
+		//Lines up the units side by side
+		float xOffset = (unitIndex / numMelee) * (squad.distanceBetweenUnits * numMelee);
+		xOffset -= (squad.distanceBetweenUnits / 2) * numMelee;
+
+		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
+
 	}
 
 
@@ -48,7 +69,7 @@ public class Unit_Melee : Unit_Base
 	{
 		NavMeshSeek ();
 
-		if (Vector3.Distance (NavMeshTarget.position, transform.position) < attackRange)
+		if (Vector3.Distance (NavMeshTarget, transform.position) < attackRange)
 			yield return BTNodeResult.Success;
 		else
 			yield return BTNodeResult.NotFinished;
