@@ -39,6 +39,7 @@ public class Player_AI : MonoBehaviour
     NavMeshAgent agent;
 	void Awake () 
 	{
+        target = null;
         agent = GetComponent<NavMeshAgent>();
 		InitBT();
 		bt.Start();
@@ -46,14 +47,16 @@ public class Player_AI : MonoBehaviour
 	
 	private void InitBT()
 	{
-		bt = new BehaviorTree(Application.dataPath + "/Player-AI-Tree.xml", this);
+       //isSquadCommander = false;
+       //isAttackOrder = false;
+		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/Player Scripts/Player-AI-Tree.xml", this);
 	}
 
     //checks if the player currently has an order to move
     [BTLeaf("has-move-order")]
     public bool hasMoveOrder()
     {
-        return target == null;
+        return target != null;
     }
 
     //check if the current order is an attack order or just a move order
@@ -67,7 +70,7 @@ public class Player_AI : MonoBehaviour
     [BTLeaf("is-target-a-unit")]
     public bool isTargetAUnit()
     {
-        if (target.tag.Equals("WaypointMarker"))
+        if (target.tag.Equals("MoveWaypoint"))
         {
             return false;
         }
@@ -78,7 +81,7 @@ public class Player_AI : MonoBehaviour
     }
 
     //check if there in an enemy within our attakc range
-    [BTLeaf ("is-enemy-in-range")]
+    [BTLeaf ("is-enemy-in-attack-range")]
     public bool isEnemyInRange()
     {
        int layerMask = 0; //TODO: CHANGE TO INCLUDE EVERYTHING BUT THE ENEMY LAYER
@@ -152,14 +155,13 @@ public class Player_AI : MonoBehaviour
     [BTLeaf ("move-to-target")]
     public BTCoroutine MoveToTarget()
     {
-
         //not sure this is nescessary but just in case target dies or is destroyed maybe
         if (target == null)
         {
             yield return BTNodeResult.Failure;
         }
         //if we are at our target set it to null
-        else if ((target.transform.position - this.transform.position).magnitude < 0.5f)
+        else if ((target.transform.position - this.transform.position).magnitude < 0.1f)
         {
            target = null;
            yield return BTNodeResult.Success;
@@ -167,7 +169,7 @@ public class Player_AI : MonoBehaviour
         //set destination to current target position
         else
         {
-            agent.SetDestination(target.transform.position);
+            this.agent.SetDestination(target.transform.position);
             yield return BTNodeResult.NotFinished;
         }
     }
@@ -227,6 +229,38 @@ public class Player_AI : MonoBehaviour
         {
             yield return BTNodeResult.NotFinished;
         }
+    }
+
+    [BTLeaf ("face-nearest-enemy")]
+    public BTCoroutine faceNearestEnemy()
+    {
+        GameObject nearestEnemy = this.getClosestEnemy();
+        Vector3 enemyDir = nearestEnemy.transform.position - this.transform.position;
+        float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
+
+        if (angleDifference < aimThreshold)
+        {
+            yield return BTNodeResult.Success;
+        }
+        else
+        {
+            //TODO: tune the facing speed here
+            transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
+            yield return BTNodeResult.Success;
+        }
+
+    }
+    [BTLeaf ("move-to-squad-anchor")]
+    public BTCoroutine moveToSquadAnchor()
+    {
+        //TODO: write this function when squads are complete
+        yield return BTNodeResult.NotFinished;
+    }
+
+    [BTLeaf("idle")]
+    public BTCoroutine idle()
+    {
+        yield return BTNodeResult.NotFinished;
     }
 }
 

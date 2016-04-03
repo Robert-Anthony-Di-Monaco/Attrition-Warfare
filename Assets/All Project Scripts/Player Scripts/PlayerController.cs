@@ -17,9 +17,7 @@ public class PlayerController : MonoBehaviour
 	public const int maxPlayerHealth = 100;
 	public int playerHealth;
 
-	public Transform NavMeshTarget;
-    public
-	NavMeshAgent agent;
+    public GameObject moveWaypoint;
     Player_AI playerAI;
 	
 	void Awake () 
@@ -29,15 +27,22 @@ public class PlayerController : MonoBehaviour
 
 	void Update () 
 	{
-		// 	this will be deleted
-//		float moveHorizontal = Input.GetAxis ("Horizontal");
-//		float moveVertical = Input.GetAxis ("Vertical");
-//		Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical) * speed * Time.deltaTime;
-//		transform.Translate(movement.x, 0, movement.z);
-
-		//agent.SetDestination (NavMeshTarget.position);
+        ProcessKeys();
 	}
+    void ProcessKeys()
+    {
+        //Left Mouse Click
+        if (Input.GetMouseButtonDown(0))
+        {
+            clickToMove();
 
+        }
+        //SpaceBar
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SnapCameraToPlayer();
+        }
+    }
 
 
    
@@ -50,23 +55,39 @@ public class PlayerController : MonoBehaviour
 
         RaycastHit hit;
 
-        int navMeshLayer = 1;
-        LayerMask navMesh = 1 << navMeshLayer;
-        int enemyLayer = 3; //TODO: FIX LAYERMASKS
-        LayerMask  enemy  = 1 << enemyLayer;
+        //int navMeshLayer = 1;
+        //LayerMask navMesh = 1 << navMeshLayer;
+        //int enemyLayer = 3; //TODO: FIX LAYERMASKS
+        //LayerMask  enemy  = 1 << enemyLayer;
 
+        //if we hit the terrain
+         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+        {
+            GameObject waypoint = Instantiate(moveWaypoint, hit.point, Quaternion.identity) as GameObject;
+            playerAI.target = waypoint;
+            return;
+        }
         //if we hit the enemy
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, enemy))
+        else if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
         {
             //sets the target to the clicked enemy
             //all movement and basic attacks should be handled by the Player_AI
             playerAI.target = hit.collider.gameObject;
             return;
         }
-        else if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, navMesh))
+        
+    }
+
+    public void SnapCameraToPlayer()
+    {
+        Camera.main.transform.parent.position = this.transform.position;
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag.Equals("MoveWaypoint"))
         {
-            //instantiate moveWaypointObject
-            //set object to the current AI target
+            Destroy(col.gameObject);
         }
     }
 }

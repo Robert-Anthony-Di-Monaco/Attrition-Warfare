@@ -41,8 +41,6 @@ public class ClickToMoveCharacter : MonoBehaviour {
         {
             ShootBeam();
         }
-
-
     }
 
     void clickToMove()
