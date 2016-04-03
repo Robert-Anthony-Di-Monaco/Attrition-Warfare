@@ -34,13 +34,22 @@ public class Unit_Base : MonoBehaviour
 	public Vector3 offsetFromAnchor = Vector3.zero;
 
 	// THESE WILL BE DONE BY ROBERT ----> ignore for now
-	Animator anim;  
-	NavMeshAgent agent;
+	public Animator anim;  
+	public NavMeshAgent agent;
 
-	 void Awake()
+
+	//Made this function virtual, it is overriden by children using the override keyword and base.Awake()
+	//I had to do this because the agent pointer was not being set in the children classes
+	//This is the only way to make everything in here happen in all children.
+	public virtual void Awake()
 	{
 		//anim = GetComponent<Animator>();
 		agent = GetComponent<NavMeshAgent>();
+
+		WorldController wc = GameObject.Find("WorldController").GetComponent<WorldController>();
+		ID = wc.totalUnitsInstantiated;
+		wc.totalUnitsInstantiated++;
+		wc.allUnits.Add (this);
 
 
 
@@ -54,13 +63,13 @@ public class Unit_Base : MonoBehaviour
 	}
 
 	//Overridden by children classes
-	void Start(){
+	/*void Start(){
 		
 		WorldController wc = GameObject.Find("WorldController").GetComponent<WorldController>();
 		ID = wc.allUnits.Count;
 		wc.allUnits.Add (this);
 
-	}
+	}*/
 
 // **********************************************************  SHARED FUNCTIONS BY ALL UNITS  ***********************************************
 	// This and only this is used to move the NPC-unit

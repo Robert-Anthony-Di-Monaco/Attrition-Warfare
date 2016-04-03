@@ -27,6 +27,7 @@ public class WorldController : MonoBehaviour
 	public List<Transform> stationaryEnemyUnits = new List<Transform> ();
 
 	//All units in the game, used to generated unique IDs
+	public int totalUnitsInstantiated = 0;
 	public List<Unit_Base> allUnits = new List<Unit_Base>();
 
 	void Start () 

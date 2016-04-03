@@ -23,12 +23,16 @@ using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 public class Unit_Range : Unit_Base
 {
 	private BehaviorTree bt;
-	
-	void Awake () 
+
+	//See Unit_Base.Awake()
+	public override void Awake () 
 	{
+		base.Awake ();
+
 		InitBT();
 		bt.Start();
 	}
+
 	private void InitBT()
 	{
 		bt = new BehaviorTree(Application.dataPath + "/Range-AI-Tree.xml", this);
@@ -43,8 +47,8 @@ public class Unit_Range : Unit_Base
 		float zOffset = -3f * squad.distanceBetweenUnits;
 
 		//Lines up the units side by side
-		float xOffset = (unitIndex / numRange) * (squad.distanceBetweenUnits * numRange);
-		xOffset -= (squad.distanceBetweenUnits / 2) * numRange;
+		float xOffset = ((float)unitIndex / numRange) * (squad.distanceBetweenUnits * numRange);
+		xOffset -= (squad.distanceBetweenUnits / 2) * (numRange - 1);
 
 		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
 

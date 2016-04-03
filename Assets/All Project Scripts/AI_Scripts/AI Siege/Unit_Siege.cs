@@ -22,12 +22,16 @@ using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 public class Unit_Siege : Unit_Base
 {
 	private BehaviorTree bt;
-	
-	void Awake () 
+
+	//See Unit_Base.Awake()
+	public override void Awake () 
 	{
+		base.Awake ();
+
 		InitBT();
 		bt.Start();
 	}
+
 	private void InitBT()
 	{
 		bt = new BehaviorTree(Application.dataPath + "/Siege-AI-Tree.xml", this);
@@ -42,8 +46,8 @@ public class Unit_Siege : Unit_Base
 		float zOffset = -4.5f * squad.distanceBetweenUnits;
 
 		//Lines up the units side by side
-		float xOffset = (unitIndex / numSiege) * (squad.distanceBetweenUnits * numSiege);
-		xOffset -= (squad.distanceBetweenUnits / 2) * numSiege;
+		float xOffset = ((float)unitIndex / numSiege) * (squad.distanceBetweenUnits * numSiege);
+		xOffset -= (squad.distanceBetweenUnits / 2) * (numSiege - 1);
 
 		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
 

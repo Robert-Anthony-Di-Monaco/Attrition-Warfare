@@ -23,12 +23,16 @@ public class Unit_Melee : Unit_Base
 {
 	
 	private BehaviorTree bt;
-	
-	void Awake () 
+
+	//See Unit_Base.Awake()
+	public override void Awake () 
 	{
+		base.Awake ();
+
 		InitBT();
 		bt.Start();
 	}
+
 
 	private void InitBT()
 	{
@@ -47,8 +51,8 @@ public class Unit_Melee : Unit_Base
 		float zOffset = -1.5f * squad.distanceBetweenUnits;
 
 		//Lines up the units side by side
-		float xOffset = (unitIndex / numMelee) * (squad.distanceBetweenUnits * numMelee);
-		xOffset -= (squad.distanceBetweenUnits / 2) * numMelee;
+		float xOffset = ((float)unitIndex / numMelee) * (squad.distanceBetweenUnits * numMelee);
+		xOffset -= (squad.distanceBetweenUnits / 2) * (numMelee - 1);
 
 		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
 

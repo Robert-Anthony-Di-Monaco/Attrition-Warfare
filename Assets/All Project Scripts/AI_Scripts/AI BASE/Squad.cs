@@ -6,7 +6,12 @@ using System.Collections.Generic;
 //When a unit dies, make sure it is removed from its squad using removeUnit()
 public class Squad : MonoBehaviour 
 {
-	
+
+	//IMPORTANT: squad movement speed
+	//The leader must move slower than the rest of the squad, so that the squad can catch up to their slot positions when the leader is moving
+	//Double the speed of the unit's navmeshagent to get the desired movement speed for squads.
+	private float leaderSpeedDifference;
+
 	public List<Unit_Base> allUnits = new List<Unit_Base>();   // All units in this squad
 
 	public List<Unit_Melee> meleeUnits = new List<Unit_Melee>();
@@ -15,7 +20,7 @@ public class Squad : MonoBehaviour
 
 	public Unit_Base leader;
 
-	public float distanceBetweenUnits = 5f;
+	public float distanceBetweenUnits = 7.5f;
 
 	private string meleeTag = "Melee";
 	private string rangeTag = "Range";
@@ -28,8 +33,10 @@ public class Squad : MonoBehaviour
 	void FixedUpdate(){
 		
 		//Keep the squad's anchor position at the leader
-		if(leader != null)
+		if (leader != null) {
 			transform.position = leader.transform.position;
+			transform.rotation = leader.transform.rotation;
+		}
 	}
 
 
@@ -104,19 +111,30 @@ public class Squad : MonoBehaviour
 			} 
 			else if (unit.gameObject.tag == siegeTag) {
 				unit.squad = null;
-				rangeUnits.Remove ((Unit_Range)unit);
+				siegeUnits.Remove ((Unit_Siege)unit);
+				allUnits.Remove (unit);
+
+				CalculateNewAnchorPositions ();
 			}
 		}
 
 
+	}
+	//Removes a unit by its index in the allUnits list
+	public void removeUnit(int allUnitsListIndex){
+		removeUnit (allUnits [allUnitsListIndex]);
 	}
 
 
 	//Used automatically when adding or removing units to the squad
 	void ChooseLeader(){
 		
-		if (leader == null)
+		if (leader == null){
+			
+			leaderSpeedDifference = allUnits [0].agent.speed / 2;
 			leader = (Unit_Base)allUnits [0]; //allUnits[0] is never null when this function is called
+			leader.agent.speed -= leaderSpeedDifference;
+		}
 
 
 		//Prioritize melee, then ranged, then siege units as leader
@@ -124,16 +142,22 @@ public class Squad : MonoBehaviour
 		if (leader.gameObject.tag != meleeTag) {
 			if (meleeUnits.Count > 0) {
 				if (leader.gameObject.tag == rangeTag) {
+					leader.agent.speed += leaderSpeedDifference;
 					rangeUnits.Add ((Unit_Range)leader); //put the leader back into ranged unit formation
 				} 
 				else {
+					leader.agent.speed += leaderSpeedDifference;
 					siegeUnits.Add ((Unit_Siege)leader); //or put the leader back into siege unit formation
 				}
 				leader = (Unit_Base)meleeUnits [0];
+				leader.agent.speed -= leaderSpeedDifference;
 			} 
 			else if (leader.gameObject.tag != rangeTag && rangeUnits.Count > 0) { //if there are no melee units, look for ranged
+				leader.agent.speed += leaderSpeedDifference;
 				siegeUnits.Add ((Unit_Siege)leader); //put the leader back into siege unit formation
+
 				leader = (Unit_Base)rangeUnits [0];
+				leader.agent.speed -= leaderSpeedDifference;
 			}
 		} 
 
