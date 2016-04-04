@@ -1,7 +1,27 @@
 
-<!--<behavior-tree>
-	<sequence>
-		<not> <condition name = " "/> </not>
-		<leaf name = " "/>
-</behavior-tree>-->
+<!---
+<behavior-tree>																			<!-- This is the root of the tree  -->
+	
 
+	<selector>	                              							 <!--  Selectors returns in success once any one of its children execute successfully -->
+
+	
+		<sequence>    															<!--  Sequences execute each of its children one after the other   -->
+			<condition name = "Condition 1"/>								<!--  If one of its children fails the entire sequence fails and returns in failure  -->
+			<leaf name = "Action 1"/>
+		</sequence>	
+				
+				
+				
+		<sequence>
+			<condition name = "Condition 2"/>                                 <!--  A condition just checks a Boolean -->
+			<leaf name = "Action 2"/>												<!--  A leaf just executes its code -->
+		</sequence>	
+				
+				
+				
+	</selector>
+	
+	
+</behavior-tree>
+-->
