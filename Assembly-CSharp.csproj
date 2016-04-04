@@ -63,11 +63,13 @@
      <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BehaviorTree.cs" />
      <Compile Include="Assets\All Project Scripts\HealthBar.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\ClickToMoveCharacter.cs" />
-     <Compile Include="Assets\All Project Scripts\Misc\RTSMove.cs" />
+     <Compile Include="Assets\All Project Scripts\Misc\RTSCameraMove.cs" />
+     <Compile Include="Assets\All Project Scripts\Misc\WaypointDestroy.cs" />
      <Compile Include="Assets\All Project Scripts\Player Scripts\PlayerController.cs" />
      <Compile Include="Assets\All Project Scripts\Player Scripts\Player_AI.cs" />
      <Compile Include="Assets\All Project Scripts\World Scripts\EnemyController.cs" />
      <Compile Include="Assets\All Project Scripts\World Scripts\WorldController.cs" />
+     <Compile Include="Assets\All Scenes\Squad Test Scene\TestSquad.cs" />
      <Compile Include="Assets\BasicBeamShot\Script\AutoDestroy.cs" />
      <Compile Include="Assets\BasicBeamShot\Script\BM_WaveEffect.cs" />
      <Compile Include="Assets\BasicBeamShot\Script\BasicBullet.cs" />
@@ -124,11 +126,17 @@
      <None Include="Assets\World Assets {IGNORE}\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
      <None Include="Assets\BasicBeamShot\HowToUse_EN.txt" />
      <None Include="Assets\All Project Scripts\AI_Scripts\AI Melee\Melee-AI-Tree.xml" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
