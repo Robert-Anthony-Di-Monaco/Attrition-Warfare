@@ -9,6 +9,9 @@ using System.Collections.Generic;
 				--->  thePlayer.gameObject.GetComponent<PlayerController>();               For everything else --> GetComponent<Unit_Base>();  
  */
 
+
+//Important: it is assumed that the world controller object will be named "WorldController", 
+//   please make sure it is spelt exactly like that if you create it
 public class WorldController : MonoBehaviour 
 {
 	// The Player
@@ -26,9 +29,13 @@ public class WorldController : MonoBehaviour
 	// Holds all Enemy Stationary Units --> turrets and towers
 	public List<Transform> stationaryEnemyUnits = new List<Transform> ();
 
-	//All units in the game, used to generated unique IDs
+	//All units in the game, counter used to generated unique IDs
 	public int totalUnitsInstantiated = 0;
 	public List<Unit_Base> allUnits = new List<Unit_Base>();
+
+	//All squads in the game
+	public int totalSquadsInstantiated = 0;
+	public List<Squad> allSquads = new List<Squad>();
 
 	void Start () 
 	{

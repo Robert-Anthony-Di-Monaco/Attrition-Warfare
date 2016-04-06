@@ -52,7 +52,10 @@ public class Unit_Siege : Unit_Base
 		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
 
 	}
-
+	//Overloads the function in Unit_Base
+	public override bool isSiege(){
+		return true;
+	}
 
 
 	// LEAFS and CONDITIONS definitions ---> SEE TEMPLATES BELOW FOR HOW TO DO THEM!!!!!!!!

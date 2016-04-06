@@ -54,6 +54,10 @@ public class Unit_Range : Unit_Base
 
 	}
 
+	//Overloads the function in Unit_Base
+	public override bool isRange(){
+		return true;
+	}
 
 
 	// LEAFS and CONDITIONS definitions ---> SEE TEMPLATES BELOW FOR HOW TO DO THEM!!!!!!!!

@@ -13,6 +13,8 @@ public class TestSquad : MonoBehaviour {
 
 	private Transform target;
 
+	//These can be tweaked in the inspector
+	//See "DropThisIn...." object in the SquadTest scene
 	public float numMelee = 5;
 	public float numRange = 5;
 	public float numSiege = 5;
@@ -30,22 +32,26 @@ public class TestSquad : MonoBehaviour {
 		unitSpawnPoint.Add(new Vector3 (150, 0, 450));
 
 		target = GameObject.Find ("NavMesh Target").transform;
+
+		//Instantiate 3 squads, with varying unit types
+		//Lazy programming, sorry for readability...
 		for (int squadIndex = 0; squadIndex < 3; squadIndex++) {
 			
 			GameObject squadGO = Instantiate (squadPrefab, unitSpawnPoint[squadIndex], Quaternion.identity) as GameObject;
 			squad.Add(squadGO.GetComponent<Squad> ());
 
-			for (int i = 0; i < numSiege; i++) {
+			//Insert siege units, then range, then melee to check that leader selection is working
+			for (int i = 0; i < numSiege; i++) { 
 				GameObject siegeUnit = Instantiate (siegePrefab, unitSpawnPoint[squadIndex], Quaternion.identity) as GameObject;
 				squad[squadIndex].addUnit (siegeUnit.GetComponent<Unit_Siege> ());
 			}
-			if (squadIndex != 1) {
+			if (squadIndex != 1) { //No range units in the second squad
 				for (int i = 0; i < numRange; i++) {
 					GameObject rangeUnit = Instantiate (rangePrefab, unitSpawnPoint [squadIndex], Quaternion.identity) as GameObject;
 					squad [squadIndex].addUnit (rangeUnit.GetComponent<Unit_Range> ());
 				}
 			}
-			if (squadIndex != 2) {
+			if (squadIndex != 2) { //No melee units in the third squad
 				for (int i = 0; i < numMelee; i++) {
 					GameObject meleeUnit = Instantiate (meleePrefab, unitSpawnPoint [squadIndex], Quaternion.identity) as GameObject;
 					squad [squadIndex].addUnit (meleeUnit.GetComponent<Unit_Melee> ());
@@ -56,15 +62,10 @@ public class TestSquad : MonoBehaviour {
 			Debug.Log ("SquadTest - Units - all: " + squad[squadIndex].allUnits.Count + ", melee: " + squad[squadIndex].meleeUnits.Count +
 				", range: " + squad[squadIndex].rangeUnits.Count + ", siege: " + squad[squadIndex].siegeUnits.Count);
 
-
+			//After the units have all been spawned (simultaneously on top of each other), make them seek to their slot positions
 			foreach (Unit_Base u in squad[squadIndex].allUnits) {
-				if (squad[squadIndex].leader.ID != u.ID) {
-					u.agent.speed += 10;
-
-					Vector3 targetPosition = (squad[squadIndex].transform.position + squad[squadIndex].transform.TransformVector (u.offsetFromAnchor));
-					targetPosition += squad[squadIndex].transform.forward;
-					u.NavMeshTarget = targetPosition;
-					u.NavMeshSeek ();
+				if (squad[squadIndex].leader.ID != u.ID) { //Leader doesn't move
+					u.MarchInFormation ();
 				}
 			}
 			Debug.Log("Units spawned, non-leader units will constantly seek to their slot positions relative to the leader position (every frame).");
@@ -106,7 +107,7 @@ public class TestSquad : MonoBehaviour {
 		}
 		if (timer > 20 && timer < 21) {
 			squad [0].leader.NavMeshStop ();
-			squad [0].removeUnit (squad [0].leader);
+			squad [0].leader.Kill ();
 			squad [0].leader.NavMeshTarget = new Vector3 (400, 0, 100);
 			squad [0].leader.NavMeshSeek ();
 
@@ -117,7 +118,7 @@ public class TestSquad : MonoBehaviour {
 			squad[1].leader.NavMeshTarget = new Vector3 (250, 0, 100);
 			squad [1].leader.NavMeshSeek ();
 
-			Debug.Log ("Second squad's leader has a new destination.");
+			Debug.Log ("Second squad's leader has a new destination. Note: NavMeshAgents turn strangely after reaching their destination.");
 			timer = 37;
 		}
 	}
