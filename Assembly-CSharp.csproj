@@ -69,7 +69,7 @@
      <Compile Include="Assets\All Project Scripts\Player Scripts\BasicProjectile.cs" />
      <Compile Include="Assets\All Project Scripts\Player Scripts\PlayerController.cs" />
      <Compile Include="Assets\All Project Scripts\Player Scripts\Player_AI.cs" />
-     <Compile Include="Assets\All Project Scripts\World Scripts\WorldController.cs" />
+     <Compile Include="Assets\All Project Scripts\WorldController.cs" />
      <Compile Include="Assets\All Scenes\Squad Test Scene\TestSquad.cs" />
      <Compile Include="Assets\PlayerAssets\LazerShot\LazerShot.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Scripts\ScrollingUVs_Layers.cs" />
