@@ -123,7 +123,7 @@ public class Squad : MonoBehaviour
 
 	}
 
-	/* Player script does not inherit from Unit_Base yet
+	//Player script does not inherit from Unit_Base yet
 	 
 	//To be called when the player wants to take control of a squad
 	public void giveControlTo(Player_AI player){
@@ -134,7 +134,7 @@ public class Squad : MonoBehaviour
 		player.squad = this;
 
 		isPlayerControlled = true;
-		allUnits.add((Unit_Base)player);
+		addUnit((Unit_Base)player);
 
 		ChooseLeader();
 		CalculateNewAnchorPositions();
@@ -150,7 +150,7 @@ public class Squad : MonoBehaviour
 			return;
 		}
 
-		player.squad = null;
+		//player.squad = null;
 		leader = null;
 		isPlayerControlled = false;
 		
@@ -164,7 +164,7 @@ public class Squad : MonoBehaviour
 		ChooseLeader();
 		CalculateNewAnchorPositions();
 	}
-	*/
+	
 	
 	public void addUnit(Unit_Base unit){
 

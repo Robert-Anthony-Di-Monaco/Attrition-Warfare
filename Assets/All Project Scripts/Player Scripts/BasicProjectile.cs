@@ -5,10 +5,12 @@ public class BasicProjectile : MonoBehaviour {
 
     public GameObject target;
     public float bulletSpeed;
+    public int terrainLayer = 9;
+    public int enemyLayer = 8;
 
 	// Use this for initialization
 	void Start () {
-        bulletSpeed = 10f * Time.deltaTime;
+        bulletSpeed = 5f * Time.fixedDeltaTime;
 	}
 	
 	// Update is called once per frame
@@ -22,4 +24,13 @@ public class BasicProjectile : MonoBehaviour {
         Vector3 moveDir = target.transform.position - this.transform.position;
         this.transform.position += moveDir.normalized * bulletSpeed;
     }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.layer.Equals(enemyLayer))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
+

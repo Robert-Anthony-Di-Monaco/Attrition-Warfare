@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 	public const int maxPlayerHealth = 100;
 	public int playerHealth;
     public bool attackFlag;
+    public bool squadCommandFlag = false;
 
     public GameObject attackMoveWaypoint;
     public GameObject moveWaypoint;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     void ProcessKeys()
     {
-
+        //this is to signal the next click is an attack move
         if (Input.GetKeyDown(KeyCode.A))
         {
             attackFlag = true;
@@ -52,6 +53,10 @@ public class PlayerController : MonoBehaviour
             {
                 clickToAttackMove();
             }
+            else if (squadCommandFlag)
+            {
+                //TODO: check if click is on an ally squad
+            }
             else
             {
                 clickToMove();
@@ -61,6 +66,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SnapCameraToPlayer();
+        }
+        //R for command Squad
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            squadCommandFlag = true;
         }
     }
 
@@ -87,6 +97,7 @@ public class PlayerController : MonoBehaviour
                     Destroy(playerAI.target);
                 }
                 //create waypoint and move to it
+                squadCommandFlag = false;
                 attackFlag = false;
                 playerAI.target = waypoint;
                 playerAI.isAttackOrder = false;
@@ -100,6 +111,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Destroy(playerAI.target);
                 }
+                squadCommandFlag = false;
                 attackFlag = false;
                 playerAI.target = hit.collider.gameObject;
                 playerAI.isAttackOrder = true;
@@ -128,6 +140,7 @@ public class PlayerController : MonoBehaviour
                     Destroy(playerAI.target);
                 }
                 //create waypoint and move to it
+                squadCommandFlag = false;
                 attackFlag = false;
                 playerAI.isAttackOrder = true;
                 playerAI.target = waypoint;
@@ -146,6 +159,7 @@ public class PlayerController : MonoBehaviour
             //sets the target to the clicked enemy
             //all movement and basic attacks should be handled by the Player_AI
             attackFlag = false;
+            squadCommandFlag = false;
             playerAI.isAttackOrder = true;
             playerAI.target = hit.collider.gameObject;
             return;
@@ -156,6 +170,11 @@ public class PlayerController : MonoBehaviour
     public void SnapCameraToPlayer()
     {
         Camera.main.transform.parent.position = this.transform.position;
+    }
+
+    public void commandSquad()
+    {
+
     }
 
     void OnTriggerEnter(Collider col)

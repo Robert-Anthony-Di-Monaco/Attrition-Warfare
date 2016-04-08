@@ -198,7 +198,9 @@ public class Player_AI : Unit_Base
             if (Time.time > nextShotTime)
             {
 
-                BulletOffset = transform.position + (transform.forward * 1f) - (transform.up * 0.75f);
+                BulletOffset = transform.position;
+                BulletOffset += transform.forward * 0.5f;
+                BulletOffset.y = 0.75f;
                 GameObject bullet = Instantiate(basicShot, BulletOffset, this.transform.rotation) as GameObject;
                 bullet.GetComponent<BasicProjectile>().target = this.target;
                 nextShotTime = Time.time + shotCoolDown;
@@ -247,7 +249,9 @@ public class Player_AI : Unit_Base
 
             if (Time.time > nextShotTime)
             {
-                BulletOffset = transform.position + (transform.forward * 1f) + (transform.up * 0.75f);
+                BulletOffset = transform.position;
+                BulletOffset += transform.forward * 1f;
+                BulletOffset.y = 0.75f;
                 GameObject bullet = Instantiate(basicShot, BulletOffset, this.transform.rotation) as GameObject;
                 bullet.GetComponent<BasicProjectile>().target = closestEnemy;
                 nextShotTime = Time.time + shotCoolDown;
