@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
                     Destroy(playerAI.target);
                 }
                 //create waypoint and move to it
+                attackFlag = false;
                 playerAI.target = waypoint;
                 playerAI.isAttackOrder = false;
                 return;
@@ -99,6 +100,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Destroy(playerAI.target);
                 }
+                attackFlag = false;
                 playerAI.target = hit.collider.gameObject;
                 playerAI.isAttackOrder = true;
                 return;

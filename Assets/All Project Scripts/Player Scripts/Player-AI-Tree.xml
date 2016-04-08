@@ -1,4 +1,5 @@
 <behavior-tree>
+  
   <selector>
 
     <!-- here is the sequence for having a move order
@@ -107,7 +108,7 @@
     </sequence>
 
     <!-- here is the sequence for when we dont have a move order
-		and we are not currently leading a squad bit an enemy is in range
+		and we are not currently leading a squad but an enemy is in range
 		so we attack him -->
     <sequence>
       <not>
@@ -123,7 +124,7 @@
 
 
     <!-- here is the sequence for when we dont have a move order
-		and we are not currently leading a squad bit an enemy is in range
+		and we are not currently leading a squad but an enemy is in range
 		so we attack him -->
     <sequence>
       <not>
@@ -136,13 +137,12 @@
       <not>
         <condition name = "is-facing-nearest-enemy"/>
       </not>
-      <leaf name = "shoot-nearest-enemy" />
+      <leaf name = "face-nearest-enemy" />
     </sequence>
 
 
     <!-- here is the sequence for when we dont have a move order
-		and we are not currently leading a squad bit an enemy is in range
-		so we attack him -->
+		and we are not currently leading a squad and no enemies are in range-->
     <sequence>
       <not>
         <condition name = "has-move-order"/>
@@ -157,4 +157,5 @@
     </sequence>
 
   </selector>
+  
 </behavior-tree>

@@ -25,6 +25,7 @@ public class Player_AI : Unit_Base
 
     //basic attack variables
     public GameObject basicShot;
+    public Vector3 BulletOffset;
     public float shotCoolDown = 0.5f;
     public float nextShotTime = 0f;
     //
@@ -37,7 +38,7 @@ public class Player_AI : Unit_Base
 	
 	private BehaviorTree bt;
     //NavMeshAgent agent;
-	void Awake () 
+    public override void Awake() 
 	{
         enemyLayer = 1 << 8;
         health = maxHealth;
@@ -55,7 +56,7 @@ public class Player_AI : Unit_Base
 		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/Player Scripts/Player-AI-Tree.xml", this);
 	}
 
-    public virtual bool isPlayer() { return true; }
+    public override bool isPlayer() { return true; }
 
     //checks if the player currently has an order to move
     [BTLeaf("has-move-order")]
@@ -190,13 +191,15 @@ public class Player_AI : Unit_Base
     [BTLeaf ("shoot-target")]
     public BTCoroutine shootTarget()
     {
+        this.agent.SetDestination(this.transform.position);
         if (target != null)
         {
             //we know we are already facing the target
             if (Time.time > nextShotTime)
             {
-                //TODO: APPLY DAMAGE TO THE TARGET HERE MAYBE(IF WE DONT DECIDE TO DO IT ON COLLISION)
-                GameObject bullet = Instantiate(basicShot, transform.position + (transform.forward * 1f), this.transform.rotation) as GameObject;
+
+                BulletOffset = transform.position + (transform.forward * 1f) - (transform.up * 0.75f);
+                GameObject bullet = Instantiate(basicShot, BulletOffset, this.transform.rotation) as GameObject;
                 bullet.GetComponent<BasicProjectile>().target = this.target;
                 nextShotTime = Time.time + shotCoolDown;
                 yield return BTNodeResult.Success;
@@ -215,6 +218,7 @@ public class Player_AI : Unit_Base
     [BTLeaf("face-target")]
     public BTCoroutine faceTarget()
     {
+        this.agent.SetDestination(this.transform.position);
         //check if we are within aim Threshold of the target
         Vector3 enemyDir = target.transform.position - this.transform.position;
         float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
@@ -237,14 +241,14 @@ public class Player_AI : Unit_Base
     [BTLeaf ("shoot-nearest-enemy")]
     public BTCoroutine shootNearestEnemy()
     {
+        this.agent.SetDestination(this.transform.position);
         GameObject closestEnemy = this.getClosestEnemy();
         if (closestEnemy != null) {
 
             if (Time.time > nextShotTime)
             {
-                //TODO: APPLY DAMAGE TO THE TARGET HERE MAYBE(IF WE DONT DECIDE TO DO IT ON COLLISION)
-                Instantiate(basicShot, transform.position + (transform.forward * 1f), this.transform.rotation);
-                GameObject bullet = Instantiate(basicShot, transform.position + (transform.forward * 1f), this.transform.rotation) as GameObject;
+                BulletOffset = transform.position + (transform.forward * 1f) + (transform.up * 0.75f);
+                GameObject bullet = Instantiate(basicShot, BulletOffset, this.transform.rotation) as GameObject;
                 bullet.GetComponent<BasicProjectile>().target = closestEnemy;
                 nextShotTime = Time.time + shotCoolDown;
                 yield return BTNodeResult.Success;
@@ -261,6 +265,7 @@ public class Player_AI : Unit_Base
     [BTLeaf ("face-nearest-enemy")]
     public BTCoroutine faceNearestEnemy()
     {
+        this.agent.SetDestination(this.transform.position);
         GameObject nearestEnemy = this.getClosestEnemy();
         Vector3 enemyDir = nearestEnemy.transform.position - this.transform.position;
         float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
