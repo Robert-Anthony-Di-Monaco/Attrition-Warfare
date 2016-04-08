@@ -140,7 +140,7 @@ public class Unit_Base : MonoBehaviour
 	// This and only this is used to move the NPC-unit
 	public void NavMeshSeek()
 	{
-		if(NavMeshTarget != null)
+		if(NavMeshTarget != Vector3.zero)
 			agent.SetDestination (NavMeshTarget); //changed from navmeshtarget.position
 	}
 	// Stop moving the NPC-unit
