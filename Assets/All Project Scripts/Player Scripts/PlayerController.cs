@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 {
     public int terrainLayer = 9;
     public int enemyLayer = 8;
+    public int allyLayer = 10;
 
 	public float speed = 5f; 
 
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
             else if (squadCommandFlag)
             {
                 //TODO: check if click is on an ally squad
+                commandSquad();
             }
             else
             {
@@ -123,7 +125,8 @@ public class PlayerController : MonoBehaviour
 
     void clickToAttackMove()
     {
-
+        attackFlag = false;
+        squadCommandFlag = false;
         RaycastHit hit;
 
         //same as click to move but we need to set the attack flag in the AI to true
@@ -140,14 +143,12 @@ public class PlayerController : MonoBehaviour
                     Destroy(playerAI.target);
                 }
                 //create waypoint and move to it
-                squadCommandFlag = false;
-                attackFlag = false;
                 playerAI.isAttackOrder = true;
                 playerAI.target = waypoint;
                 return;
             }
         }
-        else if (hit.collider.gameObject.layer.Equals(enemyLayer))
+        if (hit.collider.gameObject.layer.Equals(enemyLayer))
         {
             //if a previous waypoint exists destroy it
             if (playerAI.target != null && playerAI.target.tag == "MoveWaypoint")
@@ -158,10 +159,8 @@ public class PlayerController : MonoBehaviour
 
             //sets the target to the clicked enemy
             //all movement and basic attacks should be handled by the Player_AI
-            attackFlag = false;
-            squadCommandFlag = false;
-            playerAI.isAttackOrder = true;
             playerAI.target = hit.collider.gameObject;
+            playerAI.isAttackOrder = true;
             return;
         }
 
@@ -174,7 +173,18 @@ public class PlayerController : MonoBehaviour
 
     public void commandSquad()
     {
-
+        squadCommandFlag = false;
+        RaycastHit hit;
+        //same as click to move we check if we clicked on an ally
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+        {
+             //if we hit the terrain
+            if (hit.collider.gameObject.layer.Equals(allyLayer))
+            {
+                playerAI.isSquadCommander = true;
+                hit.collider.gameObject.GetComponent<Unit_Base>().squad.giveControlTo(playerAI);
+            }
+        }
     }
 
     void OnTriggerEnter(Collider col)
