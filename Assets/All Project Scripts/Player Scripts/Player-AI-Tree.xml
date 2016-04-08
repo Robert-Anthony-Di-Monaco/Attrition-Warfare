@@ -104,7 +104,7 @@
         <condition name = "has-move-order"/>
       </not>
       <condition name = "is-commanding-squad"/>
-      <leaf name = "move-to-squad-anchor" />
+      <leaf name = "idle" />
     </sequence>
 
     <!-- here is the sequence for when we dont have a move order

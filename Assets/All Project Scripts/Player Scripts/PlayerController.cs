@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 	public int playerHealth;
     public bool attackFlag;
     public bool squadCommandFlag = false;
+    public bool squadAttackFlag = false;
 
     public GameObject attackMoveWaypoint;
     public GameObject moveWaypoint;
@@ -57,7 +58,11 @@ public class PlayerController : MonoBehaviour
             else if (squadCommandFlag)
             {
                 //TODO: check if click is on an ally squad
-                commandSquad();
+                takeControlOfSquad();
+            }
+            else if(squadAttackFlag)
+            {
+                giveSquadAttackMoveOrder();
             }
             else
             {
@@ -69,10 +74,18 @@ public class PlayerController : MonoBehaviour
         {
             SnapCameraToPlayer();
         }
+
+        //SQUAD DONTROL COMMANDS
+
         //R for command Squad
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             squadCommandFlag = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && playerAI.isSquadCommander)
+        {
+            squadAttackFlag = true;
         }
     }
 
@@ -171,8 +184,9 @@ public class PlayerController : MonoBehaviour
         Camera.main.transform.parent.position = this.transform.position;
     }
 
-    public void commandSquad()
+    public void takeControlOfSquad()
     {
+
         squadCommandFlag = false;
         RaycastHit hit;
         //same as click to move we check if we clicked on an ally
@@ -187,6 +201,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void giveSquadAttackMoveOrder()
+    {
+        RaycastHit hit;
+        squadCommandFlag = false;
+        attackFlag = false;
+        squadCommandFlag = false;
+        //same code as attackMove really just modifies the unit/squad
+        //AI variables instead of the playerAI
+        playerAI.squad.leader.NavMeshTarget = Vector3.zero;
+
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+        {
+            //if we hit the terrain
+            if (hit.collider.gameObject.layer.Equals(terrainLayer))
+            {
+                GameObject waypoint = Instantiate(attackMoveWaypoint, hit.point, Quaternion.identity) as GameObject;
+                //if a previous waypoint exists destroy it
+                if (playerAI.target != null && playerAI.target.tag.Equals("MoveWaypoint"))
+                {
+                    //destroy previous waypoint
+                    Destroy(playerAI.target);
+                }
+                //create waypoint and move to it
+                playerAI.isAttackOrder = true;
+                playerAI.target = waypoint;
+                return;
+            }
+        }
+
+    }
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag.Equals("MoveWaypoint"))
@@ -194,4 +238,6 @@ public class PlayerController : MonoBehaviour
             Destroy(col.gameObject);
         }
     }
+
+    
 }
