@@ -13,16 +13,13 @@ using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
  */
 
 
-public class Player_AI : MonoBehaviour
+public class Player_AI : Unit_Base
 {
-    public float speed,
-               damageOutput,
-               attackRange;
-    public const int maxHealth = 100;
-    public int health = maxHealth;
+   
+    
 
     //LayerMask
-    public int enemyLayer = 1 << 8;
+    public int enemyLayer;
 
     public float aimThreshold = 10f;
 
@@ -39,9 +36,11 @@ public class Player_AI : MonoBehaviour
 
 	
 	private BehaviorTree bt;
-    NavMeshAgent agent;
+    //NavMeshAgent agent;
 	void Awake () 
 	{
+        enemyLayer = 1 << 8;
+        health = maxHealth;
         attackRange = 10f;
         target = null;
         agent = GetComponent<NavMeshAgent>();
@@ -55,6 +54,8 @@ public class Player_AI : MonoBehaviour
        //isAttackOrder = false;
 		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/Player Scripts/Player-AI-Tree.xml", this);
 	}
+
+    public virtual bool isPlayer() { return true; }
 
     //checks if the player currently has an order to move
     [BTLeaf("has-move-order")]
@@ -146,8 +147,8 @@ public class Player_AI : MonoBehaviour
     public GameObject getClosestEnemy()
     {
         //get nearest enemy in attack range
-        int layerMask = 0;  //TODO: set to ignore everything but the enemy
-        Collider[] cols = Physics.OverlapSphere(this.transform.position, attackRange, layerMask);
+
+        Collider[] cols = Physics.OverlapSphere(this.transform.position, attackRange, enemyLayer);
         GameObject closestEnemy = null;
         float closestDistance = float.MaxValue;
 
@@ -189,16 +190,25 @@ public class Player_AI : MonoBehaviour
     [BTLeaf ("shoot-target")]
     public BTCoroutine shootTarget()
     {
-        //we know we are already facing the target
-        if(Time.time > nextShotTime){
-            //TODO: APPLY DAMAGE TO THE TARGET HERE MAYBE(IF WE DONT DECIDE TO DO IT ON COLLISION)
-            Instantiate(basicShot, transform.position + (transform.forward * 1f), this.transform.rotation);
-            nextShotTime = Time.time + shotCoolDown;
-            yield return BTNodeResult.Success;
+        if (target != null)
+        {
+            //we know we are already facing the target
+            if (Time.time > nextShotTime)
+            {
+                //TODO: APPLY DAMAGE TO THE TARGET HERE MAYBE(IF WE DONT DECIDE TO DO IT ON COLLISION)
+                GameObject bullet = Instantiate(basicShot, transform.position + (transform.forward * 1f), this.transform.rotation) as GameObject;
+                bullet.GetComponent<BasicProjectile>().target = this.target;
+                nextShotTime = Time.time + shotCoolDown;
+                yield return BTNodeResult.Success;
+            }
+            else
+            {
+                yield return BTNodeResult.NotFinished;
+            }
         }
         else
         {
-            yield return BTNodeResult.NotFinished;
+            yield return BTNodeResult.Failure;
         }
     }
 
@@ -228,17 +238,23 @@ public class Player_AI : MonoBehaviour
     public BTCoroutine shootNearestEnemy()
     {
         GameObject closestEnemy = this.getClosestEnemy();
+        if (closestEnemy != null) {
 
-        if (Time.time > nextShotTime)
-        {
-            //TODO: APPLY DAMAGE TO THE TARGET HERE MAYBE(IF WE DONT DECIDE TO DO IT ON COLLISION)
-            Instantiate(basicShot, transform.position + (transform.forward * 1f), this.transform.rotation);
-            nextShotTime = Time.time + shotCoolDown;
-            yield return BTNodeResult.Success;
-        }
-        else
-        {
-            yield return BTNodeResult.NotFinished;
+            if (Time.time > nextShotTime)
+            {
+                //TODO: APPLY DAMAGE TO THE TARGET HERE MAYBE(IF WE DONT DECIDE TO DO IT ON COLLISION)
+                Instantiate(basicShot, transform.position + (transform.forward * 1f), this.transform.rotation);
+                GameObject bullet = Instantiate(basicShot, transform.position + (transform.forward * 1f), this.transform.rotation) as GameObject;
+                bullet.GetComponent<BasicProjectile>().target = closestEnemy;
+                nextShotTime = Time.time + shotCoolDown;
+                yield return BTNodeResult.Success;
+            }
+            else
+            {
+                yield return BTNodeResult.NotFinished;
+            }
+        }else{
+            yield return BTNodeResult.Failure;
         }
     }
 
@@ -257,7 +273,7 @@ public class Player_AI : MonoBehaviour
         {
             //TODO: tune the facing speed here
             transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
-            yield return BTNodeResult.Success;
+            yield return BTNodeResult.NotFinished;
         }
 
     }

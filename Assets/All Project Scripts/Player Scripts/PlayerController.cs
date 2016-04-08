@@ -12,7 +12,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-    public int terrainLayer = 15;
+    public int terrainLayer = 9;
     public int enemyLayer = 8;
 
 	public float speed = 5f; 
