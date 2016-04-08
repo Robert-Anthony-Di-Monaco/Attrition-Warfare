@@ -23,7 +23,6 @@ public class Unit_Siege : Unit_Base
 {
 	private BehaviorTree bt;
 
-	//See Unit_Base.Awake()
 	public override void Awake () 
 	{
 		base.Awake ();
@@ -62,7 +61,7 @@ public class Unit_Siege : Unit_Base
 	[BTLeaf("has-target")]
 	public bool hasTarget()   // Does this unit have a target
 	{
-		if(NavMeshTarget != null)
+		if(NavMeshTarget != Vector3.zero)
 			return true;
 		else 
 			return false;
