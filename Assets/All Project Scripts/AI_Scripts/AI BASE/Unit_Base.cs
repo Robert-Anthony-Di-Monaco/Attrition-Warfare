@@ -73,7 +73,7 @@ public class Unit_Base : MonoBehaviour
 	public virtual void Awake()
 	{
 		//anim = GetComponent<Animator>();
-		agent = GetComponent<NavMeshAgent>();
+		agent = gameObject.GetComponent<NavMeshAgent>();
 
 		WorldController wc = GameObject.Find("WorldController").GetComponent<WorldController>();
 		ID = wc.totalUnitsInstantiated;
@@ -91,6 +91,19 @@ public class Unit_Base : MonoBehaviour
 		 */
 	}
 
+	void FixedUpdate(){
+		
+		if(isSquadLeader())
+		{
+			NavMeshSeek();
+		}
+		else
+		{
+			MarchInFormation();
+		}
+
+	}
+	
 	//Functions to be used by behaviour trees, call within Behaviour tree functions
 
 	//Only for non-leader units
