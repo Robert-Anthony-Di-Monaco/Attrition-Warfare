@@ -22,10 +22,14 @@ using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 public class Unit_Melee : Unit_Base
 {
 	
-	private BehaviorTree bt;
-
+	public BehaviorTree bt;
 	public override void Awake () 
 	{
+        attackRange = 6f;
+        attackCooldown = 1f;
+        damageOutput = 10;
+        visionRange = 100f;
+        isInCombat = false;
 		base.Awake ();
 
 		InitBT();
@@ -35,7 +39,7 @@ public class Unit_Melee : Unit_Base
 
 	private void InitBT()
 	{
-		bt = new BehaviorTree(Application.dataPath + "/Melee-AI-Tree.xml", this);
+		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Melee/Melee-AI-Tree.xml", this);
 	}
 
 
@@ -56,10 +60,180 @@ public class Unit_Melee : Unit_Base
 		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
 
 	}
+
 	//Overloads the function in Unit_Base
 	public override bool isMelee(){
 		return true;
 	}
+
+
+    //The time check for attack is already done just write the instantiate in here
+    public void attack(GameObject targetEnemy)
+    {
+        targetEnemy.SendMessage("ApplyDamage", damageOutput);
+    }
+
+
+    //NOT A COROUTINE just used in one
+    public GameObject getClosestEnemy()
+    {
+        //get nearest enemy in attack range
+        Collider[] cols = Physics.OverlapSphere(this.transform.position, visionRange, enemyLayer);
+        GameObject closestEnemy = null;
+        float closestDistance = float.MaxValue;
+
+        //check for the closest enemy object
+        foreach (Collider collision in cols)
+        {
+            Vector3 colliderPos = collision.gameObject.transform.position;
+            float currentDistance = Math.Abs((colliderPos - this.transform.position).magnitude);
+            if (currentDistance < closestDistance)
+            {
+                closestEnemy = collision.gameObject;
+                closestDistance = currentDistance;
+            }
+        }
+        return closestEnemy;
+    }
+
+    [BTLeaf ("is-squad-in-combat")]
+    public bool isSquadInCombat(){
+        if (squad != null) { 
+            return squad.leader.isInCombat;
+        }
+        return false;
+    }
+
+
+    //TODO: FIX LAYERMASKING HERE
+    [BTLeaf ("is-enemy-in-vision-range")]
+    public bool isEnemyInVisionRange()
+    {
+       return Physics.CheckSphere(this.transform.position, visionRange, enemyLayer);
+    }
+
+    [BTLeaf("is-enemy-in-attack-range")]
+    public bool isEnemyInAttackRange()
+    {
+        return Physics.CheckSphere(this.transform.position, attackRange, enemyLayer);
+    }
+
+    [BTLeaf("is-facing-nearest-enemy")]
+    public bool isFacingNearestEnemy()
+    {
+        GameObject closestEnemy = this.getClosestEnemy();
+        if (closestEnemy == null)
+        {
+            return false;
+        }
+        Vector3 enemyDir = closestEnemy.transform.position - this.transform.position;
+        float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
+
+
+        if (angleDifference < aimThreshold)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    [BTLeaf ("face-nearest-enemy")]
+    public BTCoroutine faceNearestEnemy()
+    {
+
+        this.agent.SetDestination(this.transform.position);
+        GameObject nearestEnemy = this.getClosestEnemy();
+        Vector3 enemyDir = nearestEnemy.transform.position - this.transform.position;
+        float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
+
+        if (angleDifference < aimThreshold)
+        {
+            yield return BTNodeResult.Success;
+        }
+        else
+        {
+            //TODO: tune the facing speed here
+            transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
+            yield return BTNodeResult.NotFinished;
+        }
+    }
+
+    [BTLeaf ("attack-nearest-enemy")]
+    public BTCoroutine attackNearestEnemy()
+    {
+        this.agent.SetDestination(this.transform.position);
+        GameObject closestEnemy = this.getClosestEnemy();
+        if (closestEnemy != null)
+        {
+
+            if (Time.time > nextAttackTime)
+            {
+                attack(closestEnemy);
+                yield return BTNodeResult.Success;
+            }
+            else
+            {
+                yield return BTNodeResult.NotFinished;
+            }
+        }
+        else
+        {
+            yield return BTNodeResult.Failure;
+        }
+    }
+
+    [BTLeaf ("pursue-nearest-enemy")]
+    public BTCoroutine pursueNearestEnemy()
+    {
+        GameObject closestEnemy = this.getClosestEnemy();
+        if (closestEnemy != null)
+        {
+            if ((closestEnemy.transform.position - this.transform.position).magnitude < attackRange)
+            {
+                squad.isInCombat = true;
+                this.isInCombat = true;
+                yield return BTNodeResult.Success;
+            }
+            else
+            {
+                squad.isInCombat = true;
+                this.isInCombat = true;
+                NavMeshTarget = closestEnemy.transform.position;
+                NavMeshSeek();
+                yield return BTNodeResult.NotFinished;
+            }
+        }
+
+        else
+        {
+            yield return BTNodeResult.Failure;
+        }
+    }
+
+
+    [BTLeaf ("move-to-leader-target")]
+    public BTCoroutine MoveToLeaderTarget()
+    {
+        
+        squad.leader.NavMeshTarget = squad.target;
+        squad.leader.NavMeshSeek();
+        squad.isInCombat = false;
+        yield return BTNodeResult.Success;
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 	// LEAFS and CONDITIONS definitions ---> SEE TEMPLATES BELOW FOR HOW TO DO THEM!!!!!!!!
@@ -80,8 +254,12 @@ public class Unit_Melee : Unit_Base
 			yield return BTNodeResult.Success;
 		else
 			yield return BTNodeResult.NotFinished;
-	} 	          
+	} 	
+    
+   
 }
+
+
 
 
 

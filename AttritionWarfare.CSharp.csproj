@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Spawn.cs" />
     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Squad.cs" />
     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Unit_Base.cs" />
     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Melee\Unit_Melee.cs" />

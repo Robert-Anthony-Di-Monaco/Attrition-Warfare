@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using Coroutine = System.Collections.IEnumerator;
+using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 
 /************************************************************************************************************************************************************************
 	TO MAKE SURE THERE IS NO CONFUSION THIS IS WHAT EACH TERM MEANS:
@@ -47,15 +48,21 @@ public class Unit_Base : MonoBehaviour
 	public Unit_Base Target;		//The enemy that this unit is targetting
 									//Anything targettable should inherit Unit_Base
 
-	public float speed, //Should just use navmesh speed through agent.speed
-	 			 damageOutput,
-				 attackRange;
+    public float speed, //Should just use navmesh speed through agent.speed
+                 attackRange,
+                 visionRange,
+                 aimThreshold,
+                 nextAttackTime,
+                 attackCooldown;
 	public const int maxHealth = 100; 
 	public int health = maxHealth;
 
 	public int UpgradeLevel = 0;   // Determines this unit's abilities
 
-	public bool isEnemy;   		   // Friendly or enemy unit 
+    public int enemyLayer;
+    public int damageOutput;
+    public bool isInCombat;
+	//public bool isEnemy;   		   // Friendly or enemy unit 
 								   //	  --> use this.squad.faction, details in Squad script
 								   //     --> moved this to Squad script, that way you don't have to set it every time you instantiate a unit
 								   //	  --> changed to int faction: might be used as an index, less confusing (enemies would attack when isEnemy is false)
@@ -74,12 +81,14 @@ public class Unit_Base : MonoBehaviour
 	{
 		//anim = GetComponent<Animator>();
 		agent = gameObject.GetComponent<NavMeshAgent>();
-
+        isInCombat = false;
 		WorldController wc = GameObject.Find("WorldController").GetComponent<WorldController>();
 		ID = wc.totalUnitsInstantiated;
 		wc.totalUnitsInstantiated++;
 		wc.allUnits.Add (this);
 
+        aimThreshold = 10f;
+       
 
 
 		/* In derived class Initialize that Unit's variables here
@@ -90,24 +99,31 @@ public class Unit_Base : MonoBehaviour
 				etc...
 		 */
 	}
+    public void Start()
+    {
+            layerSetUp();
+    }
+
 
 	void FixedUpdate(){
 		
-		if(isSquadLeader())
-		{
-			NavMeshSeek();
-		}
-		else
-		{
-			MarchInFormation();
-		}
+        //if(isSquadLeader())
+        //{
+        //    NavMeshSeek();
+        //}
+        //else
+        //{
+        //    MarchInFormation();
+        //}
 
 	}
 	
 	//Functions to be used by behaviour trees, call within Behaviour tree functions
 
 	//Only for non-leader units
-	public void MarchInFormation(){ //Will need to be changed if we don't want to update this every frame
+
+    [BTLeaf("march-in-formation")]
+	public BTCoroutine MarchInFormation(){ //Will need to be changed if we don't want to update this every frame
 		if(squad != null && squad.leader != null){
 			//Transform the offset vector from local space to world space to take into account the leader's rotation
 			NavMeshTarget = squad.transform.position + squad.transform.TransformVector(offsetFromAnchor);
@@ -116,9 +132,11 @@ public class Unit_Base : MonoBehaviour
 			//  resolves issues with the unit sometimes facing the wrong direction when stationary
 			NavMeshTarget += squad.transform.forward; 
 			NavMeshSeek ();
+            yield return BTNodeResult.NotFinished;
 		}
 	}
 
+    [BTLeaf("is-squad-Leader")]
 	public bool isSquadLeader(){
 		return (squad != null && squad.leader != null && squad.leader.ID == ID);
 	}
@@ -176,6 +194,23 @@ public class Unit_Base : MonoBehaviour
 	{
 		health += amount;
 	}
+
+    public void layerSetUp()
+    {
+        //Set enemyLayer to the layer of the opposing faction
+        if (faction == 0)
+        {
+            this.gameObject.layer =  10; //ally layer;
+            enemyLayer =  1 << 8;
+
+        }
+        else if (faction == 1)
+        {
+            this.gameObject.layer =  8; //enemy layer;
+            enemyLayer = 1 << 10;
+        }
+    }
+
 
 
 

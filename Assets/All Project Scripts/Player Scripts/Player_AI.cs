@@ -19,9 +19,7 @@ public class Player_AI : Unit_Base
     
 
     //LayerMask
-    public int enemyLayer;
 
-    public float aimThreshold = 10f;
 
     //basic attack variables
     public GameObject basicShot;
@@ -40,7 +38,8 @@ public class Player_AI : Unit_Base
     //NavMeshAgent agent;
     public override void Awake() 
 	{
-        enemyLayer = 1 << 8;
+        aimThreshold = 10f;
+        enemyLayer = 8;
         health = maxHealth;
         attackRange = 10f;
         target = null;
@@ -122,6 +121,7 @@ public class Player_AI : Unit_Base
             return false;
         }
     }
+
     [BTLeaf ("is-facing-nearest-enemy")]
     public bool isFacingNearestEnemy()
     {
@@ -286,6 +286,7 @@ public class Player_AI : Unit_Base
         }
 
     }
+
     [BTLeaf ("move-to-squad-anchor")]
     public BTCoroutine moveToSquadAnchor()
     {

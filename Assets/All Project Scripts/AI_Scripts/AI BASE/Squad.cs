@@ -107,23 +107,23 @@ public class Squad : MonoBehaviour
 	void FixedUpdate(){
 
         //TODO: need to allow the player to set a target destination for the leader of a squad so he can command it to attack somewhere
-		
-		//The squad's anchor position follows the leader, without moving faster than units' navmesh speed
-		//When the squad's leader is an AI, it will move at half speed
-		//When the squad's leader is the player, the player can move at full speed without screwing up the formation
-		if (leader != null)
-		{
-			if (leader.isPlayer ()) 
-			{
-				Vector3 Target = leader.transform.position;
+
+        //The squad's anchor position follows the leader, without moving faster than units' navmesh speed
+        //When the squad's leader is an AI, it will move at half speed
+        //When the squad's leader is the player, the player can move at full speed without screwing up the formation
+        if (leader != null)
+        {
+            if (leader.isPlayer ()) 
+            {
+                Vector3 Target = leader.transform.position;
                 transform.position = Target;//(Target - transform.position).normalized * unitNavmeshSpeed * Time.deltaTime;
-			} 
-			else {
-				leader.NavMeshTarget = target;
-				transform.position = leader.transform.position;
-			}
-			transform.rotation = leader.transform.rotation;
-		}
+            } 
+            else {
+                //leader.NavMeshTarget = target;
+                transform.position = leader.transform.position;
+            }
+            transform.rotation = leader.transform.rotation;
+        }
 
 	}
 

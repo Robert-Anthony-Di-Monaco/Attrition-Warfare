@@ -9,15 +9,16 @@ public class Spawn : MonoBehaviour {
 	public GameObject emptySquad;
 	private GameObject currentSquad;
 	private int meleeUnits = 0;
+    public int faction;
 	// Use this for initialization
 	void Start () {
-		
 	}
+
 	float squadCounter = 0;
 	float unitCounter = 0;
 	// Update is called once per frame
 	void Update () {
-		if(squadCounter > 10)
+		if(squadCounter > 5)
 		{
 			if(currentSquad == null)
 			{
@@ -29,6 +30,7 @@ public class Spawn : MonoBehaviour {
 				GameObject temp1 = Instantiate(melee, transform.position, Quaternion.identity) as GameObject;
 				//temp1.transform.localScale = new Vector3(10f,10f,10f);
 				temp1.GetComponent<Unit_Melee>().enabled = true;
+                temp1.GetComponent<Unit_Base>().faction = faction;
 				currentSquad.GetComponent<Squad>().addUnit(temp1.GetComponent<Unit_Melee>());
 				unitCounter = 0;
 			}
