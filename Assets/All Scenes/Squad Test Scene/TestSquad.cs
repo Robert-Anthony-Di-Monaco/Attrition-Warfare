@@ -75,51 +75,59 @@ public class TestSquad : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        //if(timer <= 10)
-        //    timer -= Time.deltaTime;
+        if (timer <= 10)
+            timer -= Time.deltaTime;
 
-        //if (timer < 0) {
-        //    for (int squadIndex = 0; squadIndex < 3; squadIndex++) {
-        //        squad[squadIndex].leader.NavMeshTarget = (target.position);
-        //        squad[squadIndex].leader.NavMeshSeek ();
-        //    }
-        //    Debug.Log ("Leaders are now seeking to the target.");
-        //    timer = 12;
-        //}
+        if (timer < 0)
+        {
+            for (int squadIndex = 0; squadIndex < 3; squadIndex++)
+            {
+                squad[squadIndex].leader.NavMeshTarget = (target.position);
+                squad[squadIndex].leader.NavMeshSeek();
+            }
+            Debug.Log("Leaders are now seeking to the target.");
+            timer = 12;
+        }
 
-        //if (timer > 11) {
-        //    timer += Time.deltaTime;
-        //    for (int squadIndex = 0; squadIndex < 3; squadIndex++) {
-        //        foreach (Unit_Base unit in squad[squadIndex].allUnits) {
-        //            //Debug.Log ("anchor offset: " + unit.offsetFromAnchor);
+        if (timer > 11)
+        {
+            timer += Time.deltaTime;
+            for (int squadIndex = 0; squadIndex < 3; squadIndex++)
+            {
+                foreach (Unit_Base unit in squad[squadIndex].allUnits)
+                {
+                    //Debug.Log ("anchor offset: " + unit.offsetFromAnchor);
 
-        //            if (squad[squadIndex].leader.ID != unit.ID) {
-					
-        //                Vector3 targetPosition = (squad[squadIndex].transform.position + squad[squadIndex].transform.TransformVector (unit.offsetFromAnchor));
-        //                targetPosition += squad[squadIndex].transform.forward;
-        //                unit.NavMeshTarget = targetPosition;
-        //                unit.NavMeshSeek ();
-        //            }
+                    if (squad[squadIndex].leader.ID != unit.ID)
+                    {
 
-        //        }
-        //    }
+                        Vector3 targetPosition = (squad[squadIndex].transform.position + squad[squadIndex].transform.TransformVector(unit.offsetFromAnchor));
+                        targetPosition += squad[squadIndex].transform.forward;
+                        unit.NavMeshTarget = targetPosition;
+                        unit.NavMeshSeek();
+                    }
 
-        //}
-        //if (timer > 20 && timer < 21) {
-        //    squad [0].leader.NavMeshStop ();
-        //    squad [0].leader.Kill ();
-        //    squad [0].leader.NavMeshTarget = new Vector3 (400, 0, 100);
-        //    squad [0].leader.NavMeshSeek ();
+                }
+            }
 
-        //    Debug.Log ("Bottom squad's leader killed. A new leader is chosen automatically and the new leader is set to go to the bottom right.");
-        //    timer = 22;
-        //}
-        //if (timer > 35 && timer < 36) {
-        //    squad[1].leader.NavMeshTarget = new Vector3 (250, 0, 100);
-        //    squad [1].leader.NavMeshSeek ();
+        }
+        if (timer > 20 && timer < 21)
+        {
+            squad[0].leader.NavMeshStop();
+            squad[0].leader.Kill();
+            squad[0].leader.NavMeshTarget = new Vector3(400, 0, 100);
+            squad[0].leader.NavMeshSeek();
 
-        //    Debug.Log ("Second squad's leader has a new destination. Note: NavMeshAgents turn strangely after reaching their destination.");
-        //    timer = 37;
-        //}
+            Debug.Log("Bottom squad's leader killed. A new leader is chosen automatically and the new leader is set to go to the bottom right.");
+            timer = 22;
+        }
+        if (timer > 35 && timer < 36)
+        {
+            squad[1].leader.NavMeshTarget = new Vector3(250, 0, 100);
+            squad[1].leader.NavMeshSeek();
+
+            Debug.Log("Second squad's leader has a new destination. Note: NavMeshAgents turn strangely after reaching their destination.");
+            timer = 37;
+        }
 	}
 }

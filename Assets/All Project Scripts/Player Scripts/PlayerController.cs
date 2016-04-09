@@ -13,7 +13,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public int terrainLayer = 9;
-    public int enemyLayer = 8;
+    public int enemyLayer =  8;
     public int allyLayer = 10;
 
 	public float speed = 5f; 
@@ -31,8 +31,6 @@ public class PlayerController : MonoBehaviour
 	void Awake () 
 	{
         playerAI = GetComponent<Player_AI>();
-
-       
 	}
 
 	void Update () 
@@ -57,7 +55,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (squadCommandFlag)
             {
-                //TODO: check if click is on an ally squad
+                
                 takeControlOfSquad();
             }
             else if(squadAttackFlag)
@@ -97,7 +95,9 @@ public class PlayerController : MonoBehaviour
     //the ground
     void clickToMove()
     {
-
+        squadAttackFlag = false;
+        squadCommandFlag = false;
+        attackFlag = false;
         RaycastHit hit;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
@@ -112,8 +112,7 @@ public class PlayerController : MonoBehaviour
                     Destroy(playerAI.target);
                 }
                 //create waypoint and move to it
-                squadCommandFlag = false;
-                attackFlag = false;
+                
                 playerAI.target = waypoint;
                 playerAI.isAttackOrder = false;
                 return;
@@ -126,8 +125,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Destroy(playerAI.target);
                 }
-                squadCommandFlag = false;
-                attackFlag = false;
+               
                 playerAI.target = hit.collider.gameObject;
                 playerAI.isAttackOrder = true;
                 return;
@@ -138,8 +136,9 @@ public class PlayerController : MonoBehaviour
 
     void clickToAttackMove()
     {
-        attackFlag = false;
+        squadAttackFlag = false;
         squadCommandFlag = false;
+        attackFlag = false;
         RaycastHit hit;
 
         //same as click to move but we need to set the attack flag in the AI to true
@@ -186,7 +185,7 @@ public class PlayerController : MonoBehaviour
 
     public void takeControlOfSquad()
     {
-
+        Debug.Log("ControlSquad has been Called");
         squadCommandFlag = false;
         RaycastHit hit;
         //same as click to move we check if we clicked on an ally
@@ -204,33 +203,35 @@ public class PlayerController : MonoBehaviour
     void giveSquadAttackMoveOrder()
     {
         RaycastHit hit;
+        squadAttackFlag = false;
         squadCommandFlag = false;
         attackFlag = false;
-        squadCommandFlag = false;
+
+        //First remove the player From the Squad
+        Squad controlledSquad = playerAI.squad;
+        playerAI.isSquadCommander = false;
+        playerAI.squad.stopControlling();
+        Unit_Base leader = controlledSquad.leader;
+
         //same code as attackMove really just modifies the unit/squad
         //AI variables instead of the playerAI
-        playerAI.squad.leader.NavMeshTarget = Vector3.zero;
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
         {
             //if we hit the terrain
             if (hit.collider.gameObject.layer.Equals(terrainLayer))
             {
-                GameObject waypoint = Instantiate(attackMoveWaypoint, hit.point, Quaternion.identity) as GameObject;
-                //if a previous waypoint exists destroy it
-                if (playerAI.target != null && playerAI.target.tag.Equals("MoveWaypoint"))
-                {
-                    //destroy previous waypoint
-                    Destroy(playerAI.target);
-                }
-                //create waypoint and move to it
-                playerAI.isAttackOrder = true;
-                playerAI.target = waypoint;
+
+                leader.NavMeshTarget = hit.transform.position;
+                leader.NavMeshSeek();
                 return;
             }
+            //Add a case for clicking directly on an enemy
+            
         }
 
     }
+
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag.Equals("MoveWaypoint"))

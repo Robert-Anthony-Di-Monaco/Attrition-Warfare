@@ -114,7 +114,7 @@ public class Squad : MonoBehaviour
 			if (leader.isPlayer ()) 
 			{
 				Vector3 Target = leader.transform.position;
-				transform.position = (Target - transform.position).normalized * unitNavmeshSpeed * Time.deltaTime;
+                transform.position = Target;//(Target - transform.position).normalized * unitNavmeshSpeed * Time.deltaTime;
 			} 
 			else {
 				transform.position = leader.transform.position;
@@ -132,13 +132,10 @@ public class Squad : MonoBehaviour
 			Debug.Log("Squad error: Player already controls a squad.");
 			return;
 		}
-		player.squad = this;
-
 		isPlayerControlled = true;
 		addUnit((Unit_Base)player);
-
-		ChooseLeader();
-		CalculateNewAnchorPositions();
+        leader = player;
+		//CalculateNewAnchorPositions();
 		
 	}
 	//When the player wants to stop controlling this squad
@@ -151,17 +148,16 @@ public class Squad : MonoBehaviour
 			return;
 		}
 
-		//player.squad = null;
+		leader.squad = null;
 		leader = null;
 		isPlayerControlled = false;
 		
 		//Player will always be towards the end of the list, if not always at the end
-		for(int i = allUnits.Count - 1; i >= 0; i++){
+		for(int i = allUnits.Count - 1; i >= 0; i--){
 			if(allUnits[i].isPlayer()){
 				allUnits.RemoveAt(i);
 			}
 		}
-
 		ChooseLeader();
 		CalculateNewAnchorPositions();
 	}
@@ -284,12 +280,13 @@ public class Squad : MonoBehaviour
 				siegeUnits.Add ((Unit_Siege)leader);
 			}
 
-			for(int i = allUnits.Count - 1; i >= 0; i++){ //Player will be towards the end of the list
+			for(int i = allUnits.Count - 1; i >= 0; i--){ //Player will be towards the end of the list
 				if(allUnits[i].isPlayer()){
 					leader = allUnits[i];
+                    return;
 				}
 			}
-			return;
+            return;
 		}
 
 		if (!leader.isMelee()) {

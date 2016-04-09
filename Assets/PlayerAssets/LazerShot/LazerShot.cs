@@ -11,6 +11,21 @@ using System.Collections;
 
 public class LazerShot : MonoBehaviour 
 {
+    public GameObject target;
+    public float bulletSpeed;
+    public int terrainLayer = 9;
+    public int enemyLayer = 8;
+
+
+    public void Start()
+    {
+        bulletSpeed = 10f * Time.fixedDeltaTime;
+    }
+    public void Update()
+    {
+        moveToTarget();
+    }
+
 	public void Fire(Vector3 target)
 	{
 		float shotVelocity = 250f;
@@ -22,13 +37,21 @@ public class LazerShot : MonoBehaviour
 		Destroy (this.gameObject, time2Target); 
 	}
 
+    public void moveToTarget()
+    {
+        Vector3 moveDir = target.transform.position - this.transform.position;
+        this.transform.position += moveDir.normalized * bulletSpeed;
+    }
+
 	void OnTriggerEnter(Collider col)   // Currently the prefab has a trigger collider
 	{
-		// ....
+        if (col.gameObject.layer.Equals(enemyLayer))
+        {
+            Destroy(this.gameObject);
+        }
 	}
 	void OnCollisionEnter(Collision col)
 	{
-		// ....
 	}
 }
 

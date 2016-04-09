@@ -199,10 +199,10 @@ public class Player_AI : Unit_Base
             {
 
                 BulletOffset = transform.position;
-                BulletOffset += transform.forward * 0.5f;
+                BulletOffset += transform.forward * 2f;
                 BulletOffset.y = 0.75f;
                 GameObject bullet = Instantiate(basicShot, BulletOffset, this.transform.rotation) as GameObject;
-                bullet.GetComponent<BasicProjectile>().target = this.target;
+                bullet.GetComponent<LazerShot>().target = this.target;
                 nextShotTime = Time.time + shotCoolDown;
                 yield return BTNodeResult.Success;
             }
@@ -250,10 +250,10 @@ public class Player_AI : Unit_Base
             if (Time.time > nextShotTime)
             {
                 BulletOffset = transform.position;
-                BulletOffset += transform.forward * 1f;
+                BulletOffset += transform.forward * 2f;
                 BulletOffset.y = 0.75f;
                 GameObject bullet = Instantiate(basicShot, BulletOffset, this.transform.rotation) as GameObject;
-                bullet.GetComponent<BasicProjectile>().target = closestEnemy;
+                bullet.GetComponent<LazerShot>().target = closestEnemy;
                 nextShotTime = Time.time + shotCoolDown;
                 yield return BTNodeResult.Success;
             }
@@ -296,7 +296,7 @@ public class Player_AI : Unit_Base
     [BTLeaf("idle")]
     public BTCoroutine idle()
     {
-        yield return BTNodeResult.NotFinished;
+        yield return BTNodeResult.Success;
     }
 }
 

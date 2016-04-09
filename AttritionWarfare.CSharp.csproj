@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -75,50 +69,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Base\AI_Base.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Melee\AI_Melee.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Range\AI_Range.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Siege\AI_Siege.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTConditionNode.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTLeafAttribute.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTLeafNode.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTNode.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTNodeResult.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTNotNode.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTSelector.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BTSequence.cs" />
-    <Compile Include="Assets\All Project Scripts\AI_Scripts\Behaviour Trees\BehaviorTree.cs" />
-    <Compile Include="Assets\All Project Scripts\ClickToMoveCharacter.cs" />
+    <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Squad.cs" />
+    <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Unit_Base.cs" />
+    <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Melee\Unit_Melee.cs" />
+    <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Range\Unit_Range.cs" />
+    <Compile Include="Assets\All Project Scripts\AI_Scripts\AI Siege\Unit_Siege.cs" />
+    <Compile Include="Assets\All Project Scripts\AI_Scripts\EnemyAI [IGNORE]\EnemyController.cs" />
+    <Compile Include="Assets\All Project Scripts\AI_Scripts\EnemyAI [IGNORE]\Unit_Tower.cs" />
+    <Compile Include="Assets\All Project Scripts\AI_Scripts\EnemyAI [IGNORE]\Unit_Turret.cs" />
+    <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTConditionNode.cs" />
+    <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTLeafAttribute.cs" />
+    <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTLeafNode.cs" />
+    <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTNode.cs" />
+    <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTNodeResult.cs" />
+    <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTNotNode.cs" />
+    <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTSelector.cs" />
+    <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTSequence.cs" />
+    <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BehaviorTree.cs" />
     <Compile Include="Assets\All Project Scripts\HealthBar.cs" />
-    <Compile Include="Assets\All Project Scripts\PlayerController.cs" />
-    <Compile Include="Assets\All Project Scripts\RTSMove.cs" />
+    <Compile Include="Assets\All Project Scripts\Misc\ClickToMoveCharacter.cs" />
+    <Compile Include="Assets\All Project Scripts\Misc\RTSCameraMove.cs" />
+    <Compile Include="Assets\All Project Scripts\Misc\WaypointDestroy.cs" />
+    <Compile Include="Assets\All Project Scripts\Player Scripts\BasicProjectile.cs" />
+    <Compile Include="Assets\All Project Scripts\Player Scripts\PlayerController.cs" />
+    <Compile Include="Assets\All Project Scripts\Player Scripts\Player_AI.cs" />
     <Compile Include="Assets\All Project Scripts\WorldController.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\AutoDestroy.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\BM_WaveEffect.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\BasicBullet.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\BeamCollision.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\BeamLine.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\BeamParam.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\BeamWave.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\BillBoard.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\Create_MyLineMesh.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\Flash.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\GeroBeam.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\GeroBeamHit.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\GetColor_BeamLine.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\GetColor_Flash.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\GetColor_Particle.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\JumpScene.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\MouseTgt.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\MultiShooter.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\RandomRotate.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\ScaleWiggle.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\SceneMaster.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\ShooterRotate.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\ShotBase.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\ShotParticleEmitter.cs" />
-    <Compile Include="Assets\BasicBeamShot\Script\ShotParticle_Scale.cs" />
-    <Compile Include="Assets\PlayerHealthBar.cs" />
+    <Compile Include="Assets\All Scenes\Squad Test Scene\TestSquad.cs" />
+    <Compile Include="Assets\PlayerAssets\LazerShot\LazerShot.cs" />
     <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Scripts\ScrollingUVs_Layers.cs" />
     <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\Displace.cs" />
     <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\GerstnerDisplace.cs" />
@@ -130,17 +107,12 @@
     <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\WaterTile.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\All Project Scripts\AI_Scripts\AI Melee\Behaviour-Melee.xml" />
-    <None Include="Assets\All Project Scripts\AI_Scripts\AI Range\Behaviour-Range.xml" />
-    <None Include="Assets\All Project Scripts\AI_Scripts\AI Siege\Behaviour-Siege.xml" />
-    <None Include="Assets\BasicBeamShot\HowToUse_EN.txt" />
-    <None Include="Assets\BasicBeamShot\HowToUse_JP.txt" />
-    <None Include="Assets\BasicBeamShot\sh\AddColor_sh.shader" />
-    <None Include="Assets\BasicBeamShot\sh\Add_UVScroll_sh.shader" />
-    <None Include="Assets\BasicBeamShot\sh\BeamLine_sh.shader" />
-    <None Include="Assets\BasicBeamShot\sh\GeroBeam_sh.shader" />
-    <None Include="Assets\BasicBeamShot\sh\Sprite_Add_sh.shader" />
-    <None Include="Assets\World Assets {IGNORE}\Bridge\Textures and Shaders\Reflect-BumpSpec.shader" />
+    <None Include="Assets\All Project Scripts\AI_Scripts\AI Melee\Melee-AI-Tree.xml" />
+    <None Include="Assets\All Project Scripts\AI_Scripts\AI Range\Range-AI-Tree.xml" />
+    <None Include="Assets\All Project Scripts\AI_Scripts\AI Siege\Siege-AI-Tree.xml" />
+    <None Include="Assets\All Project Scripts\AI_Scripts\EnemyAI [IGNORE]\Tower-AI-Tree.xml" />
+    <None Include="Assets\All Project Scripts\AI_Scripts\EnemyAI [IGNORE]\Turret-AI-Tree.xml" />
+    <None Include="Assets\All Project Scripts\Player Scripts\Player-AI-Tree.xml" />
     <None Include="Assets\World Assets {IGNORE}\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
     <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\ReadMe.txt" />
     <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
