@@ -90,6 +90,8 @@ public class Squad : MonoBehaviour
 	//How far apart units stand when in formation
 	public float distanceBetweenUnits = 7.5f;
 
+	public Vector3 target;
+	
 	void Awake(){
 
 		leaderSpeedDifference = unitNavmeshSpeed / 2;
@@ -117,6 +119,7 @@ public class Squad : MonoBehaviour
                 transform.position = Target;//(Target - transform.position).normalized * unitNavmeshSpeed * Time.deltaTime;
 			} 
 			else {
+				leader.NavMeshTarget = target;
 				transform.position = leader.transform.position;
 			}
 			transform.rotation = leader.transform.rotation;
