@@ -27,19 +27,19 @@ public class RTSCameraMove : MonoBehaviour {
 
         if (bottomRect.Contains(Input.mousePosition))
         {
-            transform.parent.Translate(0, 0, -camSpeed, Space.World);
+            transform.parent.Translate(camSpeed, 0, 0, Space.World);
         }
         if (topRect.Contains(Input.mousePosition))
         {
-            this.transform.parent.Translate(0, 0, camSpeed, Space.World);
+            this.transform.parent.Translate(-camSpeed, 0, 0, Space.World);
         }
         if (rightRect.Contains(Input.mousePosition))
         {
-            transform.parent.Translate(camSpeed, 0, 0, Space.World);
+            transform.parent.Translate(0, 0, camSpeed, Space.World);
         }
         if (leftRect.Contains(Input.mousePosition))
         {
-            transform.parent.Translate(-camSpeed, 0, 0, Space.World);
+            transform.parent.Translate(0, 0, -camSpeed, Space.World);
         }
         //manageHeight();
 	}
