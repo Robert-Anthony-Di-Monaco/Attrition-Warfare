@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Collections;
 using Coroutine = System.Collections.IEnumerator;
 using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
@@ -77,6 +80,8 @@ public class Unit_Base : MonoBehaviour
 
 	//Made this function virtual, it is overriden by children using the override keyword and base.Awake()
 	//This is the only way to make everything in here happen in all children, while also letting each child do other things
+	public BehaviorTree bt;
+	
 	public virtual void Awake()
 	{
 		//anim = GetComponent<Animator>();
@@ -89,13 +94,20 @@ public class Unit_Base : MonoBehaviour
 
         aimThreshold = 10f;
        
+		InitBT();
+		bt.Start();
 	}
     public void Start()
     {
             layerSetUp();
     }
-
-
+	
+	
+	private void InitBT()
+	{
+		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Melee/Melee-AI-Tree.xml", this);
+	}
+	
 	void FixedUpdate(){
 		
         //if(isSquadLeader())
@@ -108,6 +120,34 @@ public class Unit_Base : MonoBehaviour
         //}
 
 	}
+	
+	//The time check for attack is already done just write the instantiate in here
+    public void attack(GameObject targetEnemy)
+    {
+        targetEnemy.SendMessage("ApplyDamage", damageOutput);
+    }
+	
+	//NOT A COROUTINE just used in one
+    public GameObject getClosestEnemy()
+    {
+        //get nearest enemy in attack range
+        Collider[] cols = Physics.OverlapSphere(this.transform.position, visionRange, enemyLayer);
+        GameObject closestEnemy = null;
+        float closestDistance = float.MaxValue;
+
+        //check for the closest enemy object
+        foreach (Collider collision in cols)
+        {
+            Vector3 colliderPos = collision.gameObject.transform.position;
+            float currentDistance = Math.Abs((colliderPos - this.transform.position).magnitude);
+            if (currentDistance < closestDistance)
+            {
+                closestEnemy = collision.gameObject;
+                closestDistance = currentDistance;
+            }
+        }
+        return closestEnemy;
+    }
 	
 	//Functions to be used by behaviour trees, call within Behaviour tree functions
 
@@ -131,6 +171,198 @@ public class Unit_Base : MonoBehaviour
 	public bool isSquadLeader(){
 		return (squad != null && squad.leader != null && squad.leader.ID == ID);
 	}
+	
+	
+	
+	[BTLeaf("is-overwhelmed")]
+    public bool isOverwhelmed()
+    {
+		if(squad.suicideAttack)
+			return false;
+		enemyCols = Physics.OverlapSphere(this.transform.position, visionRange, enemyLayer);
+		if(enemyCols.Length == 0)
+			return false;
+		Collider[] allyCols = Physics.OverlapSphere(this.transform.position, visionRange, 1 << this.gameObject.layer);
+		double ratio = (double)(allyCols.Length) / enemyCols.Length;
+        return ratio < 0.5;
+    }
+	
+	[BTLeaf("is-squad-retreating")]
+    public bool isSquadRetreating()
+    {
+		return squad.isRetreating;
+    }
+	
+    [BTLeaf ("is-squad-in-combat")]
+    public bool isSquadInCombat(){
+        if (squad != null) { 
+            return squad.leader.isInCombat;
+        }
+        return false;
+    }
+
+
+    [BTLeaf ("is-enemy-in-vision-range")]
+    public bool isEnemyInVisionRange()
+    {
+       return Physics.CheckSphere(this.transform.position, visionRange, enemyLayer);
+    }
+
+    [BTLeaf("is-enemy-in-attack-range")]
+    public bool isEnemyInAttackRange()
+    {
+        return Physics.CheckSphere(this.transform.position, attackRange, enemyLayer);
+    }
+
+    [BTLeaf("is-facing-nearest-enemy")]
+    public bool isFacingNearestEnemy()
+    {
+        GameObject closestEnemy = this.getClosestEnemy();
+        if (closestEnemy == null)
+        {
+            return false;
+        }
+        Vector3 enemyDir = closestEnemy.transform.position - this.transform.position;
+        float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
+
+
+        if (angleDifference < aimThreshold)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    [BTLeaf ("face-nearest-enemy")]
+    public BTCoroutine faceNearestEnemy()
+    {
+
+        this.agent.SetDestination(this.transform.position);
+        GameObject nearestEnemy = this.getClosestEnemy();
+        Vector3 enemyDir = nearestEnemy.transform.position - this.transform.position;
+        float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
+
+        if (angleDifference < aimThreshold)
+        {
+            yield return BTNodeResult.Success;
+        }
+        else
+        {
+            //TODO: tune the facing speed here
+            transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
+            yield return BTNodeResult.NotFinished;
+        }
+    }
+
+    [BTLeaf ("attack-nearest-enemy")]
+    public BTCoroutine attackNearestEnemy()
+    {
+        this.agent.SetDestination(this.transform.position);
+        GameObject closestEnemy = this.getClosestEnemy();
+        if (closestEnemy != null)
+        {
+
+            if (Time.time > nextAttackTime)
+            {
+                attack(closestEnemy);
+                yield return BTNodeResult.Success;
+            }
+            else
+            {
+                yield return BTNodeResult.NotFinished;
+            }
+        }
+        else
+        {
+            yield return BTNodeResult.Failure;
+        }
+    }
+
+    [BTLeaf ("pursue-nearest-enemy")]
+    public BTCoroutine pursueNearestEnemy()
+    {
+        GameObject closestEnemy = this.getClosestEnemy();
+        if (closestEnemy != null)
+        {
+            if ((closestEnemy.transform.position - this.transform.position).magnitude < attackRange)
+            {
+                squad.isInCombat = true;
+                this.isInCombat = true;
+                yield return BTNodeResult.Success;
+            }
+            else
+            {
+                squad.isInCombat = true;
+                this.isInCombat = true;
+                NavMeshTarget = closestEnemy.transform.position;
+                NavMeshSeek();
+                yield return BTNodeResult.NotFinished;
+            }
+        }
+
+        else
+        {
+            yield return BTNodeResult.Failure;
+        }
+    }
+
+
+    [BTLeaf ("move-to-leader-target")]
+    public BTCoroutine MoveToLeaderTarget()
+    {
+        squad.leader.NavMeshTarget = squad.advanceTarget;
+        squad.leader.NavMeshSeek();
+        squad.isInCombat = false;
+        yield return BTNodeResult.NotFinished;
+
+    }
+	
+	// LEAFS and CONDITIONS definitions ---> SEE TEMPLATES BELOW FOR HOW TO DO THEM!!!!!!!!
+	[BTLeaf("has-target")]
+	public bool hasTarget()   // Does this unit have a target
+	{
+		if(NavMeshTarget != Vector3.zero)
+			return true;
+		else 
+			return false;
+	}
+	[BTLeaf("seek-target")]
+	public BTCoroutine Seek()   // Seek target
+	{
+		NavMeshSeek ();
+
+		if (Vector3.Distance (NavMeshTarget, transform.position) < attackRange)
+			yield return BTNodeResult.Success;
+		else
+			yield return BTNodeResult.NotFinished;
+	} 	
+    
+	
+	Collider[] enemyCols;
+	[BTLeaf ("retreat")]
+    public BTCoroutine retreat()
+    {
+        Collider[] allyCols = Physics.OverlapSphere(this.transform.position, visionRange, this.gameObject.layer);
+		
+		if ((double)(allyCols.Length) / enemyCols.Length < 1)
+		{
+			Debug.Log(faction + " is retreating!");
+			squad.isRetreating = true;
+			squad.leader.NavMeshTarget = squad.retreatTarget;
+			squad.leader.NavMeshSeek();
+			squad.isInCombat = false;
+			squad.leader.isInCombat = false;
+			yield return BTNodeResult.NotFinished;
+		}
+		else
+		{
+			squad.isRetreating = false;
+			yield return BTNodeResult.Success;
+		}
+    }
 
 	//This is an example of how handle the unit dying,
 	//  could be used for the Player depending on how we handle the player dying
