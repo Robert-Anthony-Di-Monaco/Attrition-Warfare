@@ -136,10 +136,8 @@ public class Squad : MonoBehaviour
 			return;
 		}
 		isPlayerControlled = true;
-		addUnit((Unit_Base)player);
         leader = player;
-		//CalculateNewAnchorPositions();
-		
+		addUnit((Unit_Base)player);
 	}
 	//When the player wants to stop controlling this squad
 	//call player.squad.stopControlling();
@@ -178,7 +176,6 @@ public class Squad : MonoBehaviour
 
 		ChooseLeader ();
 		CalculateNewAnchorPositions ();
-			
 	}
 	//These are just for convenience, so you don't have to typecast to use the addUnit function
 	//Also saves having to check which type of unit is being added

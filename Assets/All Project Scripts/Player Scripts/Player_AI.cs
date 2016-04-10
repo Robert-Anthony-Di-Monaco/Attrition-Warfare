@@ -38,6 +38,7 @@ public class Player_AI : Unit_Base
     //NavMeshAgent agent;
     public override void Awake() 
 	{
+        isInCombat = false;
         aimThreshold = 10f;
         enemyLayer = 8;
         health = maxHealth;
@@ -168,6 +169,7 @@ public class Player_AI : Unit_Base
     [BTLeaf ("move-to-target")]
     public BTCoroutine MoveToTarget()
     {
+        isInCombat = false;
         //not sure this is nescessary but just in case target dies or is destroyed maybe
         if (target == null)
         {
@@ -191,6 +193,7 @@ public class Player_AI : Unit_Base
     [BTLeaf ("shoot-target")]
     public BTCoroutine shootTarget()
     {
+        isInCombat = true;
         this.agent.SetDestination(this.transform.position);
         if (target != null)
         {
@@ -243,6 +246,7 @@ public class Player_AI : Unit_Base
     [BTLeaf ("shoot-nearest-enemy")]
     public BTCoroutine shootNearestEnemy()
     {
+        isInCombat = true;
         this.agent.SetDestination(this.transform.position);
         GameObject closestEnemy = this.getClosestEnemy();
         if (closestEnemy != null) {
@@ -297,6 +301,7 @@ public class Player_AI : Unit_Base
     [BTLeaf("idle")]
     public BTCoroutine idle()
     {
+        isInCombat = false;
         yield return BTNodeResult.Success;
     }
 }

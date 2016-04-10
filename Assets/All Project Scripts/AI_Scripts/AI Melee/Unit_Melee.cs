@@ -105,7 +105,6 @@ public class Unit_Melee : Unit_Base
     }
 
 
-    //TODO: FIX LAYERMASKING HERE
     [BTLeaf ("is-enemy-in-vision-range")]
     public bool isEnemyInVisionRange()
     {
@@ -217,11 +216,10 @@ public class Unit_Melee : Unit_Base
     [BTLeaf ("move-to-leader-target")]
     public BTCoroutine MoveToLeaderTarget()
     {
-        
         squad.leader.NavMeshTarget = squad.target;
         squad.leader.NavMeshSeek();
         squad.isInCombat = false;
-        yield return BTNodeResult.Success;
+        yield return BTNodeResult.NotFinished;
 
     }
 
