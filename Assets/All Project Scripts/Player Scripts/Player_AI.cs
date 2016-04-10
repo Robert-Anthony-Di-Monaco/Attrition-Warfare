@@ -42,7 +42,7 @@ public class Player_AI : Unit_Base
         aimThreshold = 10f;
         enemyLayer = 8;
         health = maxHealth;
-        attackRange = 10f;
+        attackRange = 30f;
         target = null;
         agent = GetComponent<NavMeshAgent>();
 		InitBT();
