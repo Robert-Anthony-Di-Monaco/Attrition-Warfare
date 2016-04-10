@@ -115,6 +115,11 @@ public class Squad : MonoBehaviour
         {
             if (leader.isPlayer ()) 
             {
+				//WHEN PLAYER AI USES "isInCombat"
+				//*******************************
+				//isInCombat = leader.isInCombat;
+				//*******************************
+
                 Vector3 Target = leader.transform.position;
                 transform.position = Target;//(Target - transform.position).normalized * unitNavmeshSpeed * Time.deltaTime;
             } 
@@ -136,8 +141,8 @@ public class Squad : MonoBehaviour
 			return;
 		}
 		isPlayerControlled = true;
-        leader = player;
 		addUnit((Unit_Base)player);
+		
 	}
 	//When the player wants to stop controlling this squad
 	//call player.squad.stopControlling();
@@ -159,8 +164,12 @@ public class Squad : MonoBehaviour
 				allUnits.RemoveAt(i);
 			}
 		}
-		ChooseLeader();
-		CalculateNewAnchorPositions();
+		if (allUnits.Count == 0)
+			Destroy (gameObject);
+		else {
+			ChooseLeader ();
+			CalculateNewAnchorPositions ();
+		}
 	}
 	
 	
@@ -176,6 +185,7 @@ public class Squad : MonoBehaviour
 
 		ChooseLeader ();
 		CalculateNewAnchorPositions ();
+			
 	}
 	//These are just for convenience, so you don't have to typecast to use the addUnit function
 	//Also saves having to check which type of unit is being added
@@ -200,8 +210,7 @@ public class Squad : MonoBehaviour
 		}
 
 		if (unit.isPlayer ()) {
-			//remove this comment when Player_AI inherits from Unit_Base
-			//stopControlling ();
+			stopControlling ();
 		}
 
 		else if (unit.isSquadLeader()) 
@@ -245,6 +254,9 @@ public class Squad : MonoBehaviour
 			CalculateNewAnchorPositions ();
 		}
 
+		if (allUnits.Count == 1 && isPlayerControlled) {
+			stopControlling ();
+		}
 		
 
 	}
@@ -312,7 +324,7 @@ public class Squad : MonoBehaviour
 				leader = (Unit_Base)rangeUnits [0];
 				leader.agent.speed -= leaderSpeedDifference;
 			}
-		} 
+		}
 
 		//Remove the leader from its type's list so it is ignored in the formation calculation
 		//If the leader is already removed from the formation, Remove returns false and nothing happens
@@ -330,7 +342,8 @@ public class Squad : MonoBehaviour
 	//Used automatically when adding or removing units to the squad
 	void CalculateNewAnchorPositions(){
 
-		leader.offsetFromAnchor = Vector3.zero;
+		if(leader != null)
+			leader.offsetFromAnchor = Vector3.zero;
 
 		for (int i = 0; i < meleeUnits.Count; i++) {
 			meleeUnits[i].getNewAnchorPosition (i);

@@ -34,7 +34,7 @@ public class Unit_Range : Unit_Base
 
 	private void InitBT()
 	{
-		bt = new BehaviorTree(Application.dataPath + "/Range-AI-Tree.xml", this);
+		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Range/Range-AI-Tree.xml", this);
 	}
 
 

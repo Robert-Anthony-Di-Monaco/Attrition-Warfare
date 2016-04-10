@@ -1,22 +1,31 @@
 fileFormatVersion: 2
-guid: e574a09a0f66d3948856c8b5d0808b45
-timeCreated: 1446041553
-licenseType: Store
+guid: e538b52e94cd07b44aba6e5945fbfcc6
+timeCreated: 1460300751
+licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: torchstanding_1
-    100004: torchwall
-    400000: //RootNode
-    400002: torchstanding_1
-    400004: torchwall
-    2300000: torchstanding_1
-    2300002: torchwall
-    3300000: torchstanding_1
-    3300002: torchwall
-    4300000: torchstanding_1
-    4300002: torchwall
+    100000: Camera
+    100002: Cube_011
+    100004: Lamp
+    100006: //RootNode
+    400000: Camera
+    400002: Cube_011
+    400004: Lamp
+    400006: //RootNode
+    2300000: Cube_011
+    3300000: Cube_011
+    4300000: Cube_011
+    7400000: Cube_011|Cube.001|Default Take|Layer0
+    7400002: Cube_011|Cube_001|Default Take|Layer0
+    7400004: Cube_011|Cube_002|Default Take|Layer0
+    7400006: Cube_011|Cube_004|Default Take|Layer0
+    7400008: Cube_011|Cube_005|Default Take|Layer0
+    7400010: Cube_011|Cube_006|Default Take|Layer0
+    7400012: Cube_011|Cube_008|Default Take|Layer0
+    7400014: Cube_011|Cube_009|Default Take|Layer0
+    7400016: Cube_011|Cube_011|Default Take|Layer0
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -60,7 +69,7 @@ ModelImporter:
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []
@@ -75,7 +84,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
