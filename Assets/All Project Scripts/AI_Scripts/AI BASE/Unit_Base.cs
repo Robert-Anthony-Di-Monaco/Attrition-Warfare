@@ -89,15 +89,6 @@ public class Unit_Base : MonoBehaviour
 
         aimThreshold = 10f;
        
-
-
-		/* In derived class Initialize that Unit's variables here
-
-				speed = 
-				damageOutput = 
-
-				etc...
-		 */
 	}
     public void Start()
     {

@@ -33,7 +33,7 @@ public class Unit_Siege : Unit_Base
 
 	private void InitBT()
 	{
-		bt = new BehaviorTree(Application.dataPath + "/Siege-AI-Tree.xml", this);
+		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Siege/Siege-AI-Tree.xml", this);
 	}
 
 
