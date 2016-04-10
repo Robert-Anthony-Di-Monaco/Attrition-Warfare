@@ -209,9 +209,18 @@ public class Squad : MonoBehaviour
 			leader.squad = null;
 			leader = null;
 			allUnits.Remove (unit);
-
-			ChooseLeader ();
-			CalculateNewAnchorPositions ();
+			//If all units have been removed, remove the squad from the game
+			if (allUnits.Count == 0) {
+				WorldController wc = GameObject.Find ("WorldController").GetComponent<WorldController>();
+				wc.allSquads.Remove (this);
+					
+				Destroy (gameObject);
+			}
+			else
+			{
+				ChooseLeader ();
+				CalculateNewAnchorPositions ();
+			}
 		}
 		else { //if it is a unit in the formation
 			if (unit.isMelee()) 
@@ -236,13 +245,7 @@ public class Squad : MonoBehaviour
 			CalculateNewAnchorPositions ();
 		}
 
-		//If all units have been removed, remove the squad from the game
-		if (allUnits.Count == 0) {
-			WorldController wc = GameObject.Find ("WorldController").GetComponent<WorldController>();
-			wc.allSquads.Remove (this);
-				
-			Destroy (gameObject);
-		}
+		
 
 	}
 	//Removes a unit by its allUnits list index

@@ -4,17 +4,20 @@ using System.Collections.Generic;
 
 public class Spawn : MonoBehaviour {
 	
-	public GameObject melee;
+	public GameObject melee, ranged, siege;
 	public GameObject enemySpawnPoint;
 	public GameObject emptySquad;
+	
 	private GameObject currentSquad;
-	private int meleeUnits = 0;
+	private int meleeUnits = 0, rangedUnits = 0, siegeUnits = 0;
+	private int curMaxMelee = 3, curMaxRanged = 3, curMaxSiege = 0;
     public int faction;
+	
 	// Use this for initialization
 	void Start () {
 	}
 
-	float squadCounter = 0;
+	float squadCounter = 5;
 	float unitCounter = 0;
 	// Update is called once per frame
 	void Update () {
@@ -25,7 +28,7 @@ public class Spawn : MonoBehaviour {
 				currentSquad = Instantiate (emptySquad, transform.position, Quaternion.identity) as GameObject;
 				currentSquad.GetComponent<Squad>().target = enemySpawnPoint.transform.position;
 			}
-			if(unitCounter > 1.2f && meleeUnits++ < 5)
+			if(unitCounter > 1.2f && meleeUnits++ < curMaxMelee)
 			{
 				GameObject temp1 = Instantiate(melee, transform.position, Quaternion.identity) as GameObject;
 				//temp1.transform.localScale = new Vector3(10f,10f,10f);
@@ -34,17 +37,43 @@ public class Spawn : MonoBehaviour {
 				currentSquad.GetComponent<Squad>().addUnit(temp1.GetComponent<Unit_Melee>());
 				unitCounter = 0;
 			}
+			else if(unitCounter > 1.2f && rangedUnits++ < curMaxRanged)
+			{
+				GameObject temp1 = Instantiate(ranged, transform.position, Quaternion.identity) as GameObject;
+				//temp1.transform.localScale = new Vector3(10f,10f,10f);
+				temp1.GetComponent<Unit_Range>().enabled = true;
+                temp1.GetComponent<Unit_Base>().faction = faction;
+				currentSquad.GetComponent<Squad>().addUnit(temp1.GetComponent<Unit_Range>());
+				unitCounter = 0;
+			}
+			else if(unitCounter > 1.2f && siegeUnits++ < curMaxSiege)
+			{
+				GameObject temp1 = Instantiate(siege, transform.position, Quaternion.identity) as GameObject;
+				//temp1.transform.localScale = new Vector3(10f,10f,10f);
+				temp1.GetComponent<Unit_Siege>().enabled = true;
+                temp1.GetComponent<Unit_Base>().faction = faction;
+				currentSquad.GetComponent<Squad>().addUnit(temp1.GetComponent<Unit_Siege>());
+				unitCounter = 0;
+			}
 			else
 			{
 				unitCounter += Time.deltaTime;
 			}
 			
-			if(meleeUnits == 6)
+			if(siegeUnits == curMaxSiege)
 			{
 				meleeUnits = 0;
+				rangedUnits = 0;
+				siegeUnits = 0;
 				squadCounter = 0;
 				unitCounter = 0;
 				currentSquad = null;
+				if(curMaxMelee < 25)
+				{
+					++curMaxMelee;
+					++curMaxRanged;
+					++curMaxSiege;
+				}
 			}
 			
 		}
