@@ -90,7 +90,8 @@ public class Squad : MonoBehaviour
 	//How far apart units stand when in formation
 	public float distanceBetweenUnits = 7.5f;
 
-	public Vector3 target;
+	public Vector3 advanceTarget, retreatTarget;
+	public bool isRetreating = false, suicideAttack = false;
 	
 	void Awake(){
 

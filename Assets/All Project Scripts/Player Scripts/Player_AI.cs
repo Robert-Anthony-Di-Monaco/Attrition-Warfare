@@ -89,14 +89,14 @@ public class Player_AI : Unit_Base
             return true;
         }
     }
-
+/*
     //check if there in an enemy within our attack range
     [BTLeaf ("is-enemy-in-attack-range")]
     public bool isEnemyInRange()
     {
        return Physics.CheckSphere(this.transform.position, attackRange, enemyLayer);
     }
-
+*/
     //checks if the targeted enemy is within our attack range (different from above)
     [BTLeaf ("is-target-unit-in-range")]
     public bool isTargetunitInRange()
@@ -122,7 +122,7 @@ public class Player_AI : Unit_Base
             return false;
         }
     }
-
+/*
     [BTLeaf ("is-facing-nearest-enemy")]
     public bool isFacingNearestEnemy()
     {
@@ -144,7 +144,9 @@ public class Player_AI : Unit_Base
             return false;
         }
     }
+*/
 
+/*
     //NOT A COROUTINE just used in one
     public GameObject getClosestEnemy()
     {
@@ -165,6 +167,7 @@ public class Player_AI : Unit_Base
         }
         return closestEnemy;
     }
+*/
 
     [BTLeaf ("move-to-target")]
     public BTCoroutine MoveToTarget()
@@ -270,6 +273,7 @@ public class Player_AI : Unit_Base
         }
     }
 
+	/*
     [BTLeaf ("face-nearest-enemy")]
     public BTCoroutine faceNearestEnemy()
     {
@@ -290,7 +294,8 @@ public class Player_AI : Unit_Base
         }
 
     }
-
+*/
+	
     [BTLeaf ("move-to-squad-anchor")]
     public BTCoroutine moveToSquadAnchor()
     {

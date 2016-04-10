@@ -21,7 +21,7 @@ using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 
 public class Unit_Siege : Unit_Base
 {
-    public BehaviorTree bt;
+   // public BehaviorTree bt;
     public override void Awake()
     {
         attackRange = 25f;
@@ -31,15 +31,15 @@ public class Unit_Siege : Unit_Base
         isInCombat = false;
         base.Awake();
 
-        InitBT();
-        bt.Start();
+        //InitBT();
+        //bt.Start();
     }
-
+/*
 	private void InitBT()
 	{
 		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Siege/Siege-AI-Tree.xml", this);
 	}
-
+*/
 
 	public void getNewAnchorPosition(int unitIndex){
 
@@ -61,7 +61,7 @@ public class Unit_Siege : Unit_Base
 	}
 
 
-
+/*
 
     //The time check for attack is already done just write the instantiate in here
     public void attack(GameObject targetEnemy)
@@ -92,7 +92,9 @@ public class Unit_Siege : Unit_Base
         }
         return closestEnemy;
     }
-
+	
+	
+	
     [BTLeaf("is-squad-in-combat")]
     public bool isSquadInCombat()
     {
@@ -215,7 +217,7 @@ public class Unit_Siege : Unit_Base
     [BTLeaf("move-to-leader-target")]
     public BTCoroutine MoveToLeaderTarget()
     {
-        squad.leader.NavMeshTarget = squad.target;
+        squad.leader.NavMeshTarget = squad.advanceTarget;
         squad.leader.NavMeshSeek();
         squad.isInCombat = false;
         yield return BTNodeResult.NotFinished;
@@ -242,6 +244,9 @@ public class Unit_Siege : Unit_Base
 		else
 			yield return BTNodeResult.NotFinished;
 	}
+	
+	*/
+	
 }
 
 

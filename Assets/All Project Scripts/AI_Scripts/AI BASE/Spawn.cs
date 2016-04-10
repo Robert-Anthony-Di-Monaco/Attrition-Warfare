@@ -15,6 +15,10 @@ public class Spawn : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		if(faction == 1)
+		{
+			curMaxMelee *=6;
+		}
 	}
 
 	float squadCounter = 5;
@@ -26,9 +30,10 @@ public class Spawn : MonoBehaviour {
 			if(currentSquad == null)
 			{
 				currentSquad = Instantiate (emptySquad, transform.position, Quaternion.identity) as GameObject;
-				currentSquad.GetComponent<Squad>().target = enemySpawnPoint.transform.position;
+				currentSquad.GetComponent<Squad>().advanceTarget = enemySpawnPoint.transform.position;
+				currentSquad.GetComponent<Squad>().retreatTarget = this.transform.position;
 			}
-			if(unitCounter > 1.2f && meleeUnits++ < curMaxMelee)
+			if(unitCounter > 0.2f && meleeUnits++ < curMaxMelee)
 			{
 				GameObject temp1 = Instantiate(melee, transform.position, Quaternion.identity) as GameObject;
 				//temp1.transform.localScale = new Vector3(10f,10f,10f);
@@ -54,6 +59,10 @@ public class Spawn : MonoBehaviour {
                 temp1.GetComponent<Unit_Base>().faction = faction;
 				currentSquad.GetComponent<Squad>().addUnit(temp1.GetComponent<Unit_Siege>());
 				unitCounter = 0;
+				
+				if(faction == 0)
+					curMaxMelee *=8;
+				
 			}
 			else
 			{

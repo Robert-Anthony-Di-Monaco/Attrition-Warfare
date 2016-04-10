@@ -23,7 +23,7 @@ using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 public class Unit_Range : Unit_Base
 {
 
-    public BehaviorTree bt;
+    //public BehaviorTree bt;
     public override void Awake()
     {
         attackRange = 25f;
@@ -33,15 +33,15 @@ public class Unit_Range : Unit_Base
         isInCombat = false;
         base.Awake();
 
-        InitBT();
-        bt.Start();
+        //InitBT();
+        //bt.Start();
     }
-
+	/*
 	private void InitBT()
 	{
 		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Range/Range-AI-Tree.xml", this);
 	}
-
+*/
 	public void getNewAnchorPosition(int unitIndex){
 
 		int numRange = squad.rangeUnits.Count;
@@ -62,7 +62,7 @@ public class Unit_Range : Unit_Base
 		return true;
 	}
 
-
+/*
     //The time check for attack is already done just write the instantiate in here
     public void attack(GameObject targetEnemy)
     {
@@ -92,7 +92,8 @@ public class Unit_Range : Unit_Base
         }
         return closestEnemy;
     }
-
+	
+	
     [BTLeaf("is-squad-in-combat")]
     public bool isSquadInCombat()
     {
@@ -215,13 +216,13 @@ public class Unit_Range : Unit_Base
     [BTLeaf("move-to-leader-target")]
     public BTCoroutine MoveToLeaderTarget()
     {
-        squad.leader.NavMeshTarget = squad.target;
+        squad.leader.NavMeshTarget = squad.advanceTarget;
         squad.leader.NavMeshSeek();
         squad.isInCombat = false;
         yield return BTNodeResult.NotFinished;
 
     }
-
+	
 	// LEAFS and CONDITIONS definitions ---> SEE TEMPLATES BELOW FOR HOW TO DO THEM!!!!!!!!
 	[BTLeaf("has-target")]
 	public bool hasTarget()   // Does this unit have a target
@@ -241,6 +242,9 @@ public class Unit_Range : Unit_Base
 		else
 			yield return BTNodeResult.NotFinished;
 	}
+	
+	*/
+	
 }
 
 
