@@ -54,6 +54,7 @@
      <Compile Include="Assets\All Project Scripts\AI_Scripts\EnemyAI [IGNORE]\EnemyController.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\EnemyAI [IGNORE]\Unit_Tower.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\EnemyAI [IGNORE]\Unit_Turret.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\TurretScipt\Turret_Ai.cs" />
      <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTConditionNode.cs" />
      <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTLeafAttribute.cs" />
      <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTLeafNode.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BehaviorTree.cs" />
      <Compile Include="Assets\All Project Scripts\HealthBar.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\ClickToMoveCharacter.cs" />
+     <Compile Include="Assets\All Project Scripts\Misc\LakeAreas.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\RTSCameraMove.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\WaypointDestroy.cs" />
      <Compile Include="Assets\All Project Scripts\Player Scripts\BasicProjectile.cs" />

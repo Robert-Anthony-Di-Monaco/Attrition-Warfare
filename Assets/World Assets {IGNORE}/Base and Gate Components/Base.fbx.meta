@@ -1,67 +1,33 @@
 fileFormatVersion: 2
-guid: 70ec2e89794c73746812fef02ff5d9d8
-timeCreated: 1431558118
-licenseType: Store
+guid: 77a9a7a8ceb9710419db5d5c3d529b4d
+timeCreated: 1460391006
+licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Cube
-    100004: Cube_001
-    100006: Cube_002
-    100008: Cube_004
-    100010: Cube_005
-    100012: Cube_006
-    100014: Cube_008
-    100016: Cube_009
-    100018: Cube_011
     400000: //RootNode
-    400002: Cube
-    400004: Cube_001
-    400006: Cube_002
-    400008: Cube_004
-    400010: Cube_005
-    400012: Cube_006
-    400014: Cube_008
-    400016: Cube_009
-    400018: Cube_011
-    2300000: Cube
-    2300002: Cube_001
-    2300004: Cube_002
-    2300006: Cube_004
-    2300008: Cube_005
-    2300010: Cube_006
-    2300012: Cube_008
-    2300014: Cube_009
-    2300016: Cube_011
-    3300000: Cube
-    3300002: Cube_001
-    3300004: Cube_002
-    3300006: Cube_004
-    3300008: Cube_005
-    3300010: Cube_006
-    3300012: Cube_008
-    3300014: Cube_009
-    3300016: Cube_011
-    4300000: Cube_011
-    4300002: Cube_009
-    4300004: Cube_008
-    4300006: Cube_006
-    4300008: Cube_005
-    4300010: Cube_004
-    4300012: Cube_002
-    4300014: Cube_001
-    4300016: Cube
-    6400000: Cube
-    6400002: Cube_001
-    6400004: Cube_002
-    6400006: Cube_004
-    6400008: Cube_005
-    6400010: Cube_006
-    6400012: Cube_008
-    6400014: Cube_009
-    6400016: Cube_011
-    7400000: Default Take
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cube_011.001
+    7400000: Cube_011.001|Cube.001|Default Take|Layer0
+    7400002: Cube_011.001|Cube_001|Default Take|Layer0
+    7400004: Cube_011.001|Cube_001|Default Take|Layer0.001
+    7400006: Cube_011.001|Cube_002|Default Take|Layer0
+    7400008: Cube_011.001|Cube_002|Default Take|Layer0.001
+    7400010: Cube_011.001|Cube_004|Default Take|Layer0
+    7400012: Cube_011.001|Cube_004|Default Take|Layer0.001
+    7400014: Cube_011.001|Cube_005|Default Take|Layer0
+    7400016: Cube_011.001|Cube_005|Default Take|Layer0.001
+    7400018: Cube_011.001|Cube_006|Default Take|Layer0
+    7400020: Cube_011.001|Cube_006|Default Take|Layer0.001
+    7400022: Cube_011.001|Cube_008|Default Take|Layer0
+    7400024: Cube_011.001|Cube_008|Default Take|Layer0.001
+    7400026: Cube_011.001|Cube_009|Default Take|Layer0
+    7400028: Cube_011.001|Cube_009|Default Take|Layer0.001
+    7400030: Cube_011.001|Cube_011.001|Default Take|Layer0
+    7400032: Cube_011.001|Cube_011|Default Take|Layer0
+    7400034: Cube_011.001|Cube|Default Take|Layer0
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -72,6 +38,10 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -84,7 +54,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -102,7 +72,7 @@ ModelImporter:
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []
@@ -115,8 +85,10 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
+    hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
+  humanoidOversampling: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
