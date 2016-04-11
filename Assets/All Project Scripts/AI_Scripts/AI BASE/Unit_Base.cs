@@ -315,21 +315,20 @@ public class Unit_Base : MonoBehaviour
     {
 		if(squad.formUp)
 		{
-			if(squad.preFormUpTime < 0.2f)
+			if(squad.preFormUpTime < 0.5f)
 			{
 				squad.preFormUpTime += Time.deltaTime;
-				yield return BTNodeResult.NotFinished;
 			}
-			else if(squad.preFormUpTime < 0.5f)
+			else if(squad.preFormUpTime < 0.8f)
 			{
 				squad.preFormUpTime += Time.deltaTime;
-				squad.leader.NavMeshStop();
-				yield return BTNodeResult.NotFinished;
+				squad.leader.transform.GetComponent<NavMeshAgent>().Stop();
 			}
 			else
 			{
 				squad.formUp = false;
 				squad.preFormUpTime = 0;
+				squad.leader.transform.GetComponent<NavMeshAgent>().Resume();
 			}
 				
 		}

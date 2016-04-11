@@ -10,7 +10,7 @@ public class Spawn : MonoBehaviour {
 	
 	private GameObject currentSquad = null;
 	private int meleeUnits = 0, rangedUnits = 0, siegeUnits = 0;
-	private int curMaxMelee = 2, curMaxRanged = 2, curMaxSiege = 0;
+	private int curMaxMelee = 2, curMaxRanged = 2, curMaxSiege = 1;
     public int faction;
 	
 	// Use this for initialization
@@ -55,7 +55,6 @@ public class Spawn : MonoBehaviour {
                 temp1.GetComponent<Unit_Base>().faction = faction;
 				currentSquad.GetComponent<Squad>().addUnit(temp1.GetComponent<Unit_Siege>());
 				unitCounter = 0;
-				
 				
 			}
 			else
