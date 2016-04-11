@@ -28,7 +28,7 @@ public class HealthBar : MonoBehaviour {
 		if(health.isRange())
 			aboveUnit = new Vector3(aboveUnit.x, aboveUnit.y - 10, aboveUnit.z);
 		else if (health.isSiege())
-			aboveUnit = new Vector3(aboveUnit.x, aboveUnit.y + 40, aboveUnit.z);
+			aboveUnit = new Vector3(aboveUnit.x, aboveUnit.y + 30, aboveUnit.z);
 		
 		Vector3 pos = Camera.main.WorldToScreenPoint(aboveUnit);
 
@@ -43,10 +43,16 @@ public class HealthBar : MonoBehaviour {
 		GUI.backgroundColor = Color.red;
 		GUI.Box(new Rect(pos.x - 24, Screen.height - pos.y - 19, Unit_Base.maxHealth/2, 6), ".", backStyle);
 
-		// Draw health bar amount
-		GUI.color = Color.green;
-		GUI.backgroundColor = Color.green;
-		GUI.Box(new Rect(pos.x - 24, Screen.height - pos.y - 19, (Unit_Base.maxHealth * (health.health / Unit_Base.maxHealth)) / 2 , 6), ".", healthStyle);
+		//Fixes a problem with the green portion of the healthbar going off to the left
+		//         when the health is below 6 (GUI.Box has a minimum size of 6 pixels)
+		int hp = health.health;
+		if (hp > 6) {			
+
+			// Draw health bar amount
+			GUI.color = Color.green;
+			GUI.backgroundColor = Color.green;
+			GUI.Box (new Rect (pos.x - 24, Screen.height - pos.y - 19, (hp) / 2f, 6), ".", healthStyle);
+		}
 	}
 	
 	void InitStyles()

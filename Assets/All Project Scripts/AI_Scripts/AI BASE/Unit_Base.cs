@@ -158,10 +158,12 @@ public class Unit_Base : MonoBehaviour
 		if(squad != null && squad.leader != null){
 			//Transform the offset vector from local space to world space to take into account the leader's rotation
 			NavMeshTarget = squad.transform.position + squad.transform.TransformVector(offsetFromAnchor);
+			NavMeshTarget = new Vector3 (NavMeshTarget.x, transform.position.y, NavMeshTarget.z);
+		
 
 			//Check if the unit's slot position is inside a lake, if it is go to the leader's position instead
 			if (LakeAreas.isInsideLake (NavMeshTarget)) {
-				//NavMeshTarget = squad.transform.position;
+				NavMeshTarget = squad.transform.position;
 			}
 			
 			//Make the unit seek 1 world unit in front of the slot position,
@@ -422,7 +424,7 @@ public class Unit_Base : MonoBehaviour
 	// This and only this is used to move the NPC-unit
 	public void NavMeshSeek()
 	{
-		if(NavMeshTarget != Vector3.zero)
+		if((NavMeshTarget - transform.position) != Vector3.zero)
 			agent.SetDestination (NavMeshTarget); //changed from navmeshtarget.position
 	}
 	// Stop moving the NPC-unit
