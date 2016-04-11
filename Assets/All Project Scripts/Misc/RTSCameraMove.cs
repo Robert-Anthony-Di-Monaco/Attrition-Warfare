@@ -4,8 +4,8 @@ using System.Collections;
 public class RTSCameraMove : MonoBehaviour {
     public float camSpeed = 250;
     public float GUIsize = 100;
-	public float cameraDistance = 250;
-	public float maxCameraDistance = 400;
+	public float cameraDistance = 400;
+	public float maxCameraDistance = 500;
 	public float minCameraDistance = 100;
 	public float cameraZoomFactor = 25;
 

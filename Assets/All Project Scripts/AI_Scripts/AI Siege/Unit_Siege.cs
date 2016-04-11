@@ -41,7 +41,7 @@ public class Unit_Siege : Unit_Base
 	}
 */
 
-	public void getNewAnchorPosition(int unitIndex, int numMeleeLines, int numRangeLines, int numSiegeLines){
+	public void getNewAnchorPosition(int unitIndex, int numMeleeLines, int numRangeLines){
 
 		int numSiege = squad.siegeUnits.Count;
 		int perLine = squad.numUnitsPerLine;

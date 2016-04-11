@@ -39,7 +39,7 @@ public class WorldController : MonoBehaviour
 
 	void Start () 
 	{
-	
+		LakeAreas.Initialize();
 	}
 
 	void Update () 

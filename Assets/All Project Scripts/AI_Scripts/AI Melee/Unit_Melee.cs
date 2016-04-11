@@ -38,7 +38,7 @@ public class Unit_Melee : Unit_Base
 
 
 
-	public void getNewAnchorPosition(int unitIndex, int numMeleeLines){
+	public void getNewAnchorPosition(int unitIndex){
 		
 		int numMelee = squad.meleeUnits.Count;
 		int perLine = squad.numUnitsPerLine;

@@ -27,8 +27,8 @@ public class TestSquad : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		unitSpawnPoint.Add(new Vector3 (350, 0, 400));
-		unitSpawnPoint.Add(new Vector3 (150, 0, 350));
+		unitSpawnPoint.Add(new Vector3 (150, 0, 100));
+		unitSpawnPoint.Add(new Vector3 (250, 0, 350));
 		unitSpawnPoint.Add(new Vector3 (150, 0, 450));
 
 		target = GameObject.Find ("NavMesh Target").transform;
@@ -80,7 +80,7 @@ public class TestSquad : MonoBehaviour {
 
         if (timer < 0)
         {
-            for (int squadIndex = 1; squadIndex < 3; squadIndex++)
+            for (int squadIndex = 0; squadIndex < 3; squadIndex++)
             {
                 squad[squadIndex].leader.NavMeshTarget = (target.position);
                 squad[squadIndex].leader.NavMeshSeek();
