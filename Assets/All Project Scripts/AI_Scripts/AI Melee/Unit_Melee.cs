@@ -25,9 +25,9 @@ public class Unit_Melee : Unit_Base
 	
 	public override void Awake () 
 	{
-        attackRange = 6f;
-        attackCooldown = 1f;
-        damageOutput = 10;
+        attackRange = 15;
+        attackCooldown = 2f;
+        damageOutput = 8;
         visionRange = 100f;
         isInCombat = false;
 		base.Awake ();

@@ -212,6 +212,9 @@ public class PlayerController : MonoBehaviour
         playerAI.isSquadCommander = false;
         playerAI.squad.stopControlling();
         Unit_Base leader = controlledSquad.leader;
+		
+		//Make the squad a kamikaze squad
+		controlledSquad.suicideAttack = true;
 
         //same code as attackMove really just modifies the unit/squad
         //AI variables instead of the playerAI

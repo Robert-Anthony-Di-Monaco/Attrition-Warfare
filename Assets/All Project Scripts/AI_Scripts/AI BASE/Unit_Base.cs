@@ -313,6 +313,26 @@ public class Unit_Base : MonoBehaviour
     [BTLeaf ("move-to-leader-target")]
     public BTCoroutine MoveToLeaderTarget()
     {
+		if(squad.formUp)
+		{
+			if(squad.preFormUpTime < 0.2f)
+			{
+				squad.preFormUpTime += Time.deltaTime;
+				yield return BTNodeResult.NotFinished;
+			}
+			else if(squad.preFormUpTime < 0.5f)
+			{
+				squad.preFormUpTime += Time.deltaTime;
+				squad.leader.NavMeshStop();
+				yield return BTNodeResult.NotFinished;
+			}
+			else
+			{
+				squad.formUp = false;
+				squad.preFormUpTime = 0;
+			}
+				
+		}
         squad.leader.NavMeshTarget = squad.advanceTarget;
         squad.leader.NavMeshSeek();
         squad.isInCombat = false;

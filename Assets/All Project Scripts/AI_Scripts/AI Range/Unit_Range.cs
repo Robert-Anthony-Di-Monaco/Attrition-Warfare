@@ -26,9 +26,9 @@ public class Unit_Range : Unit_Base
     //public BehaviorTree bt;
     public override void Awake()
     {
-        attackRange = 25f;
-        attackCooldown = 1.5f;
-        damageOutput = 7;
+        attackRange = 150;
+        attackCooldown = 0.5f;
+        damageOutput = 4;
         visionRange = 100f;
         isInCombat = false;
         base.Awake();

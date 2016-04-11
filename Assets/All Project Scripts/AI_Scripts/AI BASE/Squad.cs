@@ -92,6 +92,8 @@ public class Squad : MonoBehaviour
 
 	public Vector3 advanceTarget, retreatTarget;
 	public bool isRetreating = false, suicideAttack = false;
+	public bool formUp = true;
+	public float preFormUpTime = 0;
 	
 	void Awake(){
 

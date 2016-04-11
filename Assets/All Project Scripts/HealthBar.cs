@@ -24,13 +24,13 @@ public class HealthBar : MonoBehaviour {
 		
 		// Draw health bar background
 		GUI.color = Color.grey;
-		GUI.backgroundColor = Color.grey;
-		GUI.Box(new Rect(pos.x-26, Screen.height - pos.y + 20, Unit_Base.maxHealth/2, 7), ".", backStyle);
+		GUI.backgroundColor = Color.red;
+		GUI.Box(new Rect(pos.x-24, Screen.height - pos.y - 27, Unit_Base.maxHealth/2, 1), ".", backStyle);
 		
 		// Draw health bar amount
 		GUI.color = Color.green;
 		GUI.backgroundColor = Color.green;
-		GUI.Box(new Rect(pos.x-25, Screen.height - pos.y + 21, health.health/2, 5), ".", healthStyle);
+		GUI.Box(new Rect(pos.x-24, Screen.height - pos.y - 27, health.health/2, 1), ".", healthStyle);
 	}
 	
 	void InitStyles()
@@ -44,7 +44,7 @@ public class HealthBar : MonoBehaviour {
 		if( backStyle == null )
 		{
 			backStyle = new GUIStyle( GUI.skin.box );
-			backStyle.normal.background = MakeTex( 2, 2, new Color( 0f, 0f, 0f, 1.0f ) );
+			backStyle.normal.background = MakeTex( 2, 2, new Color( 1f, 0f, 0f, 1.0f ) );
 		}
 	}
 	

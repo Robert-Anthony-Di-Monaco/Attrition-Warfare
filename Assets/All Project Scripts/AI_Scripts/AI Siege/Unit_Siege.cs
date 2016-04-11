@@ -24,9 +24,9 @@ public class Unit_Siege : Unit_Base
    // public BehaviorTree bt;
     public override void Awake()
     {
-        attackRange = 25f;
-        attackCooldown = 1.5f;
-        damageOutput = 7;
+        attackRange = 400;
+        attackCooldown = 3;
+        damageOutput = 30;
         visionRange = 100f;
         isInCombat = false;
         base.Awake();
