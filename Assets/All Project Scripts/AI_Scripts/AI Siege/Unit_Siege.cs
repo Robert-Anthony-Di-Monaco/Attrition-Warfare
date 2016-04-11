@@ -41,16 +41,37 @@ public class Unit_Siege : Unit_Base
 	}
 */
 
-	public void getNewAnchorPosition(int unitIndex){
+	public void getNewAnchorPosition(int unitIndex, int numMeleeLines, int numRangeLines, int numSiegeLines){
 
 		int numSiege = squad.siegeUnits.Count;
+		int perLine = squad.numUnitsPerLine;
+		float unitDistance = squad.distanceBetweenUnits;
 
-		//Siege units stand in a line behind the range units 
-		float zOffset = -4.5f * squad.distanceBetweenUnits;
+		int inFirstLine = numSiege % perLine;
+		if (inFirstLine == 0)
+			inFirstLine = perLine;
 
-		//Lines up the units side by side
-		float xOffset = ((float)unitIndex / numSiege) * (squad.distanceBetweenUnits * numSiege);
-		xOffset -= (squad.distanceBetweenUnits / 2) * (numSiege - 1);
+		int remaining = numSiege - inFirstLine; //number of units not in the first line
+
+		int line = unitIndex / inFirstLine;
+		if(line != 0)
+			line = ( (unitIndex - inFirstLine) / perLine) + 1;
+
+		//Siege units stand in a line behind the range units by a distance of (1.5 * unitDistance)
+		float zOffset = 0;
+		zOffset += ((-1.5f * unitDistance) - ((numMeleeLines - 1) * unitDistance)); //Get the offset of the last melee unit line
+		zOffset += ((-1.5f * unitDistance) - ((numRangeLines - 1) * unitDistance)); //Add the offset of the last range unit line
+		zOffset += ((-1.5f * unitDistance) - (line * unitDistance)); //Add the offset for this range unit's line
+
+		//Lines up the unit side by side (comments in Unit_Melee)
+		float xOffset;
+		if (line == 0) {
+			xOffset = ((float)unitIndex / inFirstLine) * (unitDistance * inFirstLine);
+			xOffset -= (unitDistance / 2) * (inFirstLine - 1);
+		} else {
+			xOffset = ((float)(unitIndex % perLine) / perLine) * (unitDistance * perLine);
+			xOffset -= (unitDistance / 2) * (perLine - 1);
+		}
 
 		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
 

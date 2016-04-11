@@ -88,7 +88,10 @@ public class Squad : MonoBehaviour
 	public Unit_Base leader;
 
 	//How far apart units stand when in formation
-	public float distanceBetweenUnits = 7.5f;
+	public float distanceBetweenUnits = 15f;
+
+	//How many units can be on a line in formation
+	public int numUnitsPerLine = 8;
 
 	public Vector3 advanceTarget, retreatTarget;
 	public bool isRetreating = false, suicideAttack = false;
@@ -348,16 +351,26 @@ public class Squad : MonoBehaviour
 		if(leader != null)
 			leader.offsetFromAnchor = Vector3.zero;
 
+		//Get the number of formation lines for melee and ranged units unit
+		int numMeleeLines = meleeUnits.Count / numUnitsPerLine;
+		if (meleeUnits.Count % numUnitsPerLine > 0)
+			numMeleeLines++;
+
+		int numRangeLines = rangeUnits.Count / numUnitsPerLine;
+		if (rangeUnits.Count % numUnitsPerLine > 0)
+			numRangeLines++;
+
+		//Calculate anchor positions using its index in the list and the number of melee and range unit types
 		for (int i = 0; i < meleeUnits.Count; i++) {
 			meleeUnits[i].getNewAnchorPosition (i);
 		}
 
 		for (int i = 0; i < rangeUnits.Count; i++) {
-			rangeUnits[i].getNewAnchorPosition (i);
+			rangeUnits[i].getNewAnchorPosition (i, numMeleeLines);
 		}
 
 		for (int i = 0; i < siegeUnits.Count; i++) {
-			siegeUnits[i].getNewAnchorPosition (i);
+			siegeUnits[i].getNewAnchorPosition (i, numMeleeLines, numRangeLines);
 		}
 
 	}

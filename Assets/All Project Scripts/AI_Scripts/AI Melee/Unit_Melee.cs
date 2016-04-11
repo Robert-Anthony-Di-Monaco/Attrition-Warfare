@@ -38,19 +38,34 @@ public class Unit_Melee : Unit_Base
 
 
 
-	public void getNewAnchorPosition(int unitIndex){
-
-		if (squad.leader.ID == this.ID)
-			offsetFromAnchor = Vector3.zero;
-
-		int numMelee = squad.meleeUnits.Count;
+	public void getNewAnchorPosition(int unitIndex, int numMeleeLines){
 		
-		//Melees stand in a line behind the leader 
-		float zOffset = -1.5f * squad.distanceBetweenUnits;
+		int numMelee = squad.meleeUnits.Count;
+		int perLine = squad.numUnitsPerLine;
+		float unitDistance = squad.distanceBetweenUnits;
+
+		int inFirstLine = numMelee % perLine;
+		if (inFirstLine == 0)
+			inFirstLine = perLine;
+		
+		int remaining = numMelee - inFirstLine; //number of units not in the first line
+
+		int line = unitIndex / inFirstLine;
+		if(line != 0)
+			line = ( (unitIndex - inFirstLine) / perLine) + 1;
+	
+		//Melees stand in a line behind the leader by a distance of (1.5 * unitDistance) 
+		float zOffset = (-1.5f * unitDistance) - (line * unitDistance);
 
 		//Lines up the units side by side
-		float xOffset = ((float)unitIndex / numMelee) * (squad.distanceBetweenUnits * numMelee);
-		xOffset -= (squad.distanceBetweenUnits / 2) * (numMelee - 1);
+		float xOffset;
+		if (line == 0) { //the first line may have fewer units (it contains "inFirstLine" units)
+			xOffset = ((float)unitIndex / inFirstLine) * (unitDistance * inFirstLine); //line up the units starting from the center and to the right
+			xOffset -= (unitDistance / 2) * (inFirstLine - 1); //shift the units to the left so they are centered
+		} else { //subsequent lines always have "perLine" units, same as above except for the number of units in this line
+			xOffset = ((float)(unitIndex % perLine) / perLine) * (unitDistance * perLine);
+			xOffset -= (unitDistance / 2) * (perLine - 1);
+		}
 
 		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
 

@@ -9,6 +9,8 @@ public class RTSCameraMove : MonoBehaviour {
 	public float minCameraDistance = 100;
 	public float cameraZoomFactor = 25;
 
+	public Rect levelBounds = new Rect (200, 135, 1065, 2450);
+
     Rect bottomRect;
     Rect topRect;
     Rect leftRect;
@@ -17,9 +19,8 @@ public class RTSCameraMove : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		//point (0, 0) on the screen is the top left corner
-        topRect = new Rect(0, 0, Screen.width, GUIsize);
-        bottomRect = new Rect(0, Screen.height - GUIsize, Screen.width, GUIsize);
+        bottomRect = new Rect(0, 0, Screen.width, GUIsize);
+        topRect = new Rect(0, Screen.height - GUIsize, Screen.width, GUIsize);
         leftRect = new Rect(0,0, GUIsize, Screen.height);
         rightRect = new Rect(Screen.width - GUIsize, 0, GUIsize, Screen.height);
 
@@ -36,42 +37,63 @@ public class RTSCameraMove : MonoBehaviour {
 		if (bottomRect.Contains(Input.mousePosition) || Input.GetKey(KeyCode.DownArrow))
         {
 			//Moves faster when closer to the edge of the screen
-			float amount = (Input.mousePosition.y - (Screen.height - GUIsize)) / GUIsize; 
+			float amount = 1 - Input.mousePosition.y / GUIsize; 
+
+			//Using arrow keys isn't dependent on the mouse position
+			if(Input.GetKey(KeyCode.DownArrow))
+				amount = 1;
 
 			//Translates the vector to world space so the camera can face any direction
-			transform.parent.position += transform.parent.TransformVector (new Vector3(0, 0, amount * camSpeed * Time.deltaTime));
+			transform.parent.position += transform.parent.TransformVector (new Vector3(0, 0, amount * -camSpeed * Time.deltaTime));
 
 			//transform.parent.Translate(camSpeed, 0, 0, Space.World);
         }
 		if (topRect.Contains(Input.mousePosition) || Input.GetKey(KeyCode.UpArrow))
         {
-			float amount = 1 - Input.mousePosition.y / GUIsize;
-			transform.parent.position += transform.parent.TransformVector (new Vector3(0, 0, amount * -camSpeed * Time.deltaTime));
+			float amount = (Input.mousePosition.y - (Screen.height - GUIsize)) / GUIsize;
+			if(Input.GetKey(KeyCode.UpArrow))
+				amount = 1;
+			transform.parent.position += transform.parent.TransformVector (new Vector3(0, 0, amount * camSpeed * Time.deltaTime));
             //transform.parent.Translate(-camSpeed, 0, 0, Space.World);
         }
 		if (rightRect.Contains(Input.mousePosition) || Input.GetKey(KeyCode.RightArrow))
         {
 			float amount = (Input.mousePosition.x - (Screen.width - GUIsize)) / GUIsize;
+			if(Input.GetKey(KeyCode.RightArrow))
+				amount = 1;
 			transform.parent.position += transform.parent.TransformVector (new Vector3(amount * camSpeed * Time.deltaTime, 0, 0));
             //transform.parent.Translate(0, 0, camSpeed, Space.World);
         }
 		if (leftRect.Contains(Input.mousePosition) || Input.GetKey(KeyCode.LeftArrow))
         {
 			float amount = 1 - Input.mousePosition.x / GUIsize;
+			if(Input.GetKey(KeyCode.LeftArrow))
+				amount = 1;
 			transform.parent.position += transform.parent.TransformVector (new Vector3(amount * -camSpeed * Time.deltaTime, 0, 0));
             //transform.parent.Translate(0, 0, -camSpeed, Space.World);
         }
 
 		//Zoom using the fields at the top of the script
-		float mouseWheelInput = Mathf.Clamp(Input.GetAxis ("Mouse ScrollWheel"), -1, 1);
+		float mouseWheelInput = Input.GetAxis ("Mouse ScrollWheel");
 		if (mouseWheelInput < 0 && cameraDistance < maxCameraDistance)
 			cameraDistance += cameraZoomFactor;
 		else if(mouseWheelInput > 0 && cameraDistance > minCameraDistance)
 			cameraDistance -= cameraZoomFactor;
 			
-			
+		StayInBounds ();
 
         //manageHeight();
+	}
+	void StayInBounds(){
+		if (transform.parent.position.x < levelBounds.x)
+			transform.parent.position = new Vector3 (levelBounds.x, transform.parent.position.y, transform.parent.position.z);
+		else if (transform.parent.position.x > levelBounds.width)
+			transform.parent.position = new Vector3 (levelBounds.width, transform.parent.position.y, transform.parent.position.z);
+		
+		if(transform.parent.position.z < levelBounds.y)
+			transform.parent.position = new Vector3 (transform.parent.position.x, transform.parent.position.y, levelBounds.y);
+		else if(transform.parent.position.z > levelBounds.height)
+			transform.parent.position = new Vector3 (transform.parent.position.x, transform.parent.position.y, levelBounds.height);
 	}
 
 

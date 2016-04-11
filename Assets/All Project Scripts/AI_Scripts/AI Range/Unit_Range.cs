@@ -42,16 +42,36 @@ public class Unit_Range : Unit_Base
 		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Range/Range-AI-Tree.xml", this);
 	}
 */
-	public void getNewAnchorPosition(int unitIndex){
+	public void getNewAnchorPosition(int unitIndex, int numMeleeLines, int numRangeLines){
 
 		int numRange = squad.rangeUnits.Count;
+		int perLine = squad.numUnitsPerLine;
+		float unitDistance = squad.distanceBetweenUnits;
 
-		//Ranged units stand in a line behind the melee units 
-		float zOffset = -3f * squad.distanceBetweenUnits;
+		int inFirstLine = numRange % perLine;
+		if (inFirstLine == 0)
+			inFirstLine = perLine;
 
-		//Lines up the units side by side
-		float xOffset = ((float)unitIndex / numRange) * (squad.distanceBetweenUnits * numRange);
-		xOffset -= (squad.distanceBetweenUnits / 2) * (numRange - 1);
+		int remaining = numRange - inFirstLine; //number of units not in the first line
+
+		int line = unitIndex / inFirstLine;
+		if(line != 0)
+			line = ( (unitIndex - inFirstLine) / perLine) + 1;
+
+		//Ranged units stand in a line behind the melee units by a distance of (1.5 * unitDistance)
+		float zOffset = 0;
+		zOffset += ((-1.5f * unitDistance) - ((numMeleeLines - 1) * unitDistance)); //Get the offset of the last melee unit line
+		zOffset += ((-1.5f * unitDistance) - (line * unitDistance)); //Add the offset for this range unit's line
+
+		//Lines up the units side by side (comments in Unit_Melee)
+		float xOffset;
+		if (line == 0) {
+			xOffset = ((float)unitIndex / inFirstLine) * (unitDistance * inFirstLine);
+			xOffset -= (unitDistance / 2) * (inFirstLine - 1);
+		} else {
+			xOffset = ((float)(unitIndex % perLine) / perLine) * (unitDistance * perLine);
+			xOffset -= (unitDistance / 2) * (perLine - 1);
+		}
 
 		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
 

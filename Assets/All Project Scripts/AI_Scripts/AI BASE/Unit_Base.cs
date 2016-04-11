@@ -159,6 +159,11 @@ public class Unit_Base : MonoBehaviour
 			//Transform the offset vector from local space to world space to take into account the leader's rotation
 			NavMeshTarget = squad.transform.position + squad.transform.TransformVector(offsetFromAnchor);
 
+			//Check if the unit's slot position is inside a lake, if it is go to the leader's position instead
+			if (LakeAreas.isInsideLake (NavMeshTarget)) {
+				NavMeshTarget = squad.transform.position;
+			}
+			
 			//Make the unit seek 1 world unit in front of the slot position,
 			//  resolves issues with the unit sometimes facing the wrong direction when stationary
 			NavMeshTarget += squad.transform.forward; 
