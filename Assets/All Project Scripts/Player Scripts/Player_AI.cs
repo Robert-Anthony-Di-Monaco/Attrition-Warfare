@@ -15,11 +15,7 @@ using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 
 public class Player_AI : Unit_Base
 {
-   
-    
-
     //LayerMask
-
 
     //basic attack variables
     public GameObject basicShot;
@@ -178,7 +174,7 @@ public class Player_AI : Unit_Base
             yield return BTNodeResult.Failure;
         }
         //if we are at our target set it to null
-        else if ((target.transform.position - this.transform.position).magnitude < 0.1f)
+        else if (Vector3.Distance(target.transform.position, this.transform.position) < 0.5f)  
         {
            target = null;
            yield return BTNodeResult.Success;
@@ -202,7 +198,6 @@ public class Player_AI : Unit_Base
             //we know we are already facing the target
             if (Time.time > nextShotTime)
             {
-
                 BulletOffset = transform.position;
                 BulletOffset += transform.forward * 2f;
                 BulletOffset.y = 0.75f;
@@ -234,12 +229,12 @@ public class Player_AI : Unit_Base
         {
             yield return BTNodeResult.Success;
         }
-        else
-        {
-            //TODO: tune the facing speed here
-            transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
-            yield return BTNodeResult.Success;
-        }
+//        else
+//        {
+//            //TODO: tune the facing speed here
+//            transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);   //******************************************************************
+//            yield return BTNodeResult.Success; 
+//        }
     }
 
   

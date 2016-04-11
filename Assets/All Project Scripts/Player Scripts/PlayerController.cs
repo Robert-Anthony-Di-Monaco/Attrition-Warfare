@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 	public float speed = 5f; 
 
 	public const int maxPlayerHealth = 100;
-	public int playerHealth;
+	public int playerHealth = 1;
     public bool attackFlag;
     public bool squadCommandFlag = false;
     public bool squadAttackFlag = false;

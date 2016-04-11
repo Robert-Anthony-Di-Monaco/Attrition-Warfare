@@ -84,6 +84,10 @@
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\Water.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\WaterBase.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\WaterTile.cs" />
+     <Compile Include="Assets\World Assets {IGNORE}\zzAnimations\Controllers\MeleeAnimator.cs" />
+     <Compile Include="Assets\World Assets {IGNORE}\zzAnimations\Controllers\RangeAnimator.cs" />
+     <Compile Include="Assets\World Assets {IGNORE}\zzAnimations\Controllers\SiegeAnimator.cs" />
+     <Compile Include="Assets\World Assets {IGNORE}\zzAnimations\RobertsTestingScript.cs" />
      <None Include="Assets\All Project Scripts\AI_Scripts\AI Siege\Siege-AI-Tree.xml" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Shaders\Unlit_Lava_Simple.shader" />
      <None Include="Assets\All Project Scripts\Player Scripts\Player-AI-Tree.xml" />
@@ -98,6 +102,7 @@
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\FXWater4Advanced.shader" />
      <None Include="Assets\World Assets {IGNORE}\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
      <None Include="Assets\All Project Scripts\AI_Scripts\AI Melee\Melee-AI-Tree.xml" />
+     <None Include="Assets\World Assets {IGNORE}\zzAnimations\zModels\MaterialsSiege\lightbeam.shader" />
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
