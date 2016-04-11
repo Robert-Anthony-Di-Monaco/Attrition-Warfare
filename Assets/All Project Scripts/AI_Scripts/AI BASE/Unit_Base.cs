@@ -161,7 +161,7 @@ public class Unit_Base : MonoBehaviour
 
 			//Check if the unit's slot position is inside a lake, if it is go to the leader's position instead
 			if (LakeAreas.isInsideLake (NavMeshTarget)) {
-				NavMeshTarget = squad.transform.position;
+				//NavMeshTarget = squad.transform.position;
 			}
 			
 			//Make the unit seek 1 world unit in front of the slot position,
@@ -195,7 +195,7 @@ public class Unit_Base : MonoBehaviour
 	[BTLeaf("is-squad-retreating")]
     public bool isSquadRetreating()
     {
-		return squad.isRetreating;
+		return squad != null && squad.isRetreating;
     }
 	
     [BTLeaf ("is-squad-in-combat")]
@@ -244,22 +244,26 @@ public class Unit_Base : MonoBehaviour
     [BTLeaf ("face-nearest-enemy")]
     public BTCoroutine faceNearestEnemy()
     {
-
         this.agent.SetDestination(this.transform.position);
         GameObject nearestEnemy = this.getClosestEnemy();
-        Vector3 enemyDir = nearestEnemy.transform.position - this.transform.position;
-        float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
+        if (nearestEnemy != null)
+        {
+            
+            Vector3 enemyDir = nearestEnemy.transform.position - this.transform.position;
+            float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
 
-        if (angleDifference < aimThreshold)
-        {
-            yield return BTNodeResult.Success;
+            if (angleDifference < aimThreshold)
+            {
+                yield return BTNodeResult.Success;
+            }
+            else
+            {
+                //TODO: tune the facing speed here
+                transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
+                yield return BTNodeResult.NotFinished;
+            }
         }
-        else
-        {
-            //TODO: tune the facing speed here
-            transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
-            yield return BTNodeResult.NotFinished;
-        }
+        yield return BTNodeResult.Failure;
     }
 
     [BTLeaf ("attack-nearest-enemy")]

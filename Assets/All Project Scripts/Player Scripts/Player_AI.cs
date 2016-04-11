@@ -34,7 +34,6 @@ public class Player_AI : Unit_Base
     public bool isSquadCommander;
 
 	
-	private BehaviorTree bt;
     //NavMeshAgent agent;
     public override void Awake() 
 	{
