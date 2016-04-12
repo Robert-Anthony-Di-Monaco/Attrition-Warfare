@@ -5,18 +5,21 @@ public class Turret_Ai : Unit_Base {
 
 
     public Transform gun;
+    public Transform shotPoint;
     public GameObject basicAttackProjectile;
+    public GameObject target;
 
     public override void Awake()
     {
         base.Awake();
-        attackRange = 25f;
-        attackCooldown = 1.5f;
+        attackRange = 700f;
+        attackCooldown = 2f;
         nextAttackTime = 0f;
         damageOutput = 7;
-        visionRange = 100f;
+        visionRange = 700f;
         isInCombat = false;
-        gun = this.transform.Find("head001");
+        gun = this.transform.Find("Head001");
+        shotPoint = this.transform.Find("ShotPoint");
     }
 	// Update is called once per frame
 	void Update () {
@@ -31,17 +34,20 @@ public class Turret_Ai : Unit_Base {
         if (closestEnemy != null){
         
             //check if we are facing the closestEnemy
-            if(isFacingEnemy()){
-
+            if (isFacingEnemy())
+            {
                 //check if he is in range
                 if (isEnemyInAttackRange(closestEnemy))
                 {
+                    target= closestEnemy;
                     shoot();
                 }
             }
-
-            //we are not facing him so face him
-            faceEnemy(closestEnemy);
+            else
+            {
+                //we are not facing him so face him
+                faceEnemy(closestEnemy);
+            }
         }
     }
 
@@ -90,8 +96,8 @@ public class Turret_Ai : Unit_Base {
 
     public bool isEnemyInAttackRange(GameObject enemy)
     {
-        Vector3 distance = this.transform.position - enemy.transform.position;
-        return attackRange < distance.magnitude;
+        Vector3 distance = enemy.transform.position - this.transform.position;
+        return attackRange < Mathf.Abs(distance.magnitude);
     }
 
     public void faceEnemy(GameObject enemy){
@@ -104,8 +110,9 @@ public class Turret_Ai : Unit_Base {
     {
         if(Time.time > nextAttackTime){
             Vector3 offset = Vector3.zero;
-            Instantiate(basicAttackProjectile, this.transform.position + offset, gun.transform.rotation);
-            nextAttackTime += attackCooldown;
+            GameObject bullet = Instantiate(basicAttackProjectile, shotPoint.position, gun.transform.rotation) as GameObject;
+            bullet.GetComponent<LazerShot>().target = target;
+            nextAttackTime = Time.time + attackCooldown;
         }
     }
 }
