@@ -65,6 +65,7 @@ public class Unit_Base : MonoBehaviour
     public int enemyLayer;
     public int damageOutput;
     public bool isInCombat;
+	public GameObject theTarget;
 	//public bool isEnemy;   		   // Friendly or enemy unit 
 								   //	  --> use this.squad.faction, details in Squad script
 								   //     --> moved this to Squad script, that way you don't have to set it every time you instantiate a unit
@@ -73,7 +74,7 @@ public class Unit_Base : MonoBehaviour
 	// THESE WILL BE DONE BY ROBERT ----> ignore for now
 	public Animator anim; 
 
-	public float deathAnimationLength = 0; // How long to wait before destroying the gameobject when the unit dies, see Kill()
+	public float deathAnimationLength = 3f; // How long to wait before destroying the gameobject when the unit dies, see Kill()
 
 
 	//**** Functions ******
@@ -101,7 +102,12 @@ public class Unit_Base : MonoBehaviour
     {
             layerSetUp();
     }
-	
+
+	void Update()
+	{
+		if(isInCombat == false)
+			theTarget = null;
+	}
 	
 	private void InitBT()
 	{
@@ -126,6 +132,7 @@ public class Unit_Base : MonoBehaviour
 	//The time check for attack is already done just write the instantiate in here
     public void attack(GameObject targetEnemy)
     {
+		theTarget = targetEnemy;
         targetEnemy.SendMessage("ApplyDamage", damageOutput);
 		nextAttackTime = Time.time + attackCooldown;
     }
