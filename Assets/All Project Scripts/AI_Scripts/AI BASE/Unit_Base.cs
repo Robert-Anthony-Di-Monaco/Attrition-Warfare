@@ -99,7 +99,7 @@ public class Unit_Base : MonoBehaviour
 	}
     public void Start()
     {
-            layerSetUp();
+        layerSetUp();
     }
 	
 	
@@ -439,7 +439,14 @@ public class Unit_Base : MonoBehaviour
 		health -= amount;
 		if (health <= 0)
 		{
-			Kill();		
+			if(isPlayer())
+			{
+				gameObject.GetComponent<Player_AI>().respawnPlayer();
+			}
+			else
+			{
+				Kill();
+			}
 		}
 	}
 	// Heal this unit   --> the HealthBar script takes care of the rest

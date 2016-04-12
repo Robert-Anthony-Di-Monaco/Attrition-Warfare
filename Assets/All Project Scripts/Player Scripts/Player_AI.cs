@@ -28,11 +28,12 @@ public class Player_AI : Unit_Base
     public GameObject target;
     public bool isAttackOrder;
     public bool isSquadCommander;
+	public Vector3 respawnPosition;
 
-	
     //NavMeshAgent agent;
     public override void Awake() 
 	{
+		respawnPosition = transform.position;
         isInCombat = false;
         aimThreshold = 10f;
         enemyLayer = 8;
@@ -52,7 +53,16 @@ public class Player_AI : Unit_Base
 	}
 
     public override bool isPlayer() { return true; }
-
+	
+	public void respawnPlayer()
+	{
+		agent.enabled = false;
+		transform.position = respawnPosition;
+		agent.enabled = true;
+		Destroy(target);
+		health = maxHealth;
+	}
+	
     //checks if the player currently has an order to move
     [BTLeaf("has-move-order")]
     public bool hasMoveOrder()
