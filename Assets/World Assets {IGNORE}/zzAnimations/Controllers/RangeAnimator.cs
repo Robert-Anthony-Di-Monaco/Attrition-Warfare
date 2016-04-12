@@ -12,7 +12,7 @@ using System.Collections;
 [RequireComponent (typeof (Animator))]
 public class RangeAnimator : MonoBehaviour 
 {
-	public float movementSpeed;
+	public float movementSpeed, stopAnimationDistance;
 	public float animationMovementSpeed, animationInjuredSpeed;
 	
 	float attackRange;
@@ -73,7 +73,7 @@ public class RangeAnimator : MonoBehaviour
 			// Update position
 			transform.position = Vector3.Lerp (transform.position, agent.nextPosition, movementSpeed * Time.deltaTime);
 			// Apply sprinting animations
-			bool shouldMove = (Vector3.Distance (transform.position, agent.destination) > 12f) ? true : false;
+			bool shouldMove = (Vector3.Distance (transform.position, agent.destination) > stopAnimationDistance) && agent.velocity.magnitude > 10f ? true : false;
 			if(health >= 50f)
 			{
 				anim.SetBool ("injured", false);
