@@ -220,8 +220,11 @@ public class Unit_Base : MonoBehaviour
 		}
 		else{
 			isInCombat = false;
-			squad.isInCombat = false;
-			return false;
+            if (squad != null)
+            {
+                squad.isInCombat = false;
+            }
+            return false;
 		}
     }
 

@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
 		}
 		//Hide the victory/defeat message after it has been displayed
 		if(Input.GetKeyDown(KeyCode.Escape)){
-			GameObject.Find("WorldController").GetComponent<WorldController>().message = null;
+			//GameObject.Find("WorldController").GetComponent<WorldController>().message = null;
 		}
     }
 

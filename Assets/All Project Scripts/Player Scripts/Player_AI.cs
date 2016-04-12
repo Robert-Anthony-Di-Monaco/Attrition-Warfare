@@ -20,6 +20,7 @@ public class Player_AI : Unit_Base
     //basic attack variables
     public GameObject basicShot;
     public Vector3 BulletOffset;
+    public GameObject PlayerGUI;
     public float shotCoolDown = 0.5f;
     public float nextShotTime = 0f;
     //
@@ -59,6 +60,7 @@ public class Player_AI : Unit_Base
 	public override void ApplyDamage(int amount)
 	{
 		health -= amount/4;
+        PlayerGUI.GetComponent<PlayerGUI>().setHealth(health);
 		if (health <= 0)
 		{
 			respawnPlayer ();
@@ -72,6 +74,7 @@ public class Player_AI : Unit_Base
 		agent.enabled = true;
 		Destroy(target);
 		health = maxHealth;
+        PlayerGUI.GetComponent<PlayerGUI>().setHealth(health);
 	}
 	
     //checks if the player currently has an order to move
