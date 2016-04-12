@@ -9,22 +9,36 @@ public class Turret_Ai : Unit_Base {
     public GameObject basicAttackProjectile;
     public GameObject target;
 
+	public Quaternion faceIdle;
+
     public override void Awake()
     {
         base.Awake();
         attackRange = 300f;
-        attackCooldown = 2f;
-        damageOutput = 7;
+        attackCooldown = 0.5f;
+        damageOutput = 40;
         visionRange = 300f;
         nextAttackTime = 0.0f;
         isInCombat = false;
         gun = this.transform.Find("Head001");
         shotPoint = gun.transform.Find("ShotPoint");
     }
+	void Start(){
+		layerSetUp ();
+	}
 	// Update is called once per frame
 	void FixedUpdate () {
 
         TurretBehaviour();
+	}
+
+	public override void ApplyDamage(int amount)
+	{
+		health -= amount/8;
+		if (health <= 0)
+		{
+			Kill();		
+		}
 	}
 
     public void TurretBehaviour()
@@ -43,6 +57,7 @@ public class Turret_Ai : Unit_Base {
                     {
                         target = closestEnemy;
                         shoot();
+						target = null;
                     }
                 }
             }
@@ -114,6 +129,9 @@ public class Turret_Ai : Unit_Base {
         if(Time.time > nextAttackTime){
             nextAttackTime = Time.time + attackCooldown;
             GameObject bullet = Instantiate(basicAttackProjectile, shotPoint.position, gun.transform.rotation) as GameObject;
+
+			bullet.GetComponent<LazerShot> ().parent = this;
+			bullet.GetComponent<LazerShot> ().damage = damageOutput;
             bullet.GetComponent<LazerShot>().target = target;
         }
     }

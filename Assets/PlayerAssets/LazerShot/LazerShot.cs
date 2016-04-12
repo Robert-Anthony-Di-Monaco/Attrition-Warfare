@@ -12,16 +12,18 @@ using System.Collections;
 public class LazerShot : MonoBehaviour 
 {
     public GameObject target;
+	public Turret_Ai parent;
     public float bulletSpeed;
     public int terrainLayer = 9;
     public int enemyLayer = 8;
+	public int damage;
 
 
     public void Start()
     {
         bulletSpeed = 1000f * Time.fixedDeltaTime;
     }
-    public void Update()
+    public void FixedUpdate()
     {
         moveToTarget();
     }
@@ -39,14 +41,21 @@ public class LazerShot : MonoBehaviour
 
     public void moveToTarget()
     {
+		if (target == null || target.Equals(null)) {
+			Destroy (this);
+			return;
+		}
         Vector3 moveDir = target.transform.position - this.transform.position;
-        this.transform.position += moveDir.normalized * bulletSpeed;
+		moveDir = new Vector3 (moveDir.x, moveDir.y + 20, moveDir.z);
+		transform.rotation.SetLookRotation (moveDir);
+		this.transform.position += moveDir.normalized * bulletSpeed;
     }
 
 	void OnTriggerEnter(Collider col)   // Currently the prefab has a trigger collider
 	{
-        if (col.gameObject.layer.Equals(enemyLayer))
+        if (col.gameObject.Equals(target))
         {
+			target.SendMessage("ApplyDamage", damage);
             Destroy(this.gameObject);
         }
 	}

@@ -36,7 +36,9 @@ public class WorldController : MonoBehaviour
 	//All squads in the game
 	public int totalSquadsInstantiated = 0;
 	public List<Squad> allSquads = new List<Squad>();
-
+	
+	int allyCrystalsDestroyed = 0, enemyCrystalsDestroyed = 0;
+	
 	void Start () 
 	{
 		LakeAreas.Initialize();
@@ -46,4 +48,24 @@ public class WorldController : MonoBehaviour
 	{
 	
 	}
+	
+	public void victory()
+	{
+		if(++enemyCrystalsDestroyed == 2)
+		{
+			// put winning code here for splash screen or whatever
+			Debug.Log("You win! Congratulations on having no life!");
+		}
+	}
+	
+	public void defeat()
+	{
+		if(++allyCrystalsDestroyed == 2)
+		{
+			// put losing code here for splash screen or whatever
+			Debug.Log("You lose! You must suck!");
+		}
+	}
+	
+	
 }

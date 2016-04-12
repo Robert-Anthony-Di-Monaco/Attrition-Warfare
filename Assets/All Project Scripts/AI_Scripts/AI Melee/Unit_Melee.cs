@@ -25,10 +25,10 @@ public class Unit_Melee : Unit_Base
 	
 	public override void Awake () 
 	{
-        attackRange = 15;
-        attackCooldown = 2f;
-        damageOutput = 8;
-        visionRange = 100f;
+        attackRange = 50;
+        attackCooldown = 0.75f;
+        damageOutput = 32;
+        visionRange = 150f;
         isInCombat = false;
 		base.Awake ();
 
@@ -36,7 +36,14 @@ public class Unit_Melee : Unit_Base
 	}
 
 
-
+	public override void ApplyDamage(int amount)
+	{
+		health -= amount/2;
+		if (health <= 0)
+		{
+			Kill();		
+		}
+	}
 
 	public void getNewAnchorPosition(int unitIndex){
 		
