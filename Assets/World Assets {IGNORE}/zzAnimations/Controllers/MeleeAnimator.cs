@@ -12,7 +12,7 @@ using System.Collections;
 [RequireComponent (typeof (Animator))]
 public class MeleeAnimator : MonoBehaviour 
 {
-	public float movementSpeed;
+	public float movementSpeed, stopAnimationDistance;
 	public float animationMovementSpeed, animationInjuredSpeed;
 	
 	float attackRange;
@@ -26,7 +26,7 @@ public class MeleeAnimator : MonoBehaviour
 		agent = GetComponent<NavMeshAgent> ();
 		anim = GetComponent<Animator> ();
 		attackRange = 1f;//GetComponent<Unit_Base>().attackRange;
-		health = 1;//GetComponent<Unit_Base>().health; 
+		health = 55;//GetComponent<Unit_Base>().health; 
 		
 		// Dont auto update
 		agent.updatePosition = false;
@@ -72,7 +72,7 @@ public class MeleeAnimator : MonoBehaviour
 			// Update position
 			transform.position = Vector3.Lerp (transform.position, agent.nextPosition, movementSpeed * Time.deltaTime);
 			// Apply sprinting animations
-			bool shouldMove = (Vector3.Distance (transform.position, agent.destination) > 10f) ? true : false;
+			bool shouldMove = (Vector3.Distance (transform.position, agent.destination) > stopAnimationDistance) && agent.velocity.magnitude > 10f ? true : false;
 			if(health >= 50f)
 			{
 				anim.SetBool ("injured", false);
@@ -87,14 +87,14 @@ public class MeleeAnimator : MonoBehaviour
 			anim.SetFloat ("velx", deltaPos.x);
 			anim.SetFloat ("vely", deltaPos.y);
 		} 
-		// Agent is in range ---> start attacking
-		else if(Vector3.Distance(agent.destination, transform.position) <= attackRange)   
-		{
-			anim.speed = 1.45f;
-
-			// Apply attacking animation sequence
-			anim.SetBool ("attacking", true);
-		}
+//		// Agent is in range ---> start attacking
+//		else if(Vector3.Distance(agent.destination, transform.position) <= attackRange)   
+//		{
+//			anim.speed = 1.45f;
+//
+//			// Apply attacking animation sequence
+//			anim.SetBool ("attacking", true);
+//		}
 	}	
 	void OnAnimatorMove ()
 	{

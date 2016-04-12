@@ -463,11 +463,5 @@ public class Unit_Base : MonoBehaviour
             enemyLayer = 1 << 10;
         }
     }
-
-
-
-
-
-
 }
 
