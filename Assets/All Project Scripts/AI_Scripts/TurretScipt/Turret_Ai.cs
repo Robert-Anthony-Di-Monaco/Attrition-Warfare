@@ -12,17 +12,17 @@ public class Turret_Ai : Unit_Base {
     public override void Awake()
     {
         base.Awake();
-        attackRange = 700f;
+        attackRange = 300f;
         attackCooldown = 2f;
-        nextAttackTime = 0f;
         damageOutput = 7;
-        visionRange = 700f;
+        visionRange = 300f;
+        nextAttackTime = 0.0f;
         isInCombat = false;
         gun = this.transform.Find("Head001");
-        shotPoint = this.transform.Find("ShotPoint");
+        shotPoint = gun.transform.Find("ShotPoint");
     }
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         TurretBehaviour();
 	}
@@ -39,8 +39,11 @@ public class Turret_Ai : Unit_Base {
                 //check if he is in range
                 if (isEnemyInAttackRange(closestEnemy))
                 {
-                    target= closestEnemy;
-                    shoot();
+                    if (Time.time >= nextAttackTime)
+                    {
+                        target = closestEnemy;
+                        shoot();
+                    }
                 }
             }
             else
@@ -72,32 +75,32 @@ public class Turret_Ai : Unit_Base {
         }
     }
 
-    public GameObject getClosestEnemy()
-    {
-        //get nearest enemy in attack range
+    //public GameObject getClosestEnemy()
+    //{
+    //    //get nearest enemy in attack range
 
-        Collider[] cols = Physics.OverlapSphere(this.transform.position, visionRange, enemyLayer);
-        GameObject closestEnemy = null;
-        float closestDistance = float.MaxValue;
+    //    Collider[] cols = Physics.OverlapSphere(this.transform.position, visionRange, enemyLayer);
+    //    GameObject closestEnemy = null;
+    //    float closestDistance = float.MaxValue;
 
-        //check for the closest enemy object
-        foreach (Collider collision in cols)
-        {
-            Vector3 colliderPos = collision.gameObject.transform.position;
-            float currentDistance = Mathf.Abs((colliderPos - this.transform.position).magnitude);
-            if (currentDistance < closestDistance)
-            {
-                closestEnemy = collision.gameObject;
-                closestDistance = currentDistance;
-            }
-        }
-        return closestEnemy;
-    }
+    //    //check for the closest enemy object
+    //    foreach (Collider collision in cols)
+    //    {
+    //        Vector3 colliderPos = collision.gameObject.transform.position;
+    //        float currentDistance = Mathf.Abs((colliderPos - this.transform.position).magnitude);
+    //        if (currentDistance < closestDistance)
+    //        {
+    //            closestEnemy = collision.gameObject;
+    //            closestDistance = currentDistance;
+    //        }
+    //    }
+    //    return closestEnemy;
+    //}
 
     public bool isEnemyInAttackRange(GameObject enemy)
     {
         Vector3 distance = enemy.transform.position - this.transform.position;
-        return attackRange < Mathf.Abs(distance.magnitude);
+        return  Mathf.Abs(distance.magnitude) < attackRange;
     }
 
     public void faceEnemy(GameObject enemy){
@@ -109,10 +112,9 @@ public class Turret_Ai : Unit_Base {
     public void shoot()
     {
         if(Time.time > nextAttackTime){
-            Vector3 offset = Vector3.zero;
+            nextAttackTime = Time.time + attackCooldown;
             GameObject bullet = Instantiate(basicAttackProjectile, shotPoint.position, gun.transform.rotation) as GameObject;
             bullet.GetComponent<LazerShot>().target = target;
-            nextAttackTime = Time.time + attackCooldown;
         }
     }
 }

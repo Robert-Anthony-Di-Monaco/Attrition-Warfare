@@ -19,7 +19,7 @@ public class LazerShot : MonoBehaviour
 
     public void Start()
     {
-        bulletSpeed = 100f * Time.fixedDeltaTime;
+        bulletSpeed = 1000f * Time.fixedDeltaTime;
     }
     public void Update()
     {
