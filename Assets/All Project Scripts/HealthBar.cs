@@ -48,6 +48,9 @@ public class HealthBar : MonoBehaviour {
 		int hp = health.health;
 		if (hp > 6) {			
 
+			if (hp < 100) {
+				hp -= (hp % 6);
+			}
 			// Draw health bar amount
 			GUI.color = Color.green;
 			GUI.backgroundColor = Color.green;
