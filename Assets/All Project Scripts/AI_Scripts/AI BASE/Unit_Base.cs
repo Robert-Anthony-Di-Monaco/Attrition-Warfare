@@ -99,7 +99,7 @@ public class Unit_Base : MonoBehaviour
 	}
     public void Start()
     {
-        layerSetUp();
+            layerSetUp();
     }
 	
 	
@@ -109,7 +109,9 @@ public class Unit_Base : MonoBehaviour
 	}
 	
 	void FixedUpdate(){
-		
+
+		//Remember that his gets inherited by ALL subclasses: units, player, buildings, turrets, crystal
+
         //if(isSquadLeader())
         //{
         //    NavMeshSeek();
@@ -419,6 +421,7 @@ public class Unit_Base : MonoBehaviour
 	public virtual bool isRange(){ return false; }
 	public virtual bool isSiege(){ return false; }
 	public virtual bool isBuilding(){ return false; }
+	public virtual bool isCrystal(){ return false; }
 
 	// **************************  SHARED FUNCTIONS BY ALL UNITS  **************************
 	// This and only this is used to move the NPC-unit
@@ -434,19 +437,12 @@ public class Unit_Base : MonoBehaviour
 	}
 
 	// Apply damage to this unit  --> the HealthBar script takes care of the rest
-	public void ApplyDamage(int amount)
+	public virtual void ApplyDamage(int amount)
 	{
 		health -= amount;
 		if (health <= 0)
 		{
-			if(isPlayer())
-			{
-				gameObject.GetComponent<Player_AI>().respawnPlayer();
-			}
-			else
-			{
-				Kill();
-			}
+			Kill();		
 		}
 	}
 	// Heal this unit   --> the HealthBar script takes care of the rest
@@ -470,5 +466,11 @@ public class Unit_Base : MonoBehaviour
             enemyLayer = 1 << 10;
         }
     }
+
+
+
+
+
+
 }
 
