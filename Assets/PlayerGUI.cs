@@ -31,6 +31,6 @@ public class PlayerGUI : MonoBehaviour {
 
     public void setHealth(int health)
     {
-        healthbar.transform.Find("HealthBar").gameObject.GetComponent<PlayerHealthBar>().updateHealthbar(health);
+        healthbar.transform.Find("HealthBar").gameObject.GetComponent<PlayerHealthBar>().updateHealthBar();
     }
 }

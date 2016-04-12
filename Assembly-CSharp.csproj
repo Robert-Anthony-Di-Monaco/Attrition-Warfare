@@ -74,7 +74,12 @@
      <Compile Include="Assets\All Project Scripts\Player Scripts\Player_AI.cs" />
      <Compile Include="Assets\All Project Scripts\WorldController.cs" />
      <Compile Include="Assets\All Scenes\Squad Test Scene\TestSquad.cs" />
+     <Compile Include="Assets\Crystals\Crystal.cs" />
+     <Compile Include="Assets\Crystals\CrystalHP.cs" />
+     <Compile Include="Assets\Crystals\CrystalHover.cs" />
      <Compile Include="Assets\PlayerAssets\LazerShot\LazerShot.cs" />
+     <Compile Include="Assets\PlayerGUI.cs" />
+     <Compile Include="Assets\PlayerHealthBar.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Scripts\ScrollingUVs_Layers.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\Displace.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\GerstnerDisplace.cs" />
@@ -93,6 +98,7 @@
      <None Include="Assets\All Project Scripts\Player Scripts\Player-AI-Tree.xml" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\FXWater4Simple.shader" />
+     <None Include="Assets\Crystals\CristalCave\cristalVP.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\ReadMe.txt" />
      <None Include="Assets\All Project Scripts\AI_Scripts\AI Range\Range-AI-Tree.xml" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Shaders\FXWaterPro.shader" />
@@ -103,17 +109,11 @@
      <None Include="Assets\World Assets {IGNORE}\Destroyed City\Shaders\AlphaTest-DiffuseDoubleSide.shader" />
      <None Include="Assets\All Project Scripts\AI_Scripts\AI Melee\Melee-AI-Tree.xml" />
      <None Include="Assets\World Assets {IGNORE}\zzAnimations\zModels\MaterialsSiege\lightbeam.shader" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
