@@ -10,17 +10,17 @@ public class Spawn : MonoBehaviour {
 	
 	private GameObject currentSquad = null;
 	private int meleeUnits = 0, rangedUnits = 0, siegeUnits = 0;
-	private int curMaxMelee = 2, curMaxRanged = 2, curMaxSiege = 1;
+	private int curMaxMelee = 2, curMaxRanged = 2, curMaxSiege = 0;
     public int faction;
 	
 	// Use this for initialization
 	void Start () {
 	}
 
-	float squadCounter = 5;
+	float squadCounter = 8;
 	float unitCounter = 0;
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if(squadCounter > 5)
 		{
 			if(currentSquad == null)
@@ -62,7 +62,7 @@ public class Spawn : MonoBehaviour {
 				unitCounter += Time.deltaTime;
 			}
 			
-			if(siegeUnits == curMaxSiege)
+			if(rangedUnits == curMaxRanged && siegeUnits == curMaxSiege)
 			{
 				meleeUnits = 0;
 				rangedUnits = 0;
@@ -74,7 +74,9 @@ public class Spawn : MonoBehaviour {
 				{
 					++curMaxMelee;
 					++curMaxRanged;
-					++curMaxSiege;
+					//Siege start spawning at the 4th wave and after that, every other wave
+					if( (curMaxMelee > 3 && curMaxMelee % 2 == 0))
+						++curMaxSiege;
 				}
 			}
 			

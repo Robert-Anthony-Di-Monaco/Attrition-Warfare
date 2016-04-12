@@ -85,6 +85,14 @@ public class PlayerController : MonoBehaviour
         {
             squadAttackFlag = true;
         }
+		if (Input.GetKeyDown (KeyCode.R) && playerAI.isSquadCommander) {
+			playerAI.squad.stopControlling ();
+			playerAI.isSquadCommander = false;
+		}
+		//Hide the victory/defeat message after it has been displayed
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			GameObject.Find("WorldController").GetComponent<WorldController>().message = null;
+		}
     }
 
 

@@ -38,7 +38,9 @@ public class Player_AI : Unit_Base
         aimThreshold = 10f;
         enemyLayer = 8;
         health = maxHealth;
-        attackRange = 30f;
+        attackRange = 150f;
+		damageOutput = 64;
+		attackCooldown = 0.75f;
         target = null;
         agent = GetComponent<NavMeshAgent>();
 		InitBT();
@@ -53,7 +55,16 @@ public class Player_AI : Unit_Base
 	}
 
     public override bool isPlayer() { return true; }
-	
+
+	public override void ApplyDamage(int amount)
+	{
+		health -= amount/4;
+		if (health <= 0)
+		{
+			respawnPlayer ();
+		}
+	}
+
 	public void respawnPlayer()
 	{
 		agent.enabled = false;

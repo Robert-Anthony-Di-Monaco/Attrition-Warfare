@@ -26,8 +26,8 @@ public class Unit_Siege : Unit_Base
     {
         attackRange = 400;
         attackCooldown = 3;
-        damageOutput = 30;
-        visionRange = 100f;
+        damageOutput = 104;
+        visionRange = 250f;
         isInCombat = false;
         base.Awake();
 
@@ -40,6 +40,15 @@ public class Unit_Siege : Unit_Base
 		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Siege/Siege-AI-Tree.xml", this);
 	}
 */
+
+	public override void ApplyDamage(int amount)
+	{
+		health -= amount/4;
+		if (health <= 0)
+		{
+			Kill();		
+		}
+	}
 
 	public void getNewAnchorPosition(int unitIndex, int numMeleeLines, int numRangeLines){
 

@@ -127,6 +127,7 @@ public class Unit_Base : MonoBehaviour
     public void attack(GameObject targetEnemy)
     {
         targetEnemy.SendMessage("ApplyDamage", damageOutput);
+		nextAttackTime = Time.time + attackCooldown;
     }
 	
 	//NOT A COROUTINE just used in one
@@ -213,8 +214,15 @@ public class Unit_Base : MonoBehaviour
 
     [BTLeaf ("is-enemy-in-vision-range")]
     public bool isEnemyInVisionRange()
-    {
-       return Physics.CheckSphere(this.transform.position, visionRange, enemyLayer);
+	{
+		if(Physics.CheckSphere(this.transform.position, visionRange, enemyLayer)){
+			return true;
+		}
+		else{
+			isInCombat = false;
+			squad.isInCombat = false;
+			return false;
+		}
     }
 
     [BTLeaf("is-enemy-in-attack-range")]

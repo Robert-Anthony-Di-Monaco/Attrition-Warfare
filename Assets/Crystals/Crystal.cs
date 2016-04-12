@@ -5,7 +5,6 @@ public class Crystal : Unit_Base {
 
 	public Material deadMat;
 	public const int maxHP = 1000;
-	float timer = 0;
 
 	// Use this for initialization
 	public override void Awake () {
@@ -13,13 +12,6 @@ public class Crystal : Unit_Base {
 	}
 	void Start(){
 		layerSetUp ();
-	}
-	void FixedUpdate(){
-		timer += Time.deltaTime;
-		if (timer > 2) {
-			ApplyDamage(100);
-			timer = 0;
-		}
 	}
 
 	public override void ApplyDamage (int amount)
@@ -41,6 +33,12 @@ public class Crystal : Unit_Base {
 		GetComponentInChildren<CrystalHover> ().dead = true;
 		gameObject.layer = 1 << 0;
 		Destroy (GetComponent<Rigidbody> ());
+
+		if (faction == 0)
+			GameObject.Find ("WorldController").GetComponent<WorldController> ().defeat();
+		else if (faction == 1)
+			GameObject.Find ("WorldController").GetComponent<WorldController> ().victory();
+
 		Destroy(GetComponent<Unit_Base> ());
 
 	}
