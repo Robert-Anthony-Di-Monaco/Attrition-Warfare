@@ -10,7 +10,8 @@ public class Crystal : Unit_Base {
 	public override void Awake () {
 		health = maxHP;
 	}
-	void Start(){
+	new void Start()
+    {
 		layerSetUp ();
 	}
 

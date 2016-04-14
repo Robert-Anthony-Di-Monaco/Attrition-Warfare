@@ -208,8 +208,8 @@ public class Squad : MonoBehaviour
 		addUnit ((Unit_Base)unit);
 	}
 
-	public void removeUnit (Unit_Base unit){
-		
+	public void removeUnit (Unit_Base unit)
+    {
 		if (!allUnits.Contains (unit)) {
 			Debug.Log ("Unit can't be removed from squad: it is not in this squad.");
 			return;
@@ -374,8 +374,4 @@ public class Squad : MonoBehaviour
 		}
 
 	}
-
-
-
-
 }

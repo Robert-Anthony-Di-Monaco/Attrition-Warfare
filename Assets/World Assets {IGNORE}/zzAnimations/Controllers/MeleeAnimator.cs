@@ -54,7 +54,8 @@ public class MeleeAnimator : MonoBehaviour
 		} else {
 		
 			// Agent is moving
-			if (Vector3.Distance (agent.nextPosition, transform.position) > 0.5f) {			
+			if (Vector3.Distance (agent.nextPosition, transform.position) > 0.5f)
+            {			
 				anim.SetInteger ("attacking", 0); // stop attacking
 
 				// World space change

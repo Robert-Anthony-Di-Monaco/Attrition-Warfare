@@ -94,7 +94,8 @@ public class SiegeAnimator : MonoBehaviour
 				anim.SetFloat ("vely", deltaPos.y);
 			} 
 		// Agent is in range ---> turn to it to fire
-			else if (Vector3.Distance (agent.destination, transform.position) <= attackRange && isAttacking) {//Vector3.Distance(agent.destination, transform.position) <= attackRange && Vector3.Distance(agent.destination, transform.position) > 1f)
+			else if (target != null && Vector3.Distance (agent.destination, transform.position) <= attackRange && isAttacking)
+            {
 				anim.speed = 0.9f;   // set animation playback speed for turning on the spot
 			
 				// Aim at target

@@ -29,8 +29,8 @@ public class Unit_Range : Unit_Base
 		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Range/Range-AI-Tree.xml", this);
 	}
 */
-	public void getNewAnchorPosition(int unitIndex, int numMeleeLines){
-
+	public void getNewAnchorPosition(int unitIndex, int numMeleeLines)
+    {
 		int numRange = squad.rangeUnits.Count;
 		int perLine = squad.numUnitsPerLine;
 		float unitDistance = squad.distanceBetweenUnits;
@@ -38,8 +38,6 @@ public class Unit_Range : Unit_Base
 		int inFirstLine = numRange % perLine;
 		if (inFirstLine == 0)
 			inFirstLine = perLine;
-
-		int remaining = numRange - inFirstLine; //number of units not in the first line
 
 		int line = unitIndex / inFirstLine;
 		if(line != 0)
@@ -61,7 +59,6 @@ public class Unit_Range : Unit_Base
 		}
 
 		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
-
 	}
 
 	//Overloads the function in Unit_Base

@@ -61,13 +61,13 @@
      <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTSelector.cs" />
      <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTSequence.cs" />
      <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BehaviorTree.cs" />
+     <Compile Include="Assets\All Project Scripts\BasicProjectile.cs" />
      <Compile Include="Assets\All Project Scripts\HealthBar.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\ClickToMoveCharacter.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\LakeAreas.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\RTSCameraMove.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\TestSquad.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\WaypointDestroy.cs" />
-     <Compile Include="Assets\All Project Scripts\Player Scripts\BasicProjectile.cs" />
      <Compile Include="Assets\All Project Scripts\Player Scripts\PlayerController.cs" />
      <Compile Include="Assets\All Project Scripts\Player Scripts\Player_AI.cs" />
      <Compile Include="Assets\All Project Scripts\WorldController.cs" />

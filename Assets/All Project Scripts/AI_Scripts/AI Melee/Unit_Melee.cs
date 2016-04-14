@@ -9,18 +9,14 @@ using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 
 public class Unit_Melee : Unit_Base
 {
-	
-	
 	public override void Awake () 
 	{
-        attackRange = 50;
+        attackRange = 2.5f;
         attackCooldown = 0.75f;
         damageOutput = 32;
         visionRange = 150f;
         isInCombat = false;
 		base.Awake ();
-
-		
 	}
 
 
@@ -42,8 +38,6 @@ public class Unit_Melee : Unit_Base
 		int inFirstLine = numMelee % perLine;
 		if (inFirstLine == 0)
 			inFirstLine = perLine;
-		
-		int remaining = numMelee - inFirstLine; //number of units not in the first line
 
 		int line = unitIndex / inFirstLine;
 		if(line != 0)

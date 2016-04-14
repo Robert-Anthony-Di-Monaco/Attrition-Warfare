@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Turret_AI : Unit_Base {
-
-
-    public Transform gun; 
+public class Turret_AI : Unit_Base
+{
+    public Transform head; 
     public Transform shotPoint;
-    public GameObject basicAttackProjectile;
+    public GameObject lazerShot;
+    [HideInInspector]
     public GameObject target;
 
 	public Quaternion faceIdle;
@@ -20,34 +20,20 @@ public class Turret_AI : Unit_Base {
         visionRange = 300f;
         nextAttackTime = 0.0f;
         isInCombat = false;
-        gun = this.transform.Find("Head001");
-        shotPoint = gun.transform.Find("ShotPoint");
     }
+
 	new void Start()
     {
 		layerSetUp ();
 	}
-	// Update is called once per frame
-	void FixedUpdate () {
 
-        TurretBehaviour();
-	}
-
-	public override void ApplyDamage(int amount)
-	{
-		health -= amount/8;
-		if (health <= 0)
-		{
-			Kill();		
-		}
-	}
-
-    public void TurretBehaviour()
+    // Turret Behaviour
+	void FixedUpdate ()
     {
         GameObject closestEnemy = getClosestEnemy();
         //Check if an enemy is in range
-        if (closestEnemy != null){
-        
+        if (closestEnemy != null)
+        {
             //check if we are facing the closestEnemy
             if (isFacingEnemy())
             {
@@ -58,7 +44,7 @@ public class Turret_AI : Unit_Base {
                     {
                         target = closestEnemy;
                         shoot();
-						target = null;
+                        target = null;
                     }
                 }
             }
@@ -70,6 +56,15 @@ public class Turret_AI : Unit_Base {
         }
     }
 
+	public override void ApplyDamage(int amount)
+	{
+		health -= amount/8;
+		if (health <= 0)
+		{
+			Kill();		
+		}
+	}
+    
     public bool isFacingEnemy()
     {
         GameObject closestEnemy = this.getClosestEnemy();
@@ -78,7 +73,7 @@ public class Turret_AI : Unit_Base {
             return false;
         }
         Vector3 enemyDir = closestEnemy.transform.position - this.transform.position;
-        float angleDifference = Mathf.Abs(Vector3.Angle(gun.transform.forward, enemyDir));
+        float angleDifference = Mathf.Abs(Vector3.Angle(head.transform.forward, enemyDir));
 
 
         if (angleDifference < aimThreshold)
@@ -119,21 +114,21 @@ public class Turret_AI : Unit_Base {
         return  Mathf.Abs(distance.magnitude) < attackRange;
     }
 
-    public void faceEnemy(GameObject enemy){
-
+    public void faceEnemy(GameObject enemy)
+    {
         Vector3 dir = enemy.transform.position - this.transform.position;
-        gun.transform.forward = Vector3.RotateTowards(gun.transform.forward, dir, 1f, 30f);
+        head.transform.forward = Vector3.RotateTowards(head.transform.forward, dir, 1f, 30f);
     }
 
     public void shoot()
     {
-        if(Time.time > nextAttackTime){
+        if(Time.time > nextAttackTime)
+        {
             nextAttackTime = Time.time + attackCooldown;
-            GameObject bullet = Instantiate(basicAttackProjectile, shotPoint.position, gun.transform.rotation) as GameObject;
+            GameObject bullet = Instantiate(lazerShot, shotPoint.position, head.transform.rotation) as GameObject;
 
-			bullet.GetComponent<LazerShot> ().parent = this;
-			bullet.GetComponent<LazerShot> ().damage = damageOutput;
-            bullet.GetComponent<LazerShot>().target = target;
+            bullet.GetComponent<LazerShot>().damage = damageOutput;
+            bullet.GetComponent<LazerShot>().Fire(target.transform.position);
         }
     }
 }

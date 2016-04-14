@@ -49,8 +49,6 @@ public class Unit_Siege : Unit_Base
 		if (inFirstLine == 0)
 			inFirstLine = perLine;
 
-		int remaining = numSiege - inFirstLine; //number of units not in the first line
-
 		int line = unitIndex / inFirstLine;
 		if(line != 0)
 			line = ( (unitIndex - inFirstLine) / perLine) + 1;

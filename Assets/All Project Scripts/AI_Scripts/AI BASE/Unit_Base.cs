@@ -9,61 +9,46 @@ using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 
 public class Unit_Base : MonoBehaviour 
 {
-	//**** Unit Variables shared by all unit types ****
+	//**** Unit Variables ****
+    [HideInInspector]
+	public int ID;   // Uniquely identifies this unit --> used in WorldController's allUnits list
+	public int faction;  // Whether this unit is an ally or an enemy     
+	public Squad squad;  // This unit's squad	
 
-	//These have been implemented
-	//***************************
-	public int ID;	 			   // Uniquely identify this unit by its index in the WorldController's allUnits list
+    [HideInInspector]
+    public NavMeshAgent agent;
+    [HideInInspector]
+    public Vector3 NavMeshTarget;  // For following the squad leader, call MarchInFormation() instead 
 
-	public int faction;            // Represents what side this unit fights for
-
-	public Squad squad;   		   // Points to this Unit's squad
-	// IMPORTANT: not in this script
-	// this.squad.isInCombat -> if a unit needs to enter combat, make the whole squad enter combat,
-	//                              can be changed if exiting combat is tricky
-	// this.squad.leader -> this unit's squad leader (Unit_Base type)
-
-	public NavMeshAgent agent;	   // See Awake()
-
-	//Changed NavMeshTarget to be a Vector3 from Transform
-	public Vector3 NavMeshTarget;  // This unit's target position/destination, call NavMeshSeek() after setting
-								   // If the unit just needs to follow the squad leader, call MarchInFormation() instead (inherited)
-
-	//This unit's slot position in formation, handled in the Squad script
-	//Use this.MarchInFormation() for non-leader units;
-	public Vector3 offsetFromAnchor = Vector3.zero; 
-
-
-
+    //This unit's slot position in formation, handled in the Squad script
+    //Use this.MarchInFormation() for non-leader units;
+    [HideInInspector]
+    public Vector3 offsetFromAnchor = Vector3.zero; 
+    
 	//These have not yet been implemented
 	//***********************************
-	public Unit_Base Target;		//The enemy that this unit is targetting
-									//Anything targettable should inherit Unit_Base
-
-    public float speed, //Should just use navmesh speed through agent.speed
-                 attackRange,
+	public Unit_Base Target;        //The enemy that this unit is targetting
+                                    //Anything targettable should inherit Unit_Base
+    [HideInInspector]
+    public float attackRange,
                  visionRange,
                  aimThreshold,
                  nextAttackTime,
                  attackCooldown;
-	public const int maxHealth = 100; 
-	public int health = maxHealth;
+	public const int maxHealth = 100;
+    [HideInInspector]
+    public int health = maxHealth;
 
-	public int UpgradeLevel = 0;   // Determines this unit's abilities
-
-    public int enemyLayer;
-    public int damageOutput;
+    [HideInInspector]
+    public int enemyLayer, damageOutput;
     public bool isInCombat;
-	public GameObject theTarget;
-	//public bool isEnemy;   		   // Friendly or enemy unit 
-								   //	  --> use this.squad.faction, details in Squad script
-								   //     --> moved this to Squad script, that way you don't have to set it every time you instantiate a unit
-								   //	  --> changed to int faction: might be used as an index, less confusing (enemies would attack when isEnemy is false)
-
-	// THESE WILL BE DONE BY ROBERT ----> ignore for now
-	public Animator anim; 
-
-	public float deathAnimationLength = 3f; // How long to wait before destroying the gameobject when the unit dies, see Kill()
+    public GameObject theTarget;    // WHAT IS THE DIFFERENCE BETWEEN THIS AND "public Unit_Base Target" above  --> if useless then delete
+         //public bool isEnemy;   		   // Friendly or enemy unit 
+         //	  --> use this.squad.faction, details in Squad script
+         //     --> moved this to Squad script, that way you don't have to set it every time you instantiate a unit
+         //	  --> changed to int faction: might be used as an index, less confusing (enemies would attack when isEnemy is false)
+    [HideInInspector]
+    public float deathAnimationLength = 3f; 
 
 
 	//**** Functions ******
@@ -89,7 +74,7 @@ public class Unit_Base : MonoBehaviour
 	}
     public void Start()
     {
-            layerSetUp();
+        layerSetUp();
     }
 
 	void Update()
@@ -174,11 +159,10 @@ public class Unit_Base : MonoBehaviour
 	}
 
     [BTLeaf("is-squad-Leader")]
-	public bool isSquadLeader(){
+	public bool isSquadLeader()
+    {
 		return (squad != null && squad.leader != null && squad.leader.ID == ID);
 	}
-	
-	
 	
 	[BTLeaf("is-overwhelmed")]
     public bool isOverwhelmed()
@@ -241,7 +225,6 @@ public class Unit_Base : MonoBehaviour
         Vector3 enemyDir = closestEnemy.transform.position - this.transform.position;
         float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
 
-
         if (angleDifference < aimThreshold)
         {
             return true;
@@ -259,7 +242,6 @@ public class Unit_Base : MonoBehaviour
         GameObject nearestEnemy = this.getClosestEnemy();
         if (nearestEnemy != null)
         {
-            
             Vector3 enemyDir = nearestEnemy.transform.position - this.transform.position;
             float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
 
@@ -269,12 +251,13 @@ public class Unit_Base : MonoBehaviour
             }
             else
             {
-                //TODO: tune the facing speed here
-                transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
+                // TURNING HANDLED BY ANIMATION SCRIPT
+                //transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
                 yield return BTNodeResult.NotFinished;
             }
         }
-        yield return BTNodeResult.Failure;
+        else
+            yield return BTNodeResult.Failure;
     }
 
     [BTLeaf ("attack-nearest-enemy")]
@@ -405,8 +388,8 @@ public class Unit_Base : MonoBehaviour
 
 	//This is an example of how handle the unit dying,
 	//  could be used for the Player depending on how we handle the player dying
-	public void Kill(){
-
+	public void Kill()
+    {
 		if (squad != null)
 			squad.removeUnit (this);
 			
@@ -414,9 +397,6 @@ public class Unit_Base : MonoBehaviour
 
 		wc.allUnits.Remove (this);
 		   //if this unit belongs to other lists in the world controller, remove it here
-		 
-
-		//Start death animation here
 		 
 		//Destroy the game object after the death animation finishes, or even later
 		Destroy(gameObject, deathAnimationLength);
@@ -435,7 +415,7 @@ public class Unit_Base : MonoBehaviour
 	public void NavMeshSeek()
 	{
 		if((NavMeshTarget - transform.position) != Vector3.zero)
-			agent.SetDestination (NavMeshTarget); //changed from navmeshtarget.position
+			agent.SetDestination (NavMeshTarget); 
 	}
 	// Stop moving the NPC-unit
 	public void NavMeshStop()
@@ -443,7 +423,7 @@ public class Unit_Base : MonoBehaviour
 		agent.Stop ();
 	}
 
-	// Apply damage to this unit  --> the HealthBar script takes care of the rest
+	// Apply damage to this unit 
 	public virtual void ApplyDamage(int amount)
 	{
 		health -= amount;
@@ -452,7 +432,7 @@ public class Unit_Base : MonoBehaviour
 			Kill();		
 		}
 	}
-	// Heal this unit   --> the HealthBar script takes care of the rest
+	// Heal this unit  
 	public void Heal(int amount) 
 	{
 		health += amount;
@@ -473,11 +453,5 @@ public class Unit_Base : MonoBehaviour
             enemyLayer = 1 << 10;
         }
     }
-
-
-
-
-
-
 }
 

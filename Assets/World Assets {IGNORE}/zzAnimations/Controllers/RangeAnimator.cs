@@ -99,7 +99,8 @@ public class RangeAnimator : MonoBehaviour
 				anim.SetFloat ("vely", deltaPos.y);
 			} 
 		// Agent is in range ---> start aiming 
-			else if (Vector3.Distance (agent.destination, transform.position) <= attackRange && isAttacking) {//Vector3.Distance(agent.destination, transform.position) <= attackRange && Vector3.Distance(agent.destination, transform.position) > 1f)
+			else if (target != null && Vector3.Distance (agent.destination, transform.position) <= attackRange && isAttacking)
+            {
 				anim.speed = 1.5f;   // set animation playback speed for turning on the spot
 			
 				// Aim at target
