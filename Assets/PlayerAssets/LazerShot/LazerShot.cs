@@ -12,7 +12,7 @@ using System.Collections;
 public class LazerShot : MonoBehaviour 
 {
     public GameObject target;
-	public Turret_Ai parent;
+	public Turret_AI parent;
     public float bulletSpeed;
     public int terrainLayer = 9;
     public int enemyLayer = 8;

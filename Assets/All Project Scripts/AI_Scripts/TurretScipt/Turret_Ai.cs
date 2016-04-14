@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Turret_Ai : Unit_Base {
+public class Turret_AI : Unit_Base {
 
 
-    public Transform gun;
+    public Transform gun; 
     public Transform shotPoint;
     public GameObject basicAttackProjectile;
     public GameObject target;
@@ -23,7 +23,8 @@ public class Turret_Ai : Unit_Base {
         gun = this.transform.Find("Head001");
         shotPoint = gun.transform.Find("ShotPoint");
     }
-	void Start(){
+	new void Start()
+    {
 		layerSetUp ();
 	}
 	// Update is called once per frame

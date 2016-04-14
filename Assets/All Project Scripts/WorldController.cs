@@ -15,8 +15,7 @@ using System.Collections.Generic;
 public class WorldController : MonoBehaviour 
 {
 	// The Player
-	public Transform thePlayer;   // not initialized cause Player isnt done yet ----	ROBERT WILL TAKE CARE OF THIS
-	public EnemyController theEnemy;  				 
+	public Transform thePlayer;   // not initialized cause Player isnt done yet ----	ROBERT WILL TAKE CARE OF THIS 				 
 	public Transform playerBase,
 					 enemyBase;
 
