@@ -6,17 +6,6 @@ using System.Collections;
 using Coroutine = System.Collections.IEnumerator;
 using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 
-/************************************************************************************************************************************************************************
-	TO MAKE SURE THERE IS NO CONFUSION THIS IS WHAT EACH TERM MEANS:
-		Unit --> a single NPC; its type is one of the following:
-									Melee 
-									Range
-									Siege
-									Tower --> the player's HomeBase, the EnemyBase, and all towers inbetween which need to be destroyed in order to advance
-									Turret --> between the player's HomeBase and the EnemyBase  --> they are hazards for the player + his units
- ***********************************************************************************************************************************************************************/
-
-
 
 public class Unit_Base : MonoBehaviour 
 {

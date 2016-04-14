@@ -55,7 +55,7 @@ public class MeleeAnimator : MonoBehaviour
 		
 			// Agent is moving
 			if (Vector3.Distance (agent.nextPosition, transform.position) > 0.5f) {			
-				anim.SetBool ("attacking", false); // stop attacking
+				anim.SetInteger ("attacking", 0); // stop attacking
 
 				// World space change
 				Vector3 positionChange = agent.nextPosition - transform.position;  
@@ -99,7 +99,7 @@ public class MeleeAnimator : MonoBehaviour
 				anim.speed = 1.45f;
 
 				// Apply attacking animation sequence
-				anim.SetBool ("attacking", true);
+				anim.SetInteger ("attacking", (int)Random.Range(1f, 4f));
 			}
 		}
 	}	
