@@ -22,7 +22,7 @@
       <not>
         <condition name = "is-facing-nearest-enemy"/>
       </not>
-      <leaf name = "face-nearest-enemy"/>
+      <!-- <leaf name = "face-nearest-enemy"/> -->
     </sequence>
 
 
@@ -77,7 +77,7 @@
       <not>
         <condition name = "is-facing-nearest-enemy"/>
       </not>
-      <leaf name = "face-nearest-enemy"/>
+      <!-- <leaf name = "face-nearest-enemy"/> -->
     </sequence>
 
     <sequence>

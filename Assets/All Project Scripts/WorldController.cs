@@ -15,9 +15,9 @@ using System.Collections.Generic;
 public class WorldController : MonoBehaviour 
 {
 	// The Player
-	public Transform thePlayer;   // not initialized cause Player isnt done yet ----	ROBERT WILL TAKE CARE OF THIS 				 
-	public Transform playerBase,
-					 enemyBase;
+	public Transform thePlayer;   				 
+	//Transform playerBase,
+	//		 enemyBase;
 
 	// Holds all Player Units   
 	public List<List<Transform>> playerSquads = new List<List<Transform>>();  // a list of squads and each squad is just a list of its units

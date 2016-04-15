@@ -20,7 +20,6 @@ public class LazerShot : MonoBehaviour
 		this.gameObject.GetComponent<Rigidbody>().AddForce(shotVelocity * transform.forward, ForceMode.VelocityChange);
 
 		// Destroy shot when it hits target
-		Vector3 dir = target - transform.position;
 		float time2Target = Vector3.Distance(transform.position, target)/ shotVelocity;
 		Destroy (this.gameObject, time2Target); 
 	}

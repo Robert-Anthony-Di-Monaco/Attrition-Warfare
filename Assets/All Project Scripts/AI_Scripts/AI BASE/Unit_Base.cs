@@ -20,15 +20,9 @@ public class Unit_Base : MonoBehaviour
     [HideInInspector]
     public Vector3 NavMeshTarget;  // For following the squad leader, call MarchInFormation() instead 
 
-    //This unit's slot position in formation, handled in the Squad script
-    //Use this.MarchInFormation() for non-leader units;
     [HideInInspector]
-    public Vector3 offsetFromAnchor = Vector3.zero; 
+    public Vector3 offsetFromAnchor = Vector3.zero;   // this unit's slot position in formation
     
-	//These have not yet been implemented
-	//***********************************
-	public Unit_Base Target;        //The enemy that this unit is targetting
-                                    //Anything targettable should inherit Unit_Base
     [HideInInspector]
     public float attackRange,
                  visionRange,
@@ -42,24 +36,15 @@ public class Unit_Base : MonoBehaviour
     [HideInInspector]
     public int enemyLayer, damageOutput;
     public bool isInCombat;
-    public GameObject theTarget;    // WHAT IS THE DIFFERENCE BETWEEN THIS AND "public Unit_Base Target" above  --> if useless then delete
-         //public bool isEnemy;   		   // Friendly or enemy unit 
-         //	  --> use this.squad.faction, details in Squad script
-         //     --> moved this to Squad script, that way you don't have to set it every time you instantiate a unit
-         //	  --> changed to int faction: might be used as an index, less confusing (enemies would attack when isEnemy is false)
+    public GameObject theTarget;    // The target this unit is currently attacking --> needed by animations 
+
     [HideInInspector]
     public float deathAnimationLength = 3f; 
 
-
-	//**** Functions ******
-
-	//Made this function virtual, it is overriden by children using the override keyword and base.Awake()
-	//This is the only way to make everything in here happen in all children, while also letting each child do other things
 	public BehaviorTree bt;
 	
 	public virtual void Awake()
 	{
-		//anim = GetComponent<Animator>();
 		agent = gameObject.GetComponent<NavMeshAgent>();
         isInCombat = false;
 		WorldController wc = GameObject.Find("WorldController").GetComponent<WorldController>();
@@ -111,7 +96,7 @@ public class Unit_Base : MonoBehaviour
 		nextAttackTime = Time.time + attackCooldown;
     }
 	
-	//NOT A COROUTINE just used in one
+	// Finds closest enemy 
     public GameObject getClosestEnemy()
     {
         //get nearest enemy in attack range
@@ -133,7 +118,6 @@ public class Unit_Base : MonoBehaviour
         return closestEnemy;
     }
 	
-	//Functions to be used by behaviour trees, call within Behaviour tree functions
 
 	//Only for non-leader units
 
@@ -342,7 +326,6 @@ public class Unit_Base : MonoBehaviour
 
     }
 	
-	// LEAFS and CONDITIONS definitions ---> SEE TEMPLATES BELOW FOR HOW TO DO THEM!!!!!!!!
 	[BTLeaf("has-target")]
 	public bool hasTarget()   // Does this unit have a target
 	{
@@ -362,7 +345,6 @@ public class Unit_Base : MonoBehaviour
 			yield return BTNodeResult.NotFinished;
 	} 	
     
-	
 	Collider[] enemyCols;
 	[BTLeaf ("retreat")]
     public BTCoroutine retreat()
@@ -386,8 +368,7 @@ public class Unit_Base : MonoBehaviour
 		}
     }
 
-	//This is an example of how handle the unit dying,
-	//  could be used for the Player depending on how we handle the player dying
+	// Unit dies
 	public void Kill()
     {
 		if (squad != null)
@@ -398,9 +379,8 @@ public class Unit_Base : MonoBehaviour
 		wc.allUnits.Remove (this);
 		   //if this unit belongs to other lists in the world controller, remove it here
 		 
-		//Destroy the game object after the death animation finishes, or even later
+		//Destroy the game object after the death animation finishes
 		Destroy(gameObject, deathAnimationLength);
-
 	}
 	//These are overloaded to return true in their respective classes
 	public virtual bool isPlayer(){ return false; }

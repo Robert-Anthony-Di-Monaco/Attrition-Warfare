@@ -5,7 +5,8 @@ using System.Collections;
 // IGNORE THIS SCRIPT, IT WILL TAKE CARE OF DISPLAYING A UNIT'S HEALTH, if its position around the unit needs adjusting --- > tell ROBERT he will fix it 
 
 
-public class HealthBar : MonoBehaviour {
+public class HealthBar : MonoBehaviour
+{
 	GUIStyle healthStyle;
 	GUIStyle backStyle;
 	GUIStyle borderStyle;

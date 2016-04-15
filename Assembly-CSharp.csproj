@@ -86,6 +86,7 @@
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\Water.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\WaterBase.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\WaterTile.cs" />
+     <Compile Include="Assets\World Assets {IGNORE}\zzAnimations\Controllers\BaseAnimator.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\zzAnimations\Controllers\MeleeAnimator.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\zzAnimations\Controllers\PlayerAnimator.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\zzAnimations\Controllers\RangeAnimator.cs" />
