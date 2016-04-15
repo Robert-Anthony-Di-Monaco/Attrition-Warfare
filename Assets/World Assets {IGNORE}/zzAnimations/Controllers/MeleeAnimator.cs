@@ -15,9 +15,8 @@ public class MeleeAnimator : BaseAnimator
         base.Start();
 
         angularSpeed = 0.8f;
-        angularAimingSpeed = 0;
-        coolDown = 0;  // not used by melee unit
-        angularAimingSpeed = 0; // not used either
+        angularAimingSpeed = 0;  // not used by melee units
+        coolDown = 0;    // also not used
     }
 
     new void Update()
@@ -30,9 +29,7 @@ public class MeleeAnimator : BaseAnimator
             // Stop moving
             anim.SetBool("moving", false);
             anim.SetBool("injured", false);
-
-            // Set attacking speed
-            anim.speed = 1.5f;
+            anim.speed = 1.5f;  // Set attacking speed
 
             // Apply attacking animation 
             anim.SetInteger("attacking", (int)Random.Range(1f, 4f));  // randomly selects 1 of 4 different attacks
@@ -45,7 +42,7 @@ public class MeleeAnimator : BaseAnimator
             // Update position and rotation
             Update_Transform();
 
-            // Apply sprinting animations
+            // Apply proper movement animations
             bool shouldMove = (Vector3.Distance(transform.position, agent.destination) > stopAnimationDistance) ? true : false;
             if (health >= 50f)
             {
@@ -59,7 +56,7 @@ public class MeleeAnimator : BaseAnimator
             }
         }
 
-        if (agent.velocity.sqrMagnitude < 25f)
+        if (agent.velocity.sqrMagnitude < 25f)  
         {
             anim.SetBool("moving", false);
             anim.SetBool("injured", false);

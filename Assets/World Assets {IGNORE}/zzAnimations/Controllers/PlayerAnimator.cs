@@ -4,6 +4,8 @@ using System.Collections;
 /*
 	Dont touch --> JUST ALTER THE VARIABLES IN THE INSPECTOR
 		- Rob
+
+    This is exactly like the RangeAnimator class --> kept seperate for now --> may delete later on
 */
 
 [RequireComponent (typeof (NavMeshAgent))]
@@ -29,25 +31,10 @@ public class PlayerAnimator : BaseAnimator
             // Stop moving
             anim.SetBool("moving", false);
             anim.SetBool("injured", false);
+            anim.speed = 1.5f;   // set animation speed for turning on the spot
 
-            anim.speed = 1.5f;   // set animation playback speed for turning on the spot
-
-            // Aim at target
-            Vector3 lookDir = (agent.destination - transform.position).normalized;
-            Quaternion look2Target = Quaternion.identity;
-            if (lookDir != Vector3.zero)
-                look2Target = Quaternion.LookRotation(lookDir);
-            if (Quaternion.Angle(transform.rotation, look2Target) > 2f)
-            {
-                transform.rotation = Quaternion.Slerp(transform.rotation, look2Target, 4.2f * Time.deltaTime);
-                anim.SetBool("aim", true);
-
-                Vector3 result = Vector3.Cross(transform.forward, new Vector3(agent.destination.x - transform.position.x, 0, agent.destination.z - transform.position.z));
-                float aimDir = (result.normalized == Vector3.up) ? 1f : 0;
-                anim.SetFloat("aiming", aimDir);
-            }
-            else
-                anim.SetBool("aim", false);
+            // Turn on the spot to face target
+            AimTowards();
         }
         // Agent is moving
         else if (Vector3.Distance(agent.nextPosition, transform.position) > 0.5f)
@@ -57,7 +44,7 @@ public class PlayerAnimator : BaseAnimator
             // Update position and rotation
             Update_Transform();
 
-            // Apply sprinting animations
+            // Apply proper movement animations
             bool shouldMove = (Vector3.Distance(transform.position, agent.destination) > stopAnimationDistance) ? true : false;
             if (health >= 50f)
             {
@@ -70,7 +57,7 @@ public class PlayerAnimator : BaseAnimator
                 anim.SetBool("injured", shouldMove);
             }
         }
-           
+        
         if (agent.velocity.sqrMagnitude < 25f)
         {
             anim.SetBool("moving", false);

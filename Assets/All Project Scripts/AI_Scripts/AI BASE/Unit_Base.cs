@@ -207,7 +207,7 @@ public class Unit_Base : MonoBehaviour
             return false;
         }
         Vector3 enemyDir = closestEnemy.transform.position - this.transform.position;
-        float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
+        float angleDifference = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(enemyDir.normalized));
 
         if (angleDifference < aimThreshold)
         {
@@ -219,30 +219,30 @@ public class Unit_Base : MonoBehaviour
         }
     }
 
-    [BTLeaf ("face-nearest-enemy")]
-    public BTCoroutine faceNearestEnemy()
-    {
-        this.agent.SetDestination(this.transform.position);
-        GameObject nearestEnemy = this.getClosestEnemy();
-        if (nearestEnemy != null)
-        {
-            Vector3 enemyDir = nearestEnemy.transform.position - this.transform.position;
-            float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
+    //[BTLeaf ("face-nearest-enemy")]
+    //public BTCoroutine faceNearestEnemy()
+    //{
+    //    agent.SetDestination(transform.position);
+    //    GameObject nearestEnemy = this.getClosestEnemy();
+    //    if (nearestEnemy != null)
+    //    {
+    //        Vector3 enemyDir = nearestEnemy.transform.position - transform.position;
+    //        float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
 
-            if (angleDifference < aimThreshold)
-            {
-                yield return BTNodeResult.Success;
-            }
-            else
-            {
-                // TURNING HANDLED BY ANIMATION SCRIPT
-                //transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
-                yield return BTNodeResult.NotFinished;
-            }
-        }
-        else
-            yield return BTNodeResult.Failure;
-    }
+    //        if (angleDifference < aimThreshold)
+    //        {
+    //            yield return BTNodeResult.Success;
+    //        }
+    //        else
+    //        {
+    //            // TURNING HANDLED BY ANIMATION SCRIPT
+    //            //transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
+    //            yield return BTNodeResult.NotFinished;
+    //        }
+    //    }
+    //    else
+    //        yield return BTNodeResult.Failure;
+    //}
 
     [BTLeaf ("attack-nearest-enemy")]
     public BTCoroutine attackNearestEnemy()

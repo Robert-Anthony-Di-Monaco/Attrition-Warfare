@@ -13,10 +13,8 @@ public class BaseAnimator : MonoBehaviour
 
     protected Unit_Base script;
     protected GameObject target;
-    protected float attackRange;
-    protected bool isAttacking;
-    protected bool isShooting = false;
-    protected float coolDown;
+    protected float attackRange, coolDown;
+    protected bool isAttacking, isShooting = false;
     protected int health;
 
     Vector2 smoothing = Vector2.zero;
@@ -31,6 +29,7 @@ public class BaseAnimator : MonoBehaviour
         // Initialize variables
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+
         // Get variables from AI scripts
         script = GetComponent<Unit_Base>();
         target = script.theTarget;
@@ -38,7 +37,7 @@ public class BaseAnimator : MonoBehaviour
         isAttacking = script.isInCombat;
         health = script.health;
         
-        // Dont auto update
+        // Don't have agent auto update position and rotation
         agent.updatePosition = false;
         agent.updateRotation = false;
     }
@@ -96,6 +95,8 @@ public class BaseAnimator : MonoBehaviour
         anim.SetFloat("velx", deltaPos.x);
         anim.SetFloat("vely", deltaPos.y);
     }
+
+    // Function called by animator --> you can ignore this
     protected void OnAnimatorMove()
     {
         // Update position based on navmesh height
@@ -103,6 +104,37 @@ public class BaseAnimator : MonoBehaviour
         position.y = agent.nextPosition.y;
         transform.position = position;
     }
+
+    // Aim character towards target + apply animation
+    protected void AimTowards()
+    {
+        // Aim at target
+        Vector3 lookDir = (target.transform.position - transform.position).normalized;
+        Quaternion look2Target = Quaternion.identity;
+        if (lookDir != Vector3.zero)
+            look2Target = Quaternion.LookRotation(lookDir);
+        if (Quaternion.Angle(transform.rotation, look2Target) > 2f)
+        {
+            // Rotate and play animation
+            anim.SetBool("aim", true);
+            transform.rotation = Quaternion.Slerp(transform.rotation, look2Target, angularAimingSpeed * Time.deltaTime);
+
+            // Determine which animation to play : left turn or right turn
+            Vector3 result = Vector3.Cross(transform.forward, new Vector3(lookDir.x, 0, lookDir.z));
+            float aimDir = (result == Vector3.up) ? 1f : 0;
+            anim.SetFloat("aiming", aimDir);
+        }
+        else
+        {
+            anim.SetBool("aim", false);
+            if (isShooting == false)
+            {
+                StartCoroutine("shoot");
+            }
+        }
+    }
+
+    // Instantiates lazer shot 
     protected IEnumerator shoot()
     {
         isShooting = true;

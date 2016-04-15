@@ -11,7 +11,7 @@ public class Unit_Melee : Unit_Base
 {
 	public override void Awake () 
 	{
-        attackRange = 2.5f;
+        attackRange = 15f;
         attackCooldown = 0.75f;
         damageOutput = 32;
         visionRange = 150f;
