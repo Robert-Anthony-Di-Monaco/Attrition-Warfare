@@ -36,6 +36,7 @@ public class Unit_Base : MonoBehaviour
     [HideInInspector]
     public int enemyLayer, damageOutput;
     public bool isInCombat;
+    [HideInInspector]
     public GameObject theTarget;    // The target this unit is currently attacking --> needed by animations 
 
     [HideInInspector]
@@ -70,10 +71,12 @@ public class Unit_Base : MonoBehaviour
 	
 	private void InitBT()
 	{
-		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Melee/Melee-AI-Tree.xml", this);
+        // All units will use the same Behaviour Tree
+		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/Behaviour-AI-Tree.xml", this);
 	}
 	
-	void FixedUpdate(){
+	void FixedUpdate()
+    {
 
 		//Remember that his gets inherited by ALL subclasses: units, player, buildings, turrets, crystal
 
@@ -219,31 +222,6 @@ public class Unit_Base : MonoBehaviour
         }
     }
 
-    //[BTLeaf ("face-nearest-enemy")]
-    //public BTCoroutine faceNearestEnemy()
-    //{
-    //    agent.SetDestination(transform.position);
-    //    GameObject nearestEnemy = this.getClosestEnemy();
-    //    if (nearestEnemy != null)
-    //    {
-    //        Vector3 enemyDir = nearestEnemy.transform.position - transform.position;
-    //        float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
-
-    //        if (angleDifference < aimThreshold)
-    //        {
-    //            yield return BTNodeResult.Success;
-    //        }
-    //        else
-    //        {
-    //            // TURNING HANDLED BY ANIMATION SCRIPT
-    //            //transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
-    //            yield return BTNodeResult.NotFinished;
-    //        }
-    //    }
-    //    else
-    //        yield return BTNodeResult.Failure;
-    //}
-
     [BTLeaf ("attack-nearest-enemy")]
     public BTCoroutine attackNearestEnemy()
     {
@@ -323,7 +301,6 @@ public class Unit_Base : MonoBehaviour
         squad.leader.NavMeshSeek();
         squad.isInCombat = false;
         yield return BTNodeResult.NotFinished;
-
     }
 	
 	[BTLeaf("has-target")]
@@ -368,7 +345,7 @@ public class Unit_Base : MonoBehaviour
     }
 
 	// Unit dies
-	public void Kill()
+	public IEnumerator Kill()
     {
 		if (squad != null)
 			squad.removeUnit (this);
@@ -376,10 +353,11 @@ public class Unit_Base : MonoBehaviour
 		WorldController wc = GameObject.Find ("WorldController").GetComponent<WorldController> ();
 
 		wc.allUnits.Remove (this);
-		   //if this unit belongs to other lists in the world controller, remove it here
-		 
-		//Destroy the game object after the death animation finishes
-		Destroy(gameObject, deathAnimationLength);
+        //if this unit belongs to other lists in the world controller, remove it here
+
+        //Destroy the game object after the death animation finishes
+        yield return new WaitForSeconds(deathAnimationLength);
+        Destroy(this.gameObject);
 	}
 	//These are overloaded to return true in their respective classes
 	public virtual bool isPlayer(){ return false; }

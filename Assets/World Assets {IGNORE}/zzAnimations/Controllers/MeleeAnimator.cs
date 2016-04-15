@@ -15,16 +15,21 @@ public class MeleeAnimator : BaseAnimator
         base.Start();
 
         angularSpeed = 0.8f;
-        angularAimingSpeed = 0;  // not used by melee units
-        coolDown = 0;    // also not used
-    }
+
+        // The following are not used by melee units
+        angularAimingSpeed = 0; 
+        coolDown = 0;    
+        lazerShotPrefab = null;
+        spawnPoint = null;
+        lazerSound = null;
+}
 
     new void Update()
     {
         base.Update();
         
         // Agent is in range ---> start attacking
-        if ( target != null && isAttacking && Vector3.Distance(target.transform.position, transform.position) <= attackRange )
+        if ( /*target != null &&*/ isAttacking && Vector3.Distance(agent.destination /*target.transform.position*/, transform.position) <= attackRange )
         {
             // Stop moving
             anim.SetBool("moving", false);
@@ -32,7 +37,7 @@ public class MeleeAnimator : BaseAnimator
             anim.speed = 1.5f;  // Set attacking speed
 
             // Apply attacking animation 
-            anim.SetInteger("attacking", (int)Random.Range(1f, 4f));  // randomly selects 1 of 4 different attacks
+            anim.SetInteger("attacking", Random.Range(1, 5));  // randomly selects an attack animation --> 4 different ones
         }
         // Agent is moving
         else if (Vector3.Distance (agent.nextPosition, transform.position) > 0.5f)

@@ -23,6 +23,7 @@ public class BaseAnimator : MonoBehaviour
 
     public GameObject lazerShotPrefab;
     public Transform spawnPoint;
+    public AudioSource lazerSound;
 
     protected void Start ()
     {
