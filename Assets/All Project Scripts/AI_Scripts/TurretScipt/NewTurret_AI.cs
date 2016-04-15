@@ -129,6 +129,7 @@ public class NewTurret_AI : Unit_Base
 
             bullet.GetComponent<LazerShot>().damage = damageOutput;
             bullet.GetComponent<LazerShot>().Fire(target.transform.position);
+            target.SendMessage("ApplyDamage", damageOutput);
         }
     }
 }
