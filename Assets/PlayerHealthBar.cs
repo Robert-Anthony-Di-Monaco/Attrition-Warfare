@@ -20,6 +20,9 @@ public class PlayerHealthBar : MonoBehaviour
     public void updateHealthBar()
     {
         health = player.GetComponent<Player_AI>().health;
-        this.transform.localScale = new Vector3((float)health/100, 1f, 1f);
+        float healthRatio = (float)health/100;
+        if (healthRatio > 0.0){
+            this.transform.localScale = new Vector3(healthRatio, 1f, 1f);
+        }
     }
 }
