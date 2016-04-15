@@ -4,14 +4,10 @@ using System.Collections.Generic;
 
 /*	
   	CONTROLS WORLD EVENTS, HOLDS WORLD VARIABLES 
-
-	NOTE ---> TRANSFORM HAS A "gameObject" variable, use it to access scripts 
-				--->  thePlayer.gameObject.GetComponent<PlayerController>();               For everything else --> GetComponent<Unit_Base>();  
+    
  */
 
 
-//Important: it is assumed that the world controller object will be named "WorldController", 
-//   please make sure it is spelt exactly like that if you create it
 public class WorldController : MonoBehaviour 
 {
 	// The Player

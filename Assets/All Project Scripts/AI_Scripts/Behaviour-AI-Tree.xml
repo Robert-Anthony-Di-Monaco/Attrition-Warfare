@@ -1,49 +1,61 @@
 
 
-<behavior-tree>																		
+<behavior-tree>																			
+	
+	<selector>	                              							
+    
+		<sequence>    															
+			<condition name = "is-squad-leader"/>								
+			<condition name = "is-overwhelmed"/>
+			<leaf name = "retreat"/>     
+		</sequence>
+		
+		<sequence>
+			<condition name = "is-squad-leader"/>
+			<condition name = "is-squad-retreating"/>
+			<leaf name = "retreat"/>     
+		</sequence>
+			
+		
+		<sequence>    																	
+			<condition name = "is-squad-in-combat"/>						
+			<condition name = "is-enemy-in-vision-range"/>
+			<condition name = "is-enemy-in-attack-range"/>
+			<condition name = "is-facing-nearest-enemy"/>
+			<leaf name = "attack-nearest-enemy"/>     
+		</sequence>
 
+     <!-- 
+		<sequence>
+			<condition name = "is-squad-in-combat"/>
+			<condition name = "is-enemy-in-vision-range"/>
+			<condition name = "is-enemy-in-attack-range"/>
+			<not>
+				<condition name = "is-facing-nearest-enemy"/>
+			</not>
+			<leaf name = "face-nearest-enemy"/> 
+		</sequence>
+    -->
+				
+				
+		<sequence>
+			<condition name = "is-squad-in-combat"/>
+			<condition name = "is-enemy-in-vision-range"/>
+			<not>
+				<condition name = "is-enemy-in-attack-range"/>
+			</not>
+			<leaf name = "pursue-nearest-enemy"/>
+		</sequence>
 
-  <selector>
-
-
-    <sequence>
-
-      <condition name = "is-squad-in-combat"/>
-      <condition name = "is-enemy-in-vision-range"/>
-      <condition name = "is-enemy-in-attack-range"/>
-      <condition name = "is-facing-nearest-enemy"/>
-      <leaf name = "attack-nearest-enemy"/>
-    </sequence>
-
-    <sequence>
-      <condition name = "is-squad-in-combat"/>
-      <condition name = "is-enemy-in-vision-range"/>
-      <condition name = "is-enemy-in-attack-range"/>
-      <not>
-        <condition name = "is-facing-nearest-enemy"/>
-      </not>
-      <!-- <leaf name = "face-nearest-enemy"/> -->
-    </sequence>
-
-
-    <sequence>
-      <condition name = "is-squad-in-combat"/>
-      <condition name = "is-enemy-in-vision-range"/>
-      <not>
-        <condition name = "is-enemy-in-attack-range"/>
-      </not>
-      <leaf name = "pursue-nearest-enemy"/>
-    </sequence>
-
-    <sequence>
-      <condition name = "is-squad-in-combat"/>
-      <not>
-        <condition name = "is-enemy-in-vision-range"/>
-      </not>
+		<sequence>
+			<condition name = "is-squad-in-combat"/>
+			<not>
+				<condition name = "is-enemy-in-vision-range"/>
+			</not>
       <leaf name = "march-in-formation"/>
-    </sequence>
+		</sequence>
 
-
+    
     <sequence>
       <not>
         <condition name = "is-squad-in-combat"/>
@@ -54,19 +66,8 @@
       <condition name = "is-facing-nearest-enemy"/>
       <leaf name = "attack-nearest-enemy"/>
     </sequence>
-
-    <sequence>
-      <not>
-        <condition name = "is-squad-in-combat"/>
-      </not>
-      <condition name = "is-squad-leader"/>
-      <condition name = "is-enemy-in-vision-range"/>
-      <condition name = "is-enemy-in-attack-range"/>
-      <condition name = "is-facing-nearest-enemy"/>
-      <leaf name = "attack-nearest-enemy"/>
-    </sequence>
-
-
+    
+    <!--
     <sequence>
       <not>
         <condition name = "is-squad-in-combat"/>
@@ -77,8 +78,9 @@
       <not>
         <condition name = "is-facing-nearest-enemy"/>
       </not>
-      <!-- <leaf name = "face-nearest-enemy"/> -->
+     <leaf name = "face-nearest-enemy"/> 
     </sequence>
+    -->
 
     <sequence>
       <not>
@@ -113,7 +115,7 @@
       </not>
       <leaf name = "march-in-formation"/>
     </sequence>
-
-  </selector>
+				
+	</selector>
 	
 </behavior-tree>

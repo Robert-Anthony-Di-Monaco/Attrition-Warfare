@@ -11,7 +11,7 @@ public class Unit_Melee : Unit_Base
 {
 	public override void Awake () 
 	{
-        attackRange = 15f;
+        attackRange = 10f;
         attackCooldown = 0.75f;
         damageOutput = 32;
         visionRange = 150f;
@@ -25,8 +25,8 @@ public class Unit_Melee : Unit_Base
 		health -= amount/2;
 		if (health <= 0)
 		{
-			Kill();		
-		}
+            StartCoroutine("Kill");
+        }
 	}
 
 	public void getNewAnchorPosition(int unitIndex){

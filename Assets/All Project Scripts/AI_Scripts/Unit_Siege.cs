@@ -7,35 +7,45 @@ using Random = UnityEngine.Random;
 using Coroutine = System.Collections.IEnumerator;
 using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 
-public class Unit_Range : Unit_Base
-{
 
-    //public BehaviorTree bt;
+public class Unit_Siege : Unit_Base
+{
+   // public BehaviorTree bt;
     public override void Awake()
     {
-        attackRange = 125;
-        attackCooldown = 0.4f;
-        damageOutput = 24;
-        visionRange = 200f;
+        attackRange = 400;
+        attackCooldown = 3;
+        damageOutput = 104;
+        visionRange = 250f;
         isInCombat = false;
         base.Awake();
 
         //InitBT();
         //bt.Start();
     }
-	/*
+/*
 	private void InitBT()
 	{
-		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Range/Range-AI-Tree.xml", this);
+		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/AI Siege/Siege-AI-Tree.xml", this);
 	}
 */
-	public void getNewAnchorPosition(int unitIndex, int numMeleeLines)
-    {
-		int numRange = squad.rangeUnits.Count;
+
+	public override void ApplyDamage(int amount)
+	{
+		health -= amount/4;
+		if (health <= 0)
+		{
+			StartCoroutine("Kill");		
+		}
+	}
+
+	public void getNewAnchorPosition(int unitIndex, int numMeleeLines, int numRangeLines){
+
+		int numSiege = squad.siegeUnits.Count;
 		int perLine = squad.numUnitsPerLine;
 		float unitDistance = squad.distanceBetweenUnits;
 
-		int inFirstLine = numRange % perLine;
+		int inFirstLine = numSiege % perLine;
 		if (inFirstLine == 0)
 			inFirstLine = perLine;
 
@@ -43,12 +53,13 @@ public class Unit_Range : Unit_Base
 		if(line != 0)
 			line = ( (unitIndex - inFirstLine) / perLine) + 1;
 
-		//Ranged units stand in a line behind the melee units by a distance of (1.5 * unitDistance)
+		//Siege units stand in a line behind the range units by a distance of (1.5 * unitDistance)
 		float zOffset = 0;
 		zOffset += ((-1.5f * unitDistance) - ((numMeleeLines - 1) * unitDistance)); //Get the offset of the last melee unit line
+		zOffset += ((-1.5f * unitDistance) - ((numRangeLines - 1) * unitDistance)); //Add the offset of the last range unit line
 		zOffset += ((-1.5f * unitDistance) - (line * unitDistance)); //Add the offset for this range unit's line
 
-		//Lines up the units side by side (comments in Unit_Melee)
+		//Lines up the unit side by side (comments in Unit_Melee)
 		float xOffset;
 		if (line == 0) {
 			xOffset = ((float)unitIndex / inFirstLine) * (unitDistance * inFirstLine);
@@ -59,14 +70,16 @@ public class Unit_Range : Unit_Base
 		}
 
 		offsetFromAnchor = new Vector3 (xOffset, 0, zOffset);
-	}
 
+	}
 	//Overloads the function in Unit_Base
-	public override bool isRange(){
+	public override bool isSiege(){
 		return true;
 	}
 
+
 /*
+
     //The time check for attack is already done just write the instantiate in here
     public void attack(GameObject targetEnemy)
     {
@@ -96,6 +109,7 @@ public class Unit_Range : Unit_Base
         }
         return closestEnemy;
     }
+	
 	
 	
     [BTLeaf("is-squad-in-combat")]
@@ -226,7 +240,8 @@ public class Unit_Range : Unit_Base
         yield return BTNodeResult.NotFinished;
 
     }
-	
+
+
 	// LEAFS and CONDITIONS definitions ---> SEE TEMPLATES BELOW FOR HOW TO DO THEM!!!!!!!!
 	[BTLeaf("has-target")]
 	public bool hasTarget()   // Does this unit have a target
@@ -250,7 +265,3 @@ public class Unit_Range : Unit_Base
 	*/
 	
 }
-	
-	
-
-
