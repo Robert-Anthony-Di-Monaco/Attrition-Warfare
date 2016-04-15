@@ -20,8 +20,6 @@ public class Turret_AI : Unit_Base
         visionRange = 300f;
         nextAttackTime = 0.0f;
         isInCombat = false;
-        head = transform.Find("Head001");
-        shotPoint = transform.Find("ShotPoint");
     }
 
     new void Start()
@@ -63,7 +61,7 @@ public class Turret_AI : Unit_Base
         health -= amount / 8;
         if (health <= 0)
         {
-            Kill();
+            StartCoroutine("Kill"); 
         }
     }
 
