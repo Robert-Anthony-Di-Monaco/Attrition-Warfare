@@ -386,8 +386,8 @@ public class Unit_Base : MonoBehaviour
 		health -= amount;
 		if (health <= 0)
 		{
-			Kill();		
-		}
+            StartCoroutine("Kill");
+        }
 	}
 	// Heal this unit  
 	public void Heal(int amount) 
