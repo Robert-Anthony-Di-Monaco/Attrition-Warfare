@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Turret_AI : Unit_Base
+public class NewTurret_AI : Unit_Base
 {
     public Transform head;
     public Transform shotPoint;
@@ -61,7 +61,7 @@ public class Turret_AI : Unit_Base
         health -= amount / 8;
         if (health <= 0)
         {
-            StartCoroutine("Kill"); 
+            StartCoroutine("Kill");
         }
     }
 
