@@ -123,7 +123,7 @@ public class Squad : MonoBehaviour
             {
 				//WHEN PLAYER AI USES "isInCombat"
 				//*******************************
-				//isInCombat = leader.isInCombat;
+				isInCombat = leader.isInCombat;
 				//*******************************
 
                 Vector3 Target = leader.transform.position;

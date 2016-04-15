@@ -193,7 +193,6 @@ public class PlayerController : MonoBehaviour
 
     public void takeControlOfSquad()
     {
-        Debug.Log("ControlSquad has been Called");
         squadCommandFlag = false;
         RaycastHit hit;
         //same as click to move we check if we clicked on an ally
@@ -226,14 +225,13 @@ public class PlayerController : MonoBehaviour
 
         //same code as attackMove really just modifies the unit/squad
         //AI variables instead of the playerAI
-
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
         {
             //if we hit the terrain
             if (hit.collider.gameObject.layer.Equals(terrainLayer))
             {
-
-                leader.NavMeshTarget = hit.transform.position;
+                controlledSquad.advanceTarget = hit.point;
+                leader.NavMeshTarget = hit.point;
                 leader.NavMeshSeek();
                 return;
             }
