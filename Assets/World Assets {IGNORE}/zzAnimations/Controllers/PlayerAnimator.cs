@@ -5,7 +5,7 @@ using System.Collections;
 	Dont touch --> JUST ALTER THE VARIABLES IN THE INSPECTOR
 		- Rob
 
-    This is exactly like the RangeAnimator class --> kept seperate for now --> may delete later on
+    This is exactly like the RangeAnimator class --> its seperate because PlayerAI was handled differently
 */
 
 [RequireComponent (typeof (NavMeshAgent))]
@@ -18,7 +18,8 @@ public class PlayerAnimator : BaseAnimator
 
         angularSpeed = 1.1f;
         angularAimingSpeed = 4.2f;
-        coolDown = 1.5f;
+        coolDown = 0.5f;
+        aimThreshold = 10f;
     }
 	
 	new void Update ()

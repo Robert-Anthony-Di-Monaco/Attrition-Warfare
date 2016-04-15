@@ -17,6 +17,7 @@ public class SiegeAnimator : BaseAnimator
         angularSpeed = 0.6f;
         angularAimingSpeed = 1.1f;
         coolDown = 3f;
+        aimThreshold = 2f;
         injuredAnimationSpeed = movementAnimationSpeed; // not used by siege units
     }
 

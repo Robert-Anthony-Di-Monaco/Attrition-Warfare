@@ -18,7 +18,8 @@ public class MeleeAnimator : BaseAnimator
 
         // The following are not used by melee units
         angularAimingSpeed = 0; 
-        coolDown = 0;    
+        coolDown = 0;
+        aimThreshold = 0;
         lazerShotPrefab = null;
         spawnPoint = null;
         lazerSound = null;

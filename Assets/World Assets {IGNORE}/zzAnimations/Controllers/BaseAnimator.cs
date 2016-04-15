@@ -9,7 +9,7 @@ public class BaseAnimator : MonoBehaviour
 {
     public float movementSpeed, stopAnimationDistance,
                  movementAnimationSpeed, injuredAnimationSpeed;
-    protected float angularSpeed, angularAimingSpeed;
+    protected float angularSpeed, angularAimingSpeed, aimThreshold;
 
     protected Unit_Base script;
     protected GameObject target;
@@ -114,7 +114,7 @@ public class BaseAnimator : MonoBehaviour
         Quaternion look2Target = Quaternion.identity;
         if (lookDir != Vector3.zero)
             look2Target = Quaternion.LookRotation(lookDir);
-        if (Quaternion.Angle(transform.rotation, look2Target) > 2f)
+        if (Quaternion.Angle(transform.rotation, look2Target) > aimThreshold)
         {
             // Rotate and play animation
             anim.SetBool("aim", true);

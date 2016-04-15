@@ -17,6 +17,7 @@ public class RangeAnimator : BaseAnimator
         angularSpeed = 1.1f;
         angularAimingSpeed = 4.2f;
         coolDown = 1.5f;
+        aimThreshold = 2f;
     }
 
     new void Update()
