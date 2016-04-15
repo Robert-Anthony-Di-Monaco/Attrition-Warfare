@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Turret_AI : Unit_Base
 {
-    public Transform head; 
+    public Transform head;
     public Transform shotPoint;
     public GameObject lazerShot;
     [HideInInspector]
     public GameObject target;
 
-	public Quaternion faceIdle;
+    public Quaternion faceIdle;
 
     public override void Awake()
     {
@@ -20,15 +20,17 @@ public class Turret_AI : Unit_Base
         visionRange = 300f;
         nextAttackTime = 0.0f;
         isInCombat = false;
+        head = transform.Find("Head001");
+        shotPoint = transform.Find("ShotPoint");
     }
 
-	new void Start()
+    new void Start()
     {
-		layerSetUp ();
-	}
+        layerSetUp();
+    }
 
     // Turret Behaviour
-	void FixedUpdate ()
+    void FixedUpdate()
     {
         GameObject closestEnemy = getClosestEnemy();
         //Check if an enemy is in range
@@ -56,15 +58,15 @@ public class Turret_AI : Unit_Base
         }
     }
 
-	public override void ApplyDamage(int amount)
-	{
-		health -= amount/8;
-		if (health <= 0)
-		{
-			Kill();		
-		}
-	}
-    
+    public override void ApplyDamage(int amount)
+    {
+        health -= amount / 8;
+        if (health <= 0)
+        {
+            Kill();
+        }
+    }
+
     public bool isFacingEnemy()
     {
         GameObject closestEnemy = this.getClosestEnemy();
@@ -111,7 +113,7 @@ public class Turret_AI : Unit_Base
     public bool isEnemyInAttackRange(GameObject enemy)
     {
         Vector3 distance = enemy.transform.position - this.transform.position;
-        return  Mathf.Abs(distance.magnitude) < attackRange;
+        return Mathf.Abs(distance.magnitude) < attackRange;
     }
 
     public void faceEnemy(GameObject enemy)
@@ -122,7 +124,7 @@ public class Turret_AI : Unit_Base
 
     public void shoot()
     {
-        if(Time.time > nextAttackTime)
+        if (Time.time > nextAttackTime)
         {
             nextAttackTime = Time.time + attackCooldown;
             GameObject bullet = Instantiate(lazerShot, shotPoint.position, head.transform.rotation) as GameObject;

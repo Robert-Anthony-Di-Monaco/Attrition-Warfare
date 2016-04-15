@@ -353,7 +353,6 @@ public class Unit_Base : MonoBehaviour
 		
 		if ((double)(allyCols.Length) / enemyCols.Length < 1)
 		{
-			Debug.Log(faction + " is retreating!");
 			squad.isRetreating = true;
 			squad.leader.NavMeshTarget = squad.retreatTarget;
 			squad.leader.NavMeshSeek();
