@@ -22,7 +22,6 @@ public class MeleeAnimator : BaseAnimator
         aimThreshold = 0;
         lazerShotPrefab = null;
         spawnPoint = null;
-        lazerSound = null;
 }
 
     new void Update()

@@ -48,7 +48,7 @@
      <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Spawn.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Squad.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Unit_Base.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\TurretScipt\Turret_AI.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\TurretScipt\NewTurret_AI.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Unit_Melee.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Unit_Range.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Unit_Siege.cs" />

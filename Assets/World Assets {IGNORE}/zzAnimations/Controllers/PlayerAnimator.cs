@@ -11,7 +11,7 @@ using System.Collections;
 [RequireComponent (typeof (NavMeshAgent))]
 [RequireComponent (typeof (Animator))]
 public class PlayerAnimator : BaseAnimator
-{
+{ 
     new void Start()
 	{
         base.Start();

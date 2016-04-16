@@ -11,9 +11,9 @@ using System.Collections.Generic;
 public class WorldController : MonoBehaviour 
 {
 	// The Player
-	public Transform thePlayer;   				 
-	//Transform playerBase,
-	//		 enemyBase;
+	public Transform thePlayer;
+
+    public AudioSource ambient1, ambient2, ambient3;
 
 	// Holds all Player Units   
 	public List<List<Transform>> playerSquads = new List<List<Transform>>();  // a list of squads and each squad is just a list of its units
@@ -41,7 +41,13 @@ public class WorldController : MonoBehaviour
 
 	void Update () 
 	{
-	
+        if (ambient1.isPlaying == false && ambient2.isPlaying == false && ambient3.isPlaying == false)
+        {
+            int selection = Random.Range(1, 4);
+            if (selection == 1) ambient1.Play();
+            else if (selection == 2) ambient2.Play();
+            else ambient3.Play();
+        }
 	}
 	
 	public void victory()

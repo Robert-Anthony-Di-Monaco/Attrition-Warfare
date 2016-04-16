@@ -6,6 +6,7 @@ public class NewTurret_AI : Unit_Base
     public Transform head;
     public Transform shotPoint;
     public GameObject lazerShot;
+    public AudioSource lazerSound;
     [HideInInspector]
     public GameObject target;
 
@@ -129,6 +130,8 @@ public class NewTurret_AI : Unit_Base
 
             bullet.GetComponent<LazerShot>().damage = damageOutput;
             bullet.GetComponent<LazerShot>().Fire(target.transform.position);
+            if (lazerSound.isPlaying == false)
+                lazerSound.Play();
             target.SendMessage("ApplyDamage", damageOutput);
         }
     }
