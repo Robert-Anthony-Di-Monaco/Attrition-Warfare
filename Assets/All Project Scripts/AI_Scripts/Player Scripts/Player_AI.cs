@@ -31,7 +31,7 @@ public class Player_AI : Unit_Base
 	{
 		respawnPosition = transform.position;
         isInCombat = false;
-        aimThreshold = 2f;
+        aimThreshold = 10f;
         enemyLayer = 8;
         health = maxHealth;
         attackRange = 150f;
@@ -173,12 +173,12 @@ public class Player_AI : Unit_Base
         }
     }
 
-    
 
+    // Please note turning is handled by animation scripts --> see World Assets > zzAnimation> Controllers
     [BTLeaf("face-target")]
     public BTCoroutine faceTarget()
     {
-        this.agent.SetDestination(this.transform.position);
+        this.agent.Stop();// SetDestination(this.transform.position);
         //check if we are within aim Threshold of the target
         Vector3 enemyDir = target.transform.position - this.transform.position;
         float angleDifference = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(enemyDir.normalized));
@@ -189,7 +189,6 @@ public class Player_AI : Unit_Base
         }
         else
         {
-           // transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
             yield return BTNodeResult.Success; 
         }
     }
@@ -199,23 +198,20 @@ public class Player_AI : Unit_Base
     public BTCoroutine shootTarget()
     {
         isInCombat = true;
-        this.agent.SetDestination(this.transform.position);
+        this.agent.Stop();// SetDestination(this.transform.position);
         if (target != null)
         {
-            isInCombat = true;
-            attack(target);
-            yield return BTNodeResult.Success;
-            ////we know we are already facing the target
-            //if (Time.time > nextShotTime)
-            //{
-            //    nextShotTime = Time.time + shotCoolDown;
-            //    attack(target);
-            //    yield return BTNodeResult.Success;
-            //}
-            //else
-            //{
-            //    yield return BTNodeResult.NotFinished;
-            //}
+            //we know we are already facing the target
+            if (Time.time > nextShotTime)
+            {
+                nextShotTime = Time.time + shotCoolDown;
+                attack(target);
+                yield return BTNodeResult.Success;
+            }
+            else
+            {
+                yield return BTNodeResult.NotFinished;
+            }
         }
         else
         {
@@ -228,23 +224,20 @@ public class Player_AI : Unit_Base
     public BTCoroutine shootNearestEnemy()
     {
         isInCombat = true;
-        this.agent.SetDestination(this.transform.position);
+        this.agent.Stop();// SetDestination(this.transform.position);
         GameObject closestEnemy = this.getClosestEnemy();
         if (closestEnemy != null)
         {
-            isInCombat = true;
-            attack(closestEnemy);
-            yield return BTNodeResult.Success;
-            //if (Time.time > nextShotTime)
-            //{
-            //    nextShotTime = Time.time + shotCoolDown;
-            //    attack(closestEnemy);
-            //    yield return BTNodeResult.Success;
-            //}
-            //else
-            //{
-            //    yield return BTNodeResult.NotFinished;
-            //}
+            if (Time.time > nextShotTime)
+            {
+                nextShotTime = Time.time + shotCoolDown;
+                attack(closestEnemy);
+                yield return BTNodeResult.Success;
+            }
+            else
+            {
+                yield return BTNodeResult.NotFinished;
+            }
         }
         else
         {
@@ -253,10 +246,11 @@ public class Player_AI : Unit_Base
     }
 
 
+    // Please note turning is handled by animation scripts --> see World Assets > zzAnimation> Controllers
     [BTLeaf("face-nearest-enemy")]
     public BTCoroutine faceNearestEnemy()
     {
-        this.agent.SetDestination(this.transform.position);
+       // this.agent.SetDestination(this.transform.position);
         GameObject nearestEnemy = this.getClosestEnemy();
         if (nearestEnemy != null)
         {
@@ -269,8 +263,6 @@ public class Player_AI : Unit_Base
             }
             else
             {
-                // Animation Handles turning
-                //transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
                 yield return BTNodeResult.NotFinished;
             }
         }

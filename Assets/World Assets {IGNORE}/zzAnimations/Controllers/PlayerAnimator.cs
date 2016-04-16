@@ -19,7 +19,7 @@ public class PlayerAnimator : BaseAnimator
         angularSpeed = 1.1f;
         angularAimingSpeed = 4.2f;
         coolDown = 0.5f;
-        aimThreshold = 2f;
+        aimThreshold = 10f;
     }
 	
 	new void Update ()

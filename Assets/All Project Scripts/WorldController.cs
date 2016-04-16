@@ -11,9 +11,7 @@ using System.Collections.Generic;
 public class WorldController : MonoBehaviour 
 {
 	// The Player
-	public Transform thePlayer;   				 
-	//Transform playerBase,
-	//		 enemyBase;
+	public Transform thePlayer;   				
 
 	// Holds all Player Units   
 	public List<List<Transform>> playerSquads = new List<List<Transform>>();  // a list of squads and each squad is just a list of its units
@@ -35,6 +33,8 @@ public class WorldController : MonoBehaviour
 	//Victory/defeat
 	int allyCrystalsDestroyed = 0, enemyCrystalsDestroyed = 0;
 
+    public AudioSource ambient1, ambient2, ambient3;
+
 	public Texture2D victorySplash;
 	public Texture2D defeatSplash;
 	public int XmoveSplashCenter = 0;
@@ -51,7 +51,13 @@ public class WorldController : MonoBehaviour
 
 	void Update () 
 	{
-		
+        if (ambient1.isPlaying == false && ambient2.isPlaying == false && ambient3.isPlaying == false)
+        {
+            int select = Random.Range(1, 4);
+            if (select == 1) ambient1.Play();
+            else if (select == 2) ambient2.Play();
+            else ambient3.Play();
+        }
 	}
 	
 	public void victory()

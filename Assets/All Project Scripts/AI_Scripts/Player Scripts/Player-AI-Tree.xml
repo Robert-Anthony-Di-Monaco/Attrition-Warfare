@@ -13,7 +13,7 @@
     </sequence>
 
     
-    <!-- sequence for having an attack move order on a unit within range 
+    <!-- sequence for having an attack move order on a unit within range -->
     <sequence>
       <condition name = "has-move-order"/>
       <condition name = "is-order-attack-order"/>
@@ -24,7 +24,7 @@
       </not>
       <leaf name = "face-target"/>
     </sequence>
-    -->
+   
 
     <!-- sequence for having an attack move order on a unit NOT in range -->
     <sequence>
@@ -37,7 +37,7 @@
       <leaf name = "move-to-target"/>
     </sequence>
 
-    <!-- sequence for move attack order targeting the ground but there is an enemy within attacking range so act aggressively towards it 
+    <!-- sequence for move attack order targeting the ground but there is an enemy within attacking range so act aggressively towards it -->
     <sequence>
       <condition name = "has-move-order"/>
       <condition name = "is-order-attack-order"/>
@@ -48,11 +48,9 @@
       <condition name = "is-facings-nearest-enemy"/>
       <leaf name = "shoot-nearest-enemy" />
     </sequence>
-    -->
+    
 
-    <!-- here is the sequence for having a move order
-		that is an attack move order targeted on the ground but
-		there is an enemy in attack range so we act aggressively towards it  
+    <!-- sequence for an attack move order targeted on the ground but there is an enemy in attack range so we act aggressively towards it -->
     <sequence>
       <condition name = "has-move-order"/>
       <condition name = "is-order-attack-order"/>
@@ -65,7 +63,7 @@
       </not>
       <leaf name = "face-nearest-enemy" /> 
     </sequence>
-    -->
+    
     
     <!-- sequence for an attack move order targeting the ground + there no enemies in rang so move towards target location -->
     <sequence>
@@ -99,7 +97,7 @@
       <leaf name = "idle" />
     </sequence>
 
-    <!-- here is the sequence for when we dont have a move order and we are not currently leading a squad but an enemy is in range so we attack him 
+    <!-- here is the sequence for when we dont have a move order and we are not currently leading a squad but an enemy is in range so we attack him -->
     <sequence>
       <not>
         <condition name = "has-move-order"/>
@@ -111,7 +109,7 @@
       <condition name = "is-facings-nearest-enemy"/>
       <leaf name = "shoot-nearest-enemy" />
     </sequence>
-    -->
+    
 
     
     <!-- sequence for NO move order + NOT leading a squad but an enemy within range so attack them -->
