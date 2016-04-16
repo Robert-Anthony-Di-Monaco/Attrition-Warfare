@@ -74,23 +74,7 @@ public class Unit_Base : MonoBehaviour
         // All units will use the same Behaviour Tree
 		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/Behaviour-AI-Tree.xml", this);
 	}
-	
-	void FixedUpdate()
-    {
 
-		//Remember that his gets inherited by ALL subclasses: units, player, buildings, turrets, crystal
-
-        //if(isSquadLeader())
-        //{
-        //    NavMeshSeek();
-        //}
-        //else
-        //{
-        //    MarchInFormation();
-        //}
-
-	}
-	
 	//The time check for attack is already done just write the instantiate in here
     public void attack(GameObject targetEnemy)
     {
@@ -142,57 +126,63 @@ public class Unit_Base : MonoBehaviour
 		if (gameObject.GetComponent<Unit_Melee> () != null) {
 			if(closestMeleeEnemy !=null)
 				return closestMeleeEnemy;
-			if(closestRangedEnemy !=null)
+			else if(closestRangedEnemy !=null)
 				return closestRangedEnemy;
-			if(closestSiegeEnemy !=null)
+			else if(closestSiegeEnemy !=null)
 				return closestSiegeEnemy;
-			if(closestPlayerEnemy !=null)
+			else if(closestPlayerEnemy !=null)
 				return closestPlayerEnemy;
-			if(closestBuildingEnemy !=null)
-				return closestBuildingEnemy;
+            else if (closestBuildingEnemy != null)
+                return closestBuildingEnemy;
+            else
+                return null;
 		}
 		else if (gameObject.GetComponent<Unit_Range> () != null) {
 			if(closestRangedEnemy !=null)
 				return closestRangedEnemy;
-			if(closestMeleeEnemy !=null)
+			else if(closestMeleeEnemy !=null)
 				return closestMeleeEnemy;
-			if(closestSiegeEnemy !=null)
+			else if(closestSiegeEnemy !=null)
 				return closestSiegeEnemy;
-			if(closestPlayerEnemy !=null)
+			else if(closestPlayerEnemy !=null)
 				return closestPlayerEnemy;
-			if(closestBuildingEnemy !=null)
-				return closestBuildingEnemy;
+            else if (closestBuildingEnemy != null)
+                return closestBuildingEnemy;
+            else
+                return null;
 		}
 		else if (gameObject.GetComponent<Unit_Siege> () != null) {
-			if(closestBuildingEnemy !=null)
-				return closestBuildingEnemy;
-			if(closestRangedEnemy !=null)
-				return closestRangedEnemy;
-			if(closestMeleeEnemy !=null)
-				return closestMeleeEnemy;
-			if(closestSiegeEnemy !=null)
-				return closestSiegeEnemy;
-			if(closestPlayerEnemy !=null)
-				return closestPlayerEnemy;
+            if (closestBuildingEnemy != null)
+                return closestBuildingEnemy;
+            else if (closestRangedEnemy != null)
+                return closestRangedEnemy;
+            else if (closestMeleeEnemy != null)
+                return closestMeleeEnemy;
+            else if (closestSiegeEnemy != null)
+                return closestSiegeEnemy;
+            else if (closestPlayerEnemy != null)
+                return closestPlayerEnemy;
+            else
+                return null;
 		}
 		else // Turrets
 		{
 			if(closestMeleeEnemy !=null)
 				return closestMeleeEnemy;
-			if(closestRangedEnemy !=null)
+			else if(closestRangedEnemy !=null)
 				return closestRangedEnemy;
-			if(closestSiegeEnemy !=null)
+			else if(closestSiegeEnemy !=null)
 				return closestSiegeEnemy;
-			if(closestPlayerEnemy !=null)
+			else if(closestPlayerEnemy !=null)
 				return closestPlayerEnemy;
-			if(closestBuildingEnemy !=null)
-				return closestBuildingEnemy;
+            else if (closestBuildingEnemy != null)
+                return closestBuildingEnemy;
+            else
+                return null;
 		}
 
     }
 	
-
-	//Only for non-leader units
 
     [BTLeaf("march-in-formation")]
 	public BTCoroutine MarchInFormation(){ //Will need to be changed if we don't want to update this every frame
@@ -436,7 +426,6 @@ public class Unit_Base : MonoBehaviour
 	public virtual bool isBuilding(){ return false; }
 	public virtual bool isCrystal(){ return false; }
 
-	// **************************  SHARED FUNCTIONS BY ALL UNITS  **************************
 	// This and only this is used to move the NPC-unit
 	public void NavMeshSeek()
 	{

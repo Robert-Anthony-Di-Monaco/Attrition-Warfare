@@ -15,17 +15,12 @@ using BTCoroutine = System.Collections.Generic.IEnumerator<BTNodeResult>;
 
 public class Player_AI : Unit_Base
 {
-    //LayerMask
-
-    //basic attack variables
+    // Player AI variables
     public GameObject basicShot;
     public Vector3 BulletOffset;
     public GameObject PlayerGUI;
     public float shotCoolDown = 0.5f;
     public float nextShotTime = 0f;
-    //
-
-
     public GameObject target;
     public bool isAttackOrder;
     public bool isSquadCommander;
@@ -50,8 +45,6 @@ public class Player_AI : Unit_Base
 	
 	private void InitBT()
 	{
-       //isSquadCommander = false;
-       //isAttackOrder = false;
 		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/Player Scripts/Player-AI-Tree.xml", this);
 	}
 
@@ -108,14 +101,7 @@ public class Player_AI : Unit_Base
             return true;
         }
     }
-/*
-    //check if there in an enemy within our attack range
-    [BTLeaf ("is-enemy-in-attack-range")]
-    public bool isEnemyInRange()
-    {
-       return Physics.CheckSphere(this.transform.position, attackRange, enemyLayer);
-    }
-*/
+
     //checks if the targeted enemy is within our attack range (different from above)
     [BTLeaf ("is-target-unit-in-range")]
     public bool isTargetunitInRange()
@@ -134,7 +120,7 @@ public class Player_AI : Unit_Base
     {
         Vector3 dirVect = target.transform.position - this.transform.position;
 
-        if (Mathf.Abs(Vector3.Angle(this.transform.forward, dirVect)) < aimThreshold)
+        if (Quaternion.Angle(transform.rotation, Quaternion.LookRotation(dirVect.normalized)) <= aimThreshold)
         {
             return true;
         }else {
@@ -154,7 +140,7 @@ public class Player_AI : Unit_Base
         float angleDifference = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(enemyDir.normalized));
 
 
-        if (angleDifference < aimThreshold)
+        if (angleDifference <= aimThreshold)
         {
             return true;
         }
@@ -163,29 +149,6 @@ public class Player_AI : Unit_Base
             return false;
         }
     }
-
-    /*
-        NOT A COROUTINE just used in one
-        public GameObject getClosestEnemy()
-        {
-            get nearest enemy in attack range
-
-            Collider[] cols = Physics.OverlapSphere(this.transform.position, attackRange, enemyLayer);
-            GameObject closestEnemy = null;
-            float closestDistance = float.MaxValue;
-
-             //check for the closest enemy object
-            foreach( Collider collision in cols){
-                Vector3 colliderPos = collision.gameObject.transform.position;
-                float currentDistance = Math.Abs((colliderPos - this.transform.position).magnitude);
-                if(currentDistance < closestDistance){
-                    closestEnemy = collision.gameObject;
-                    closestDistance = currentDistance;
-                }
-            }
-            return closestEnemy;
-        }
-    */
 
     [BTLeaf ("move-to-target")]
     public BTCoroutine MoveToTarget()
@@ -218,9 +181,9 @@ public class Player_AI : Unit_Base
         this.agent.SetDestination(this.transform.position);
         //check if we are within aim Threshold of the target
         Vector3 enemyDir = target.transform.position - this.transform.position;
-        float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
+        float angleDifference = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(enemyDir.normalized));
 
-        if (angleDifference < aimThreshold)
+        if (angleDifference <= aimThreshold)
         {
             yield return BTNodeResult.Success;
         }
@@ -239,22 +202,20 @@ public class Player_AI : Unit_Base
         this.agent.SetDestination(this.transform.position);
         if (target != null)
         {
-            //we know we are already facing the target
-            if (Time.time > nextShotTime)
-            {
-                //BulletOffset = transform.position;
-                //BulletOffset += transform.forward * 2f;
-                //BulletOffset.y = 0.75f;
-                //GameObject bullet = Instantiate(basicShot, BulletOffset, this.transform.rotation) as GameObject;
-                //bullet.GetComponent<LazerShot>().target = this.target;
-                nextShotTime = Time.time + shotCoolDown;
-                attack(target);
-                yield return BTNodeResult.Success;
-            }
-            else
-            {
-                yield return BTNodeResult.NotFinished;
-            }
+            isInCombat = true;
+            attack(target);
+            yield return BTNodeResult.Success;
+            ////we know we are already facing the target
+            //if (Time.time > nextShotTime)
+            //{
+            //    nextShotTime = Time.time + shotCoolDown;
+            //    attack(target);
+            //    yield return BTNodeResult.Success;
+            //}
+            //else
+            //{
+            //    yield return BTNodeResult.NotFinished;
+            //}
         }
         else
         {
@@ -269,24 +230,24 @@ public class Player_AI : Unit_Base
         isInCombat = true;
         this.agent.SetDestination(this.transform.position);
         GameObject closestEnemy = this.getClosestEnemy();
-        if (closestEnemy != null) {
-
-            if (Time.time > nextShotTime)
-            {
-                //BulletOffset = transform.position;
-                //BulletOffset += transform.forward * 2f;
-                //BulletOffset.y = 0.75f;
-                //GameObject bullet = Instantiate(basicShot, BulletOffset, this.transform.rotation) as GameObject;
-                //bullet.GetComponent<LazerShot>().target = closestEnemy;
-                nextShotTime = Time.time + shotCoolDown;
-                attack(closestEnemy);
-                yield return BTNodeResult.Success;
-            }
-            else
-            {
-                yield return BTNodeResult.NotFinished;
-            }
-        }else{
+        if (closestEnemy != null)
+        {
+            isInCombat = true;
+            attack(closestEnemy);
+            yield return BTNodeResult.Success;
+            //if (Time.time > nextShotTime)
+            //{
+            //    nextShotTime = Time.time + shotCoolDown;
+            //    attack(closestEnemy);
+            //    yield return BTNodeResult.Success;
+            //}
+            //else
+            //{
+            //    yield return BTNodeResult.NotFinished;
+            //}
+        }
+        else
+        {
             yield return BTNodeResult.Failure;
         }
     }
@@ -298,11 +259,11 @@ public class Player_AI : Unit_Base
         this.agent.SetDestination(this.transform.position);
         GameObject nearestEnemy = this.getClosestEnemy();
         if (nearestEnemy != null)
-        { 
+        {
             Vector3 enemyDir = nearestEnemy.transform.position - this.transform.position;
-            float angleDifference = Mathf.Abs(Vector3.Angle(this.transform.forward, enemyDir));
+            float angleDifference = Quaternion.Angle(transform.rotation, Quaternion.LookRotation(enemyDir.normalized));
 
-            if (angleDifference < aimThreshold)
+            if (angleDifference <= aimThreshold)
             {
                 yield return BTNodeResult.Success;
             }
@@ -318,7 +279,6 @@ public class Player_AI : Unit_Base
     [BTLeaf ("move-to-squad-anchor")]
     public BTCoroutine moveToSquadAnchor()
     {
-        //TODO: write this function when squads are complete
         yield return BTNodeResult.NotFinished;
     }
 

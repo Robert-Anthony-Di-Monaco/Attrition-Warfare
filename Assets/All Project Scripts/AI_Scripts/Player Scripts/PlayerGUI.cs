@@ -7,19 +7,8 @@ public class PlayerGUI : MonoBehaviour {
 
     public Transform healthbar;
     public GameObject Player;
-   // bool attack;
-   // bool squadAttack;
-    //bool command;
     public Button buttonW, buttonA, buttonSpace, buttonE;
 
-    // Use this for initialization
-    void Start ()
-    {
-        //attack = Player.GetComponent<PlayerController>().attackFlag;
-       // squadAttack = Player.GetComponent<PlayerController>().squadAttackFlag;
-       // command = Player.GetComponent<PlayerController>().squadCommandFlag;
-	}
-	
 	// Update is called once per frame
 	void Update ()
     {
