@@ -29,7 +29,7 @@ public class Spawn : MonoBehaviour {
 				currentSquad.GetComponent<Squad>().advanceTarget = enemySpawnPoint.transform.position;
 				currentSquad.GetComponent<Squad>().retreatTarget = this.transform.position;
 			}
-			if(unitCounter > 1.2f && meleeUnits++ < curMaxMelee)
+			if(unitCounter > 1.2f && meleeUnits < curMaxMelee)
 			{
 				GameObject temp1 = Instantiate(melee, transform.position, Quaternion.identity) as GameObject;
 				//temp1.transform.localScale = new Vector3(10f,10f,10f);
@@ -37,8 +37,9 @@ public class Spawn : MonoBehaviour {
                 temp1.GetComponent<Unit_Base>().faction = faction;
 				currentSquad.GetComponent<Squad>().addUnit(temp1.GetComponent<Unit_Melee>());
 				unitCounter = 0;
+				++meleeUnits;
 			}
-			else if(unitCounter > 1.2f && rangedUnits++ < curMaxRanged)
+			else if(unitCounter > 1.2f && rangedUnits < curMaxRanged)
 			{
 				GameObject temp1 = Instantiate(ranged, transform.position, Quaternion.identity) as GameObject;
 				//temp1.transform.localScale = new Vector3(10f,10f,10f);
@@ -46,8 +47,9 @@ public class Spawn : MonoBehaviour {
                 temp1.GetComponent<Unit_Base>().faction = faction;
 				currentSquad.GetComponent<Squad>().addUnit(temp1.GetComponent<Unit_Range>());
 				unitCounter = 0;
+				++rangedUnits;
 			}
-			else if(unitCounter > 1.2f && siegeUnits++ < curMaxSiege)
+			else if(unitCounter > 1.2f && siegeUnits < curMaxSiege)
 			{
 				GameObject temp1 = Instantiate(siege, transform.position, Quaternion.identity) as GameObject;
 				//temp1.transform.localScale = new Vector3(10f,10f,10f);
@@ -55,13 +57,14 @@ public class Spawn : MonoBehaviour {
                 temp1.GetComponent<Unit_Base>().faction = faction;
 				currentSquad.GetComponent<Squad>().addUnit(temp1.GetComponent<Unit_Siege>());
 				unitCounter = 0;
+				++siegeUnits;
 				
 			}
 			else
 			{
 				unitCounter += Time.deltaTime;
 			}
-			
+			//Debug.Log (rangedUnits + " and " + curMaxRanged  + " and " +  siegeUnits  + " and " +  curMaxSiege);
 			if(rangedUnits == curMaxRanged && siegeUnits == curMaxSiege)
 			{
 				meleeUnits = 0;
