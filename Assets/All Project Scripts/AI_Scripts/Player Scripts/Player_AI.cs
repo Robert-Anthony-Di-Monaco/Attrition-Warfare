@@ -154,6 +154,7 @@ public class Player_AI : Unit_Base
     public BTCoroutine MoveToTarget()
     {
         isInCombat = false;
+        agent.Resume();
         //not sure this is nescessary but just in case target dies or is destroyed maybe
         if (target == null)
         {
