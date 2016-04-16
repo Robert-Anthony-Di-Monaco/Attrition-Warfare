@@ -31,7 +31,7 @@ public class Player_AI : Unit_Base
 	{
 		respawnPosition = transform.position;
         isInCombat = false;
-        aimThreshold = 10f;
+        aimThreshold = 2f;
         enemyLayer = 8;
         health = maxHealth;
         attackRange = 150f;
@@ -48,12 +48,19 @@ public class Player_AI : Unit_Base
 		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/Player Scripts/Player-AI-Tree.xml", this);
 	}
 
-	void FixedUpdate(){
-		if (target != null) {
-			if (target.GetComponent<Unit_Base> () != null) {
-				isInCombat = true;
-			}
-		}
+	void Update(){
+        if (target != null)
+        {
+            if (target.GetComponent<Unit_Base>() != null)
+            {
+                isInCombat = true;
+            }
+        }
+        else
+        {
+            isInCombat = false;
+            NavMeshSeek();
+        }
 	}
 
     public override bool isPlayer() { return true; }

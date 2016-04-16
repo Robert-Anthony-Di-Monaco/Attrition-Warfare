@@ -91,6 +91,8 @@ public class Unit_Base : MonoBehaviour
 		GameObject closestMeleeEnemy = null,closestRangedEnemy = null, closestSiegeEnemy = null, closestBuildingEnemy = null, closestPlayerEnemy = null;
 		float closestMeleeDistance = float.MaxValue, closestRangedDistance = float.MaxValue, closestSiegeDistance = float.MaxValue, closestBuildingDistance = float.MaxValue, closestPlayerDistance = float.MaxValue;
 
+        closestBuildingDistance = 1 * closestBuildingDistance;  // to prevent weird errors in console
+
         //check for the closest enemy object
         foreach (Collider collision in cols)
         {
