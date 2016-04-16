@@ -36,7 +36,7 @@ public class Unit_Base : MonoBehaviour
     [HideInInspector]
     public int enemyLayer, damageOutput;
     public bool isInCombat;
-    [HideInInspector]
+    //[HideInInspector]
     public GameObject theTarget;    // The target this unit is currently attacking --> needed by animations 
 
     [HideInInspector]
@@ -65,7 +65,7 @@ public class Unit_Base : MonoBehaviour
 
 	void Update()
 	{
-		if(isInCombat == false)
+		if(!isPlayer() || isInCombat == false)
 			theTarget = null;
 	}
 	

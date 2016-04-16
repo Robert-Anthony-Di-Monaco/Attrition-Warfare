@@ -12,9 +12,13 @@ using System.Collections;
 [RequireComponent (typeof (Animator))]
 public class PlayerAnimator : BaseAnimator
 { 
+	public Player_AI playerScript;
+
     new void Start()
 	{
         base.Start();
+
+		playerScript = GetComponent<Player_AI>();
 
         angularSpeed = 1.1f;
         angularAimingSpeed = 4.2f;
@@ -24,7 +28,23 @@ public class PlayerAnimator : BaseAnimator
 	
 	new void Update ()
 	{
-        base.Update();
+		target = playerScript.target;
+		attackRange = script.attackRange;
+		isAttacking = script.isInCombat;
+		health = script.health;
+
+		// Check if dead
+		if (health == 0)
+		{
+			anim.SetBool("die", true);
+			return;
+		}
+
+		// Set speed for movement animations
+		if (health >= 50)
+			anim.speed = movementAnimationSpeed;
+		else
+			anim.speed = injuredAnimationSpeed;
 
         // Agent is in range ---> turn on the spot to face it
         if (target != null && isAttacking && Vector3.Distance(target.transform.position, transform.position) <= attackRange)

@@ -42,10 +42,18 @@ public class Player_AI : Unit_Base
 		InitBT();
 		bt.Start();
 	}
-	
+
 	private void InitBT()
 	{
 		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/Player Scripts/Player-AI-Tree.xml", this);
+	}
+
+	void FixedUpdate(){
+		if (target != null) {
+			if (target.GetComponent<Unit_Base> () != null) {
+				isInCombat = true;
+			}
+		}
 	}
 
     public override bool isPlayer() { return true; }
@@ -153,7 +161,8 @@ public class Player_AI : Unit_Base
     [BTLeaf ("move-to-target")]
     public BTCoroutine MoveToTarget()
     {
-        isInCombat = false;
+		if(target.GetComponent<Unit_Base>() == null)
+        	isInCombat = false;
         agent.Resume();
         //not sure this is nescessary but just in case target dies or is destroyed maybe
         if (target == null)
