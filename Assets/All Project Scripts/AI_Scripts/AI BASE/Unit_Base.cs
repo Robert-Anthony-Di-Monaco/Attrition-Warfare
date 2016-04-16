@@ -99,26 +99,96 @@ public class Unit_Base : MonoBehaviour
 		nextAttackTime = Time.time + attackCooldown;
     }
 	
-	// Finds closest enemy 
+	// Finds closest enemy in sight, prioritising different types of enemies depending on callers type
     public GameObject getClosestEnemy()
     {
         //get nearest enemy in attack range
         Collider[] cols = Physics.OverlapSphere(this.transform.position, visionRange, enemyLayer);
-        GameObject closestEnemy = null;
-        float closestDistance = float.MaxValue;
+		GameObject closestMeleeEnemy = null,closestRangedEnemy = null, closestSiegeEnemy = null, closestBuildingEnemy = null, closestPlayerEnemy = null;
+		float closestMeleeDistance = float.MaxValue, closestRangedDistance = float.MaxValue, closestSiegeDistance = float.MaxValue, closestBuildingDistance = float.MaxValue, closestPlayerDistance = float.MaxValue;
 
         //check for the closest enemy object
         foreach (Collider collision in cols)
         {
             Vector3 colliderPos = collision.gameObject.transform.position;
             float currentDistance = Math.Abs((colliderPos - this.transform.position).magnitude);
-            if (currentDistance < closestDistance)
+			if (collision.gameObject.GetComponent<Unit_Melee>() != null && currentDistance < closestMeleeDistance)
             {
-                closestEnemy = collision.gameObject;
-                closestDistance = currentDistance;
+				closestMeleeEnemy = collision.gameObject;
+				closestMeleeDistance = currentDistance;
             }
+			else if (collision.gameObject.GetComponent<Unit_Range>() != null && currentDistance < closestRangedDistance)
+			{
+				closestRangedEnemy = collision.gameObject;
+				closestRangedDistance = currentDistance;
+			}
+			else if (collision.gameObject.GetComponent<Unit_Siege>() != null && currentDistance < closestSiegeDistance)
+			{
+				closestSiegeEnemy = collision.gameObject;
+				closestSiegeDistance = currentDistance;
+			}
+			else if (collision.gameObject.GetComponent<Player_AI>() != null && currentDistance < closestPlayerDistance)
+			{
+				closestPlayerEnemy = collision.gameObject;
+				closestPlayerDistance = currentDistance;
+			}
+			else //if (collision.gameObject.GetComponent<Unit_Turret>() != null && currentDistance < closestBuildingDistance)
+			{
+				closestBuildingEnemy = collision.gameObject;
+				closestBuildingDistance = currentDistance;
+			}
         }
-        return closestEnemy;
+
+		if (gameObject.GetComponent<Unit_Melee> () != null) {
+			if(closestMeleeEnemy !=null)
+				return closestMeleeEnemy;
+			if(closestRangedEnemy !=null)
+				return closestRangedEnemy;
+			if(closestSiegeEnemy !=null)
+				return closestSiegeEnemy;
+			if(closestPlayerEnemy !=null)
+				return closestPlayerEnemy;
+			if(closestBuildingEnemy !=null)
+				return closestBuildingEnemy;
+		}
+		else if (gameObject.GetComponent<Unit_Range> () != null) {
+			if(closestRangedEnemy !=null)
+				return closestRangedEnemy;
+			if(closestMeleeEnemy !=null)
+				return closestMeleeEnemy;
+			if(closestSiegeEnemy !=null)
+				return closestSiegeEnemy;
+			if(closestPlayerEnemy !=null)
+				return closestPlayerEnemy;
+			if(closestBuildingEnemy !=null)
+				return closestBuildingEnemy;
+		}
+		else if (gameObject.GetComponent<Unit_Siege> () != null) {
+			if(closestBuildingEnemy !=null)
+				return closestBuildingEnemy;
+			if(closestRangedEnemy !=null)
+				return closestRangedEnemy;
+			if(closestMeleeEnemy !=null)
+				return closestMeleeEnemy;
+			if(closestSiegeEnemy !=null)
+				return closestSiegeEnemy;
+			if(closestPlayerEnemy !=null)
+				return closestPlayerEnemy;
+		}
+		else // Turrets
+		{
+			if(closestMeleeEnemy !=null)
+				return closestMeleeEnemy;
+			if(closestRangedEnemy !=null)
+				return closestRangedEnemy;
+			if(closestSiegeEnemy !=null)
+				return closestSiegeEnemy;
+			if(closestPlayerEnemy !=null)
+				return closestPlayerEnemy;
+			if(closestBuildingEnemy !=null)
+				return closestBuildingEnemy;
+		}
+
     }
 	
 
