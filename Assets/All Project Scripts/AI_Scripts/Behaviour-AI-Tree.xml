@@ -25,19 +25,7 @@
 			<leaf name = "attack-nearest-enemy"/>     
 		</sequence>
 
-     <!-- 
-		<sequence>
-			<condition name = "is-squad-in-combat"/>
-			<condition name = "is-enemy-in-vision-range"/>
-			<condition name = "is-enemy-in-attack-range"/>
-			<not>
-				<condition name = "is-facing-nearest-enemy"/>
-			</not>
-			<leaf name = "face-nearest-enemy"/> 
-		</sequence>
-    -->
-				
-				
+     
 		<sequence>
 			<condition name = "is-squad-in-combat"/>
 			<condition name = "is-enemy-in-vision-range"/>
@@ -67,21 +55,7 @@
       <leaf name = "attack-nearest-enemy"/>
     </sequence>
     
-    <!--
-    <sequence>
-      <not>
-        <condition name = "is-squad-in-combat"/>
-      </not>
-      <condition name = "is-squad-leader"/>
-      <condition name = "is-enemy-in-vision-range"/>
-      <condition name = "is-enemy-in-attack-range"/>
-      <not>
-        <condition name = "is-facing-nearest-enemy"/>
-      </not>
-     <leaf name = "face-nearest-enemy"/> 
-    </sequence>
-    -->
-
+  
     <sequence>
       <not>
         <condition name = "is-squad-in-combat"/>
