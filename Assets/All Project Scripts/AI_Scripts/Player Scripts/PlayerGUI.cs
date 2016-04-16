@@ -10,7 +10,7 @@ public class PlayerGUI : MonoBehaviour {
    // bool attack;
    // bool squadAttack;
     //bool command;
-    public Button buttonW, buttonA, buttonSpace;
+    public Button buttonW, buttonA, buttonSpace, buttonE;
 
     // Use this for initialization
     void Start ()
@@ -35,6 +35,10 @@ public class PlayerGUI : MonoBehaviour {
         var cbSpace = buttonSpace.colors;
         cbSpace.normalColor = (Input.GetKey(KeyCode.Space)) ? Color.red : Color.white;
         buttonSpace.colors = cbSpace;
+        //
+        var cbE = buttonE.colors;
+        cbE.normalColor = (Input.GetKey(KeyCode.E)) ? Color.red : Color.white;
+        buttonE.colors = cbE;
     }
 
     public void setHealth(int health)

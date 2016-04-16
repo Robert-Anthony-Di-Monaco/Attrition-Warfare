@@ -45,10 +45,14 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\NewTurret_AI.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Spawn.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Squad.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\AI BASE\Unit_Base.cs" />
-     <Compile Include="Assets\All Project Scripts\AI_Scripts\TurretScipt\NewTurret_AI.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\Player Scripts\PlayerController.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\Player Scripts\PlayerGUI.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\Player Scripts\PlayerHealthBar.cs" />
+     <Compile Include="Assets\All Project Scripts\AI_Scripts\Player Scripts\Player_AI.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Unit_Melee.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Unit_Range.cs" />
      <Compile Include="Assets\All Project Scripts\AI_Scripts\Unit_Siege.cs" />
@@ -61,22 +65,17 @@
      <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTSelector.cs" />
      <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BTSequence.cs" />
      <Compile Include="Assets\All Project Scripts\BT Classes [IGNORE]\BehaviorTree.cs" />
-     <Compile Include="Assets\All Project Scripts\BasicProjectile.cs" />
      <Compile Include="Assets\All Project Scripts\HealthBar.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\ClickToMoveCharacter.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\LakeAreas.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\RTSCameraMove.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\TestSquad.cs" />
      <Compile Include="Assets\All Project Scripts\Misc\WaypointDestroy.cs" />
-     <Compile Include="Assets\All Project Scripts\Player Scripts\PlayerController.cs" />
-     <Compile Include="Assets\All Project Scripts\Player Scripts\Player_AI.cs" />
      <Compile Include="Assets\All Project Scripts\WorldController.cs" />
      <Compile Include="Assets\Crystals\Crystal.cs" />
      <Compile Include="Assets\Crystals\CrystalHP.cs" />
      <Compile Include="Assets\Crystals\CrystalHover.cs" />
      <Compile Include="Assets\PlayerAssets\LazerShot\LazerShot.cs" />
-     <Compile Include="Assets\PlayerGUI.cs" />
-     <Compile Include="Assets\PlayerHealthBar.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Scripts\ScrollingUVs_Layers.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\Displace.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water\Scripts\GerstnerDisplace.cs" />
@@ -92,7 +91,7 @@
      <Compile Include="Assets\World Assets {IGNORE}\zzAnimations\Controllers\RangeAnimator.cs" />
      <Compile Include="Assets\World Assets {IGNORE}\zzAnimations\Controllers\SiegeAnimator.cs" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Shaders\Unlit_Lava_Simple.shader" />
-     <None Include="Assets\All Project Scripts\Player Scripts\Player-AI-Tree.xml" />
+     <None Include="Assets\All Project Scripts\AI_Scripts\Player Scripts\Player-AI-Tree.xml" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\TerrainAssets\Stone and Lava\Lava_Flowing_Shader\Shaders\Unlit_Lava_Distort.shader" />
      <None Include="Assets\World Assets {IGNORE}\Environment Assets\Water\Water4\Shaders\FXWater4Simple.shader" />
      <None Include="Assets\Crystals\CristalCave\cristalVP.shader" />

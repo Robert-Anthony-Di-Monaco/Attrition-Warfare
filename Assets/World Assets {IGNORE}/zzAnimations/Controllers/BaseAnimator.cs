@@ -23,6 +23,7 @@ public class BaseAnimator : MonoBehaviour
 
     public GameObject lazerShotPrefab;
     public Transform spawnPoint;
+    public AudioSource lazerSound;
 
     protected void Start ()
     {
@@ -139,6 +140,7 @@ public class BaseAnimator : MonoBehaviour
     {
         isShooting = true;
         GameObject shotInstant = Instantiate(lazerShotPrefab, spawnPoint.position, transform.rotation) as GameObject;
+        lazerSound.Play();
         shotInstant.GetComponent<LazerShot>().Fire(target.transform.position);
         yield return new WaitForSeconds(coolDown);
         isShooting = false;

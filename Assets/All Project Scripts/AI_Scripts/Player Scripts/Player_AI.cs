@@ -36,7 +36,7 @@ public class Player_AI : Unit_Base
 	{
 		respawnPosition = transform.position;
         isInCombat = false;
-        aimThreshold = 10f;
+        aimThreshold = 2f;
         enemyLayer = 8;
         health = maxHealth;
         attackRange = 150f;
@@ -52,7 +52,7 @@ public class Player_AI : Unit_Base
 	{
        //isSquadCommander = false;
        //isAttackOrder = false;
-		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/Player Scripts/Player-AI-Tree.xml", this);
+		bt = new BehaviorTree(Application.dataPath + "/All Project Scripts/AI_Scripts/Player Scripts/Player-AI-Tree.xml", this);
 	}
 
     public override bool isPlayer() { return true; }
@@ -308,6 +308,7 @@ public class Player_AI : Unit_Base
             }
             else
             {
+                // Animation Handles turning
                 //transform.forward = Vector3.RotateTowards(this.transform.forward, enemyDir, 3f, 180);
                 yield return BTNodeResult.NotFinished;
             }
