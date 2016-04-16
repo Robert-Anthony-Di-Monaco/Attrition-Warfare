@@ -345,7 +345,7 @@ public class Unit_Base : MonoBehaviour
     }
 
 	// Unit dies
-	public IEnumerator Kill()
+	public void Kill()
     {
 		if (squad != null)
 			squad.removeUnit (this);
@@ -356,8 +356,7 @@ public class Unit_Base : MonoBehaviour
         //if this unit belongs to other lists in the world controller, remove it here
 
         //Destroy the game object after the death animation finishes
-        yield return new WaitForSeconds(deathAnimationLength);
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, 3);
 	}
 	//These are overloaded to return true in their respective classes
 	public virtual bool isPlayer(){ return false; }
